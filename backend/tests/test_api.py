@@ -132,3 +132,58 @@ def test_database_persists_and_bootstrap_does_not_create_second_admin(context):
         headers = {"Authorization": "Bearer " + response.json()["access_token"]}
         assert len(other.get("/api/vehicles", headers=headers).json()) == 1
         assert len(other.get("/api/users", headers=headers).json()) == 2
+
+
+def test_restock_respects_same_stock_limit_as_vehicle_forms(context):
+    client, admin, _, _ = context
+    item = add(context, quantity=999999)
+    path = f"/api/vehicles/{item['id']}/restock"
+    assert client.post(path, headers=admin, json={"quantity": 1}).json()["quantity"] == 1000000
+    assert client.post(path, headers=admin, json={"quantity": 1}).status_code == 409
+    assert client.get("/api/vehicles", headers=admin).json()[0]["quantity"] == 1000000
+
+
+def test_expired_and_unknown_user_sessions_are_rejected(context):
+    import jwt
+    from datetime import datetime, timedelta, timezone
+    client, _, _, _ = context
+    secret = "test-secret-that-is-at-least-32-characters"
+    for payload in [
+        {"sub": "1", "exp": datetime.now(timezone.utc) - timedelta(seconds=10)},
+        {"sub": "99999", "exp": datetime.now(timezone.utc) + timedelta(hours=1)},
+        {"sub": "1"},
+    ]:
+        token = jwt.encode(payload, secret, algorithm="HS256")
+        assert client.get("/api/vehicles", headers={"Authorization": f"Bearer {token}"}).status_code == 401
+
+
+def test_bootstrap_rejects_existing_regular_user_email(context):
+    _, _, _, app = context
+    import sqlite3
+    with sqlite3.connect(app.state.database_path) as db:
+        db.execute("DELETE FROM users WHERE role = 'admin'")
+    with pytest.raises(ValueError, match="already belongs"):
+        app.state.bootstrap_admin("buyer@example.com", "BuyerPassword123!")
+
+
+def test_production_factory_requires_initial_admin(tmp_path, monkeypatch):
+    from app.main import production_app
+    monkeypatch.setenv("DATABASE_PATH", str(tmp_path / "production.db"))
+    monkeypatch.setenv("JWT_SECRET", "a-production-secret-with-at-least-32-characters")
+    monkeypatch.delenv("ADMIN_EMAIL", raising=False)
+    monkeypatch.delenv("ADMIN_PASSWORD", raising=False)
+    with pytest.raises(ValueError, match="ADMIN_EMAIL and ADMIN_PASSWORD"):
+        production_app()
+    monkeypatch.setenv("ADMIN_EMAIL", "owner@example.com")
+    monkeypatch.setenv("ADMIN_PASSWORD", "OwnerPassword123!")
+    app = production_app()
+    with TestClient(app) as client:
+        assert client.post("/api/auth/login", json={"email": "owner@example.com", "password": "OwnerPassword123!"}).status_code == 200
+    monkeypatch.delenv("ADMIN_EMAIL")
+    monkeypatch.delenv("ADMIN_PASSWORD")
+    assert production_app() is not None
+
+
+def test_short_jwt_secret_is_rejected(tmp_path):
+    with pytest.raises(ValueError, match="JWT_SECRET"):
+        create_app(str(tmp_path / "unused.db"), "short")
