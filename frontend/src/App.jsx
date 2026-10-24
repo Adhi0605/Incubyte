@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
   ArrowUpRight,
+  Archive,
   CarFront,
   Check,
   ChevronDown,
@@ -19,6 +20,7 @@ import { api, setUnauthorizedHandler } from "./api";
 import { VehicleCard, money } from "./VehicleCard";
 import { CarArt } from "./CarArt";
 import Auth from "./components/Auth";
+import ArchivedVehicles from "./components/ArchivedVehicles";
 import { Brand, Field, Modal } from "./components/ui";
 
 const blankFilters = {
@@ -160,7 +162,7 @@ export default function App() {
           edit: "Vehicle updated.",
           purchase: "Purchase complete. One vehicle deducted from stock.",
           restock: "Stock replenished.",
-          delete: "Vehicle removed.",
+          delete: "Vehicle archived. Restore it from Archived vehicles.",
           promote: "Administrator access granted.",
         }[action],
       );
@@ -213,6 +215,15 @@ export default function App() {
           </button>
           {admin && (
             <button
+              className={view === "archive" ? "active" : ""}
+              onClick={() => setView("archive")}
+            >
+              <Archive size={18} />
+              Archived vehicles
+            </button>
+          )}
+          {admin && (
+            <button
               className={view === "team" ? "active" : ""}
               onClick={() => setView("team")}
             >
@@ -258,7 +269,11 @@ export default function App() {
           <div>
             <span className="muted">Workspace</span>
             <span className="crumb">/</span>
-            {view === "inventory" ? "Vehicle inventory" : "Team access"}
+            {view === "inventory"
+              ? "Vehicle inventory"
+              : view === "archive"
+                ? "Archived vehicles"
+                : "Team access"}
           </div>
           <span className="role-badge">
             <ShieldCheck size={14} />
@@ -484,6 +499,8 @@ export default function App() {
                 )}
               </section>
             </>
+          ) : view === "archive" && admin ? (
+            <ArchivedVehicles token={token} onRestored={loadVehicles} />
           ) : (
             <section>
               <div className="page-heading">
@@ -565,7 +582,7 @@ export default function App() {
               add: "Add a vehicle",
               edit: "Edit vehicle",
               restock: "Replenish stock",
-              delete: "Delete vehicle?",
+              delete: "Archive vehicle?",
               purchase: "Confirm your purchase",
               promote: "Grant administrator access?",
             }[modal.action]
@@ -639,7 +656,8 @@ export default function App() {
             ) : modal.action === "delete" ? (
               <p className="muted">
                 Remove {modal.vehicle.make} {modal.vehicle.model} from
-                inventory? This cannot be undone.
+                inventory? You can restore it from Archived vehicles with its
+                current stock quantity.
               </p>
             ) : (
               <p className="muted">
@@ -674,7 +692,7 @@ export default function App() {
                       edit: "Save changes",
                       restock: "Restock vehicle",
                       purchase: "Confirm purchase",
-                      delete: "Delete vehicle",
+                      delete: "Archive vehicle",
                       promote: "Grant admin access",
                     }[modal.action]}
               </button>

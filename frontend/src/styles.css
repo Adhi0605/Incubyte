@@ -1,4 +1,13 @@
 @import "tailwindcss";
+
+.archive-date {
+  margin-top: 14px;
+  font-size: 11px;
+}
+.archive-notice {
+  margin-bottom: 20px;
+  color: #42603c;
+}
 @theme {
   --font-sans: "Inter", "Segoe UI", sans-serif;
 }
@@ -930,6 +939,7 @@ h3 {
     flex-direction: row;
     align-items: center;
     gap: 25px;
+    flex-wrap: wrap;
     border-bottom: 1px solid #e3e8da;
   }
   .brand {
@@ -945,8 +955,13 @@ h3 {
   }
   .sidebar nav {
     flex-direction: row;
+    order: 3;
+    width: 100%;
+    justify-content: space-between;
   }
   .sidebar nav button {
+    flex: 1;
+    justify-content: center;
     font-size: 11px;
     padding: 10px;
   }

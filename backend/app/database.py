@@ -19,9 +19,15 @@ class Database:
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     make TEXT NOT NULL, model TEXT NOT NULL, category TEXT NOT NULL,
                     price_cents INTEGER NOT NULL CHECK(price_cents >= 0),
-                    quantity INTEGER NOT NULL CHECK(quantity >= 0)
+                    quantity INTEGER NOT NULL CHECK(quantity >= 0),
+                    deleted_at TEXT
                 );
             """)
+            # Serialize the additive migration across workers opening legacy files.
+            db.execute("BEGIN IMMEDIATE")
+            columns = {row['name'] for row in db.execute("PRAGMA table_info(vehicles)")}
+            if 'deleted_at' not in columns:
+                db.execute("ALTER TABLE vehicles ADD COLUMN deleted_at TEXT")
 
     @contextmanager
     def connect(self):
@@ -39,5 +45,5 @@ def public_user(row):
 
 
 def public_vehicle(row):
-    return {**{key: row[key] for key in ('id', 'make', 'model', 'category', 'quantity')},
+    return {**{key: row[key] for key in ('id', 'make', 'model', 'category', 'quantity', 'deleted_at')},
             'price': format(Decimal(row['price_cents']) / 100, '.2f')}

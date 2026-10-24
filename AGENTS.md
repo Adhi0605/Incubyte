@@ -16,7 +16,8 @@
 - Each purchase reduces quantity by exactly one. Use an atomic conditional SQL
   update so concurrent requests cannot oversell. Restocking accepts a positive
   integer quantity. Store money as integer cents.
-- Preserve user changes. No publishing or remote push is part of this kata.
+- Preserve user changes. No deployment is part of this kata; the user has
+  authorized pushing commits to the established Git remote.
 
 ## Implementation sequence
 
@@ -106,15 +107,20 @@ Archived vehicles must be absent from listings/search/statistics and cannot be
 purchased, edited, or restocked. Restore preserves the original ID and stock.
 Existing on-disk databases must migrate automatically without losing data.
 
-1. [ ] Write/run failing API tests for archive persistence, authorization,
-   forbidden archived mutations, restore conflicts, concurrency, and legacy DB migration.
-2. [ ] Write/run failing React tests for admin-only archive navigation, restore
-   confirmation, failure handling, and absence of purchase/edit/restock controls.
-3. [ ] Implement an additive SQLite migration, soft DELETE, admin-only
-   `GET /api/vehicles/archived` and `POST /api/vehicles/{id}/restore`, with atomic
-   predicates protecting archived rows from inventory operations.
-4. [ ] Add the admin archive screen and Restore action; update delete confirmation
-   to explain recovery. Update API documentation and HTTP smoke coverage.
-5. [ ] Run backend coverage, UI tests, production build, and HTTP smoke; restart
-   the running API to apply the migration, verify local service readiness, commit
-   with AI attribution, and push to the established remote as previously requested.
+1. [x] Write/run failing API tests for archive persistence, authorization,
+       forbidden archived mutations, restore conflicts, concurrency, and legacy DB migration.
+2. [x] Write/run failing React tests for admin-only archive navigation, restore
+       confirmation, failure handling, and absence of purchase/edit/restock controls.
+3. [x] Implement an additive SQLite migration, soft DELETE, admin-only
+       `GET /api/vehicles/archived` and `POST /api/vehicles/{id}/restore`, with atomic
+       predicates protecting archived rows from inventory operations.
+4. [x] Add the admin archive screen and Restore action; update delete confirmation
+       to explain recovery. Update API documentation and HTTP smoke coverage.
+5. [x] Run backend coverage, UI tests, production build, and HTTP smoke; restart
+       the running API to apply the migration, verify local service readiness, commit
+       with AI attribution, and push to the established remote as previously requested.
+
+Soft-delete verification: 31 backend tests, 97.81% statement coverage, 12 frontend
+tests, production build, and real HTTP smoke passed. The local API was restarted
+and the existing admin login plus active/archive endpoints were verified through
+the frontend proxy. Browser layout testing remains unavailable.

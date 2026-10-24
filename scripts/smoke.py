@@ -96,10 +96,21 @@ def main():
                 assert request(web_base, path + "/purchase", "POST", token=buyer)["quantity"] == 0
                 request(web_base, path + "/purchase", "POST", token=buyer, expected=409)
                 assert request(web_base, path + "/restock", "POST", {"quantity": 2}, admin)["quantity"] == 2
+                request(web_base, path, "DELETE", token=admin, expected=204)
+                assert len(request(web_base, "/api/vehicles", token=buyer)) == 6
+                request(web_base, "/api/vehicles/archived", token=buyer, expected=403)
+                request(web_base, path + "/restore", "POST", token=buyer, expected=403)
+                request(web_base, path + "/purchase", "POST", token=buyer, expected=404)
+                request(web_base, path + "/restock", "POST", {"quantity": 1}, admin, 404)
+                request(web_base, path, "PUT", car, admin, 404)
+                archived = request(web_base, "/api/vehicles/archived", token=admin)
+                assert archived[0]['id'] == item['id'] and archived[0]['quantity'] == 2
+                restored = request(web_base, path + "/restore", "POST", token=admin)
+                assert restored['id'] == item['id'] and restored['quantity'] == 2 and restored['deleted_at'] is None
                 request(web_base, f"/api/users/{buyer_session['user']['id']}/promote", "POST", token=admin)
                 request(web_base, path, "PUT", {**car, "model": "Promoted"}, buyer)
                 request(web_base, path, "DELETE", token=admin, expected=204)
-                print("HTTP smoke passed: SPA, proxy, sample data, login, roles, purchase, restock, promotion, update, delete.")
+                print("HTTP smoke passed: SPA, proxy, login, roles, purchase, restock, archive, blocked mutations, restore, promotion, update.")
             except Exception:
                 log.flush()
                 log.seek(0)

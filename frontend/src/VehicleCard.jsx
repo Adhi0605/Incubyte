@@ -1,4 +1,10 @@
-import { ArrowUpRight, Pencil, PackagePlus, Trash2 } from "lucide-react";
+import {
+  ArrowUpRight,
+  Pencil,
+  PackagePlus,
+  Trash2,
+  RotateCcw,
+} from "lucide-react";
 import { CarArt } from "./CarArt";
 export const money = (value) =>
   new Intl.NumberFormat("en-US", {
@@ -9,13 +15,16 @@ export const money = (value) =>
 const colors = ["#a5b9aa", "#c8b99d", "#9caeba", "#b6b5b0"];
 export function VehicleCard({ vehicle, admin, onAction, busy = false }) {
   const v = vehicle;
+  const archived = Boolean(v.deleted_at);
   return (
     <article className="vehicle-card">
       <div className="vehicle-image">
         <span className="category-tag">{v.category}</span>
         <span
           className={"stock-dot " + (v.quantity ? "" : "empty")}
-          title={v.quantity ? "In stock" : "Out of stock"}
+          title={
+            archived ? "Archived" : v.quantity ? "In stock" : "Out of stock"
+          }
         />
         <CarArt category={v.category} color={colors[v.id % colors.length]} />
       </div>
@@ -24,7 +33,11 @@ export function VehicleCard({ vehicle, admin, onAction, busy = false }) {
         <div className="flex items-start justify-between gap-3">
           <h3>{v.model}</h3>
           <span className={"stock-tag " + (v.quantity ? "" : "sold")}>
-            {v.quantity ? `${v.quantity} in stock` : "Sold out"}
+            {archived
+              ? `${v.quantity} units saved`
+              : v.quantity
+                ? `${v.quantity} in stock`
+                : "Sold out"}
           </span>
         </div>
         <div className="card-footer">
@@ -32,16 +45,31 @@ export function VehicleCard({ vehicle, admin, onAction, busy = false }) {
             <span className="price-caption">Asking price</span>
             <p className="price">{money(v.price)}</p>
           </div>
-          <button
-            className="purchase"
-            disabled={!v.quantity || busy}
-            onClick={() => onAction("purchase", v)}
-          >
-            {v.quantity ? "Purchase" : "Out of stock"}
-            {v.quantity > 0 && <ArrowUpRight size={16} />}
-          </button>
+          {!archived && (
+            <button
+              className="purchase"
+              disabled={!v.quantity || busy}
+              onClick={() => onAction("purchase", v)}
+            >
+              {v.quantity ? "Purchase" : "Out of stock"}
+              {v.quantity > 0 && <ArrowUpRight size={16} />}
+            </button>
+          )}
         </div>
-        {admin && (
+        {archived && (
+          <p className="muted small archive-date">
+            Archived {new Date(v.deleted_at).toLocaleString()}
+          </p>
+        )}
+        {admin && archived && (
+          <div className="admin-actions">
+            <button disabled={busy} onClick={() => onAction("restore", v)}>
+              <RotateCcw size={14} />
+              Restore
+            </button>
+          </div>
+        )}
+        {admin && !archived && (
           <div className="admin-actions">
             <button disabled={busy} onClick={() => onAction("edit", v)}>
               <Pencil size={14} />

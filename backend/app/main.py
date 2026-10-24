@@ -64,7 +64,7 @@ def create_app(database_path: str, jwt_secret: str):
         return {"access_token": token, "token_type": "bearer", "user": user}
 
     def find_vehicle(db, vehicle_id):
-        row = db.execute("SELECT * FROM vehicles WHERE id = ?", (vehicle_id,)).fetchone()
+        row = db.execute("SELECT * FROM vehicles WHERE id = ? AND deleted_at IS NULL", (vehicle_id,)).fetchone()
         if row is None:
             raise HTTPException(404, "Vehicle not found")
         return public_vehicle(row)
@@ -110,7 +110,7 @@ def create_app(database_path: str, jwt_secret: str):
                  max_price: Decimal | None = Query(default=None, ge=0, le=1000000000)):
         if min_price is not None and max_price is not None and min_price > max_price:
             raise HTTPException(422, "Minimum price must not exceed maximum price")
-        clauses, values = [], []
+        clauses, values = ["deleted_at IS NULL"], []
         for column, value in (("make", make), ("model", model), ("category", category)):
             if value:
                 # instr treats wildcard characters as literal search text.
@@ -133,10 +133,29 @@ def create_app(database_path: str, jwt_secret: str):
                                 (data.make, data.model, data.category, int(data.price * 100), data.quantity))
             return find_vehicle(db, result.lastrowid)
 
+    @app.get("/api/vehicles/archived", dependencies=[Depends(admin_user)])
+    def archived_vehicles():
+        with database.connect() as db:
+            return [public_vehicle(row) for row in db.execute(
+                "SELECT * FROM vehicles WHERE deleted_at IS NOT NULL ORDER BY deleted_at DESC, id DESC"
+            )]
+
+    @app.post("/api/vehicles/{vehicle_id}/restore", dependencies=[Depends(admin_user)])
+    def restore_vehicle(vehicle_id: int):
+        with database.connect() as db:
+            changed = db.execute(
+                "UPDATE vehicles SET deleted_at = NULL WHERE id = ? AND deleted_at IS NOT NULL",
+                (vehicle_id,),
+            ).rowcount
+            item = find_vehicle(db, vehicle_id)
+            if not changed:
+                raise HTTPException(409, "Vehicle is already active")
+            return item
+
     @app.put("/api/vehicles/{vehicle_id}", dependencies=[Depends(admin_user)])
     def update_vehicle(vehicle_id: int, data: VehicleInput):
         with database.connect() as db:
-            if not db.execute("UPDATE vehicles SET make=?, model=?, category=?, price_cents=?, quantity=? WHERE id=?",
+            if not db.execute("UPDATE vehicles SET make=?, model=?, category=?, price_cents=?, quantity=? WHERE id=? AND deleted_at IS NULL",
                               (data.make, data.model, data.category, int(data.price * 100), data.quantity, vehicle_id)).rowcount:
                 raise HTTPException(404, "Vehicle not found")
             return find_vehicle(db, vehicle_id)
@@ -144,7 +163,10 @@ def create_app(database_path: str, jwt_secret: str):
     @app.delete("/api/vehicles/{vehicle_id}", status_code=204, dependencies=[Depends(admin_user)])
     def delete_vehicle(vehicle_id: int):
         with database.connect() as db:
-            if not db.execute("DELETE FROM vehicles WHERE id = ?", (vehicle_id,)).rowcount:
+            if not db.execute(
+                "UPDATE vehicles SET deleted_at = ? WHERE id = ? AND deleted_at IS NULL",
+                (datetime.now(timezone.utc).isoformat(), vehicle_id),
+            ).rowcount:
                 raise HTTPException(404, "Vehicle not found")
         return Response(status_code=204)
 
@@ -152,7 +174,7 @@ def create_app(database_path: str, jwt_secret: str):
     def purchase(vehicle_id: int):
         with database.connect() as db:
             # One conditional SQL update makes the stock check and decrement atomic.
-            changed = db.execute("UPDATE vehicles SET quantity = quantity - 1 WHERE id = ? AND quantity > 0", (vehicle_id,)).rowcount
+            changed = db.execute("UPDATE vehicles SET quantity = quantity - 1 WHERE id = ? AND quantity > 0 AND deleted_at IS NULL", (vehicle_id,)).rowcount
             item = find_vehicle(db, vehicle_id)
             if not changed:
                 raise HTTPException(409, "This vehicle is out of stock")
@@ -162,7 +184,7 @@ def create_app(database_path: str, jwt_secret: str):
     def restock(vehicle_id: int, data: Restock):
         with database.connect() as db:
             changed = db.execute(
-                "UPDATE vehicles SET quantity = quantity + ? WHERE id = ? AND quantity + ? <= 1000000",
+                "UPDATE vehicles SET quantity = quantity + ? WHERE id = ? AND quantity + ? <= 1000000 AND deleted_at IS NULL",
                 (data.quantity, vehicle_id, data.quantity),
             ).rowcount
             item = find_vehicle(db, vehicle_id)

@@ -96,6 +96,20 @@ behind HTTPS and configure a same-origin `/api` reverse proxy if hosting the
 production frontend output. `npm run build --prefix frontend` produces
 `frontend/dist`; no deployment is included.
 
+### Soft deletion and recovery
+
+Deleting a vehicle archives its existing row with a UTC `deleted_at` timestamp.
+Archived vehicles are excluded from inventory, search, and inventory totals.
+Purchases, updates, and restocks return 404 while a vehicle is archived.
+Only admins can open **Archived vehicles**, review the saved stock and archive
+date, and confirm **Restore**. Restoring clears the timestamp and preserves the
+vehicle's original ID, price, details, and quantity, including zero stock.
+
+Existing SQLite files are migrated automatically at startup without replacing
+rows. Archive and restore are atomic; simultaneous restore requests succeed
+once, with subsequent requests returning 409. Restoring a missing ID returns 404. Deleting an already archived ID returns 404. There is no permanent-delete
+endpoint. Vehicles permanently deleted before this feature cannot be recovered.
+
 ## API
 
 All endpoints except registration and login require
@@ -106,18 +120,24 @@ All endpoints except registration and login require
 | POST   | `/api/auth/register`          | Public; `{email, password}`; returns token/user (201) |
 | POST   | `/api/auth/login`             | Public; `{email, password}`; returns token/user       |
 | GET    | `/api/auth/me`                | Current user and role                                 |
-| GET    | `/api/vehicles`               | All vehicles, newest first                            |
+| GET    | `/api/vehicles`               | Active vehicles, newest first                         |
 | GET    | `/api/vehicles/search`        | `make`, `model`, `category`, `min_price`, `max_price` |
 | POST   | `/api/vehicles`               | Admin; create (201)                                   |
 | PUT    | `/api/vehicles/{id}`          | Admin; replace all editable fields                    |
-| DELETE | `/api/vehicles/{id}`          | Admin; delete (204)                                   |
+| DELETE | `/api/vehicles/{id}`          | Admin; archive (204)                                  |
 | POST   | `/api/vehicles/{id}/purchase` | Purchase one; no request body                         |
 | POST   | `/api/vehicles/{id}/restock`  | Admin; `{quantity: positive_integer}`                 |
 | GET    | `/api/users`                  | Admin; list users without password hashes             |
 | POST   | `/api/users/{id}/promote`     | Admin; promote; no request body                       |
 
+Admin-only recovery endpoints:
+
+- `GET /api/vehicles/archived` — archived vehicles, most recently archived first.
+- `POST /api/vehicles/{id}/restore` — restore a vehicle; no request body.
+
 Vehicle create/update bodies contain `make`, `model`, `category`, `price`, and
-`quantity`. Responses add `id`, with `price` serialized as a decimal string.
+`quantity`. Responses add `id` and `deleted_at` (null for active vehicles), with
+`price` serialized as a decimal string.
 Registration requires a valid email and a password of 10–128 characters.
 Errors use 401 for invalid sessions/login, 403 for permission denial, 404 for
 missing records, 409 for duplicates or stock conflicts, and 422 for validation.
@@ -150,7 +170,7 @@ the Vite proxy, and shuts down its own servers. It requires the dependencies
 installed above. For an API on a custom development port, set `API_TARGET` when
 starting Vite; its default remains `http://127.0.0.1:8000`.
 
-Local verification: **25 backend tests passed, 97.64% statement coverage; 8
+Local verification: **31 backend tests passed, 97.81% statement coverage; 12
 frontend tests passed; production build and HTTP smoke passed; npm audit found
 zero vulnerabilities.** No browser layout or browser end-to-end verification was
 performed. The CI workflow is committed but has not been run on GitHub.
@@ -161,6 +181,7 @@ The Git history records actual red and green stages:
 - `438ff30` → `3b2c498`: frontend card specification before implementation.
 - `36d7fab` → `235333b`: failing bootstrap/stock-limit regressions, then fixes.
 - `c9373d8`: optional seed specification before its implementation.
+- `89085ac`: failing soft-delete/restore and migration specifications before implementation.
 
 Later integration tests validate existing behavior; they are not presented as
 having preceded that implementation. See [AGENTS.md](AGENTS.md) for the detailed
@@ -192,7 +213,9 @@ I used ChatGPT/Codex to translate the kata into an implementation plan, write
 backend tests before the API, implement JWT authentication and SQLite stock
 updates, and build the React/Tailwind interface. It also authored frontend tests,
 reviewed edge cases, reproduced and fixed bootstrap/restock defects, prepared
-sample data and CI, and wrote setup and API documentation. The agent ran the
+sample data and CI, and wrote setup and API documentation. It subsequently
+implemented soft deletion, additive database migration, and admin-only archive
+and restore flows after writing failing API and UI tests. The agent ran the
 commands and checks documented in the Git history. AI assistance was substantial
 across the project, rather than limited to boilerplate.
 
