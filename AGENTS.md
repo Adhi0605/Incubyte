@@ -53,7 +53,7 @@ From the repository root:
 
 ```sh
 python3 -m venv .venv
-.venv/bin/pip install -r backend/requirements.txt
+.venv/bin/pip install -r backend/requirements.lock
 cd backend
 ../.venv/bin/pytest --cov=app --cov-report=term-missing
 cd ..
@@ -61,6 +61,7 @@ npm ci --prefix frontend
 npm test --prefix frontend
 npm run build --prefix frontend
 npm audit --prefix frontend
+python3 scripts/smoke.py
 ```
 
 Run the API using `uvicorn app.main:production_app --factory` from `backend`
@@ -87,7 +88,12 @@ report that browser layout and end-to-end behavior were not verified.
 - [x] Backend green implementation committed (`a78a04f`); 19 tests passed.
 - [x] Frontend red specification committed (`438ff30`).
 - [x] Frontend implementation written and verified.
-- [x] Frontend tests (3) and production build pass; backend coverage is 94%.
-- [ ] Review, regression fixes, and refactoring complete.
-- [ ] Documentation, environment example, sample data, dependency locks, CI.
-- [ ] Final integration verification and handoff.
+- [x] Frontend tests (8) and production build pass.
+- [x] Review and regression fixes complete: bootstrap and stock-limit red/green
+      commits `36d7fab` / `235333b`. Extracted authentication and reusable UI
+      components and formatted the frontend for readability.
+- [x] Documentation, environment example, idempotent sample data, dependency
+      locks, and CI workflow implemented. Seed red/green: `c9373d8` / `051450b`.
+- [x] Final verification: 25 backend tests, 97.64% statement coverage, 8 frontend
+      tests, production build, dependency checks, and real HTTP smoke passed.
+      Browser layout/end-to-end QA unavailable; GitHub CI has not run remotely.
