@@ -97,3 +97,24 @@ report that browser layout and end-to-end behavior were not verified.
 - [x] Final verification: 25 backend tests, 97.64% statement coverage, 8 frontend
       tests, production build, dependency checks, and real HTTP smoke passed.
       Browser layout/end-to-end QA unavailable; GitHub CI has not run remotely.
+
+## Soft deletion and restore extension
+
+Confirmed: deletion archives a vehicle in its existing row using a UTC
+`deleted_at` timestamp. Admins alone can view archived vehicles and restore them.
+Archived vehicles must be absent from listings/search/statistics and cannot be
+purchased, edited, or restocked. Restore preserves the original ID and stock.
+Existing on-disk databases must migrate automatically without losing data.
+
+1. [ ] Write/run failing API tests for archive persistence, authorization,
+   forbidden archived mutations, restore conflicts, concurrency, and legacy DB migration.
+2. [ ] Write/run failing React tests for admin-only archive navigation, restore
+   confirmation, failure handling, and absence of purchase/edit/restock controls.
+3. [ ] Implement an additive SQLite migration, soft DELETE, admin-only
+   `GET /api/vehicles/archived` and `POST /api/vehicles/{id}/restore`, with atomic
+   predicates protecting archived rows from inventory operations.
+4. [ ] Add the admin archive screen and Restore action; update delete confirmation
+   to explain recovery. Update API documentation and HTTP smoke coverage.
+5. [ ] Run backend coverage, UI tests, production build, and HTTP smoke; restart
+   the running API to apply the migration, verify local service readiness, commit
+   with AI attribution, and push to the established remote as previously requested.

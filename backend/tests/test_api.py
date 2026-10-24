@@ -190,3 +190,78 @@ def test_production_factory_requires_initial_admin(tmp_path, monkeypatch):
 def test_short_jwt_secret_is_rejected(tmp_path):
     with pytest.raises(ValueError, match="JWT_SECRET"):
         create_app(str(tmp_path / "unused.db"), "short")
+
+
+def test_soft_delete_retains_row_and_restore_preserves_identity_and_stock(context):
+    from app.database import Database
+    from datetime import datetime
+    client, admin, user, app = context
+    item = add(context, quantity=7)
+    path = f"/api/vehicles/{item['id']}"
+    assert client.delete(path, headers=admin).status_code == 204
+    for url in ['/api/vehicles', '/api/vehicles/search?make=Toyota']:
+        assert client.get(url, headers=user).json() == []
+    archived = client.get('/api/vehicles/archived', headers=admin)
+    assert archived.status_code == 200
+    row = archived.json()[0]
+    assert row['id'] == item['id']
+    assert row['quantity'] == 7
+    assert datetime.fromisoformat(row['deleted_at']).utcoffset().total_seconds() == 0
+    with Database(app.state.database_path).connect() as db:
+        assert db.execute('SELECT quantity FROM vehicles WHERE id=?', (item['id'],)).fetchone()['quantity'] == 7
+    assert client.delete(path, headers=admin).status_code == 404
+    restored = client.post(path + '/restore', headers=admin)
+    assert restored.status_code == 200
+    assert restored.json() == {**item, 'deleted_at': None}
+    assert client.get('/api/vehicles/archived', headers=admin).json() == []
+    assert client.get('/api/vehicles', headers=user).json()[0]['id'] == item['id']
+    assert client.post(path + '/purchase', headers=user).json()['quantity'] == 6
+
+
+def test_archive_and_restore_are_admin_only(context):
+    client, admin, user, _ = context
+    item = add(context)
+    client.delete(f"/api/vehicles/{item['id']}", headers=admin)
+    for headers, expected in [({}, 401), (user, 403)]:
+        assert client.get('/api/vehicles/archived', headers=headers).status_code == expected
+        assert client.post(f"/api/vehicles/{item['id']}/restore", headers=headers).status_code == expected
+    assert len(client.get('/api/vehicles/archived', headers=admin).json()) == 1
+
+
+def test_archived_vehicles_cannot_be_mutated(context):
+    client, admin, user, app = context
+    item = add(context, quantity=3)
+    path = f"/api/vehicles/{item['id']}"
+    client.delete(path, headers=admin)
+    assert client.put(path, headers=admin, json=vehicle(model='Changed')).status_code == 404
+    assert client.post(path + '/purchase', headers=user).status_code == 404
+    assert client.post(path + '/restock', headers=admin, json={'quantity': 4}).status_code == 404
+    archived = client.get('/api/vehicles/archived', headers=admin).json()[0]
+    assert archived['quantity'] == 3
+    assert archived['model'] == item['model']
+    fresh = create_app(app.state.database_path, 'test-secret-that-is-at-least-32-characters')
+    with TestClient(fresh) as other:
+        assert other.get('/api/vehicles', headers=user).json() == []
+        assert other.get('/api/vehicles/archived', headers=admin).json()[0] == archived
+
+
+def test_restore_missing_active_and_zero_stock_vehicles(context):
+    client, admin, _, _ = context
+    assert client.post('/api/vehicles/99999/restore', headers=admin).status_code == 404
+    item = add(context, quantity=0)
+    path = f"/api/vehicles/{item['id']}"
+    assert client.post(path + '/restore', headers=admin).status_code == 409
+    client.delete(path, headers=admin)
+    assert client.post(path + '/restore', headers=admin).json()['quantity'] == 0
+    assert client.post(path + '/restore', headers=admin).status_code == 409
+
+
+def test_concurrent_restores_succeed_once(context):
+    client, admin, _, _ = context
+    item = add(context)
+    path = f"/api/vehicles/{item['id']}"
+    client.delete(path, headers=admin)
+    with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
+        statuses = list(pool.map(lambda _: client.post(path + '/restore', headers=admin).status_code, range(4)))
+    assert statuses.count(200) == 1
+    assert statuses.count(409) == 3

@@ -33,7 +33,16 @@ beforeEach(() => {
         data = { access_token: "test-token", user };
       else if (path === "/api/auth/me") data = user;
       else if (path.startsWith("/api/vehicles/search"))
-        data = cars.map((c) => ({ ...c }));
+        data = cars.filter((c) => !c.deleted_at).map((c) => ({ ...c }));
+      else if (path === "/api/vehicles/archived")
+        data = cars.filter((c) => c.deleted_at).map((c) => ({ ...c }));
+      else if (path === "/api/vehicles/1" && options.method === "DELETE") {
+        cars[0].deleted_at = "2026-10-24T10:00:00+00:00";
+        return { ok: true, status: 204 };
+      } else if (path === "/api/vehicles/1/restore") {
+        cars[0].deleted_at = null;
+        data = { ...cars[0] };
+      }
       else if (path === "/api/vehicles/1/purchase") {
         cars[0].quantity--;
         data = { ...cars[0] };
@@ -166,4 +175,49 @@ test("expired saved sessions return to sign in", async () => {
     await screen.findByRole("button", { name: "Sign in" }),
   ).toBeInTheDocument();
   expect(sessionStorage.getItem("forecourt-session")).toBeNull();
+});
+
+
+test("admins archive and restore a vehicle with its original stock", async () => {
+  savedSession(admin);
+  render(<App />);
+  fireEvent.click(await screen.findByRole("button", { name: "Delete" }));
+  expect(screen.getByRole("dialog")).toHaveTextContent(/restore.*archived vehicles/i);
+  fireEvent.click(screen.getByRole("button", { name: "Archive vehicle" }));
+  await waitFor(() => expect(screen.queryByText("Camry")).not.toBeInTheDocument());
+  fireEvent.click(screen.getByRole("button", { name: "Archived vehicles" }));
+  fireEvent.click(await screen.findByRole("button", { name: "Restore" }));
+  expect(requests.some(r => r.path.endsWith('/restore'))).toBe(false);
+  fireEvent.click(screen.getByRole("button", { name: "Confirm restore" }));
+  await waitFor(() => expect(screen.queryByText("Camry")).not.toBeInTheDocument());
+  expect(requests.find(r => r.path.endsWith('/restore')).options.method).toBe('POST');
+  fireEvent.click(screen.getByRole("button", { name: /^Inventory/ }));
+  expect(await screen.findByText("Camry")).toBeInTheDocument();
+  expect(screen.getByText("2 in stock")).toBeInTheDocument();
+});
+
+test("regular members have no archive navigation", async () => {
+  savedSession(buyer); render(<App />);
+  await screen.findByText("Camry");
+  expect(screen.queryByRole("button", { name: "Archived vehicles" })).not.toBeInTheDocument();
+  expect(requests.some(r => r.path === '/api/vehicles/archived')).toBe(false);
+});
+
+test("restore can be cancelled and failures preserve the archived vehicle", async () => {
+  savedSession(admin);
+  cars[0].deleted_at = "2026-10-24T10:00:00+00:00";
+  const original = fetch.getMockImplementation();
+  fetch.mockImplementation((path, options) => path.endsWith('/restore')
+    ? Promise.resolve({ ok: false, status: 409, json: async () => ({ detail: 'Vehicle is already active' }) })
+    : original(path, options));
+  render(<App />);
+  fireEvent.click(await screen.findByRole("button", { name: "Archived vehicles" }));
+  fireEvent.click(await screen.findByRole("button", { name: "Restore" }));
+  fireEvent.click(screen.getByRole("button", { name: "Cancel" }));
+  expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+  fireEvent.click(screen.getByRole("button", { name: "Restore" }));
+  fireEvent.click(screen.getByRole("button", { name: "Confirm restore" }));
+  expect(await screen.findByRole("alert")).toHaveTextContent('Vehicle is already active');
+  expect(screen.getByRole("dialog")).toBeInTheDocument();
+  expect(cars[0].deleted_at).toBeTruthy();
 });

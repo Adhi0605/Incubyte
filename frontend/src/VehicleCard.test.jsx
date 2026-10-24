@@ -43,3 +43,19 @@ test("admins can edit, restock and delete", () => {
     expect(action).toHaveBeenCalledWith(name.toLowerCase(), vehicle);
   }
 });
+
+
+test("archived cards expose only an admin restore action", () => {
+  const action = vi.fn();
+  const archived = { ...vehicle, quantity: 3, deleted_at: "2026-10-24T10:00:00+00:00" };
+  const { rerender } = render(<VehicleCard vehicle={archived} admin onAction={action} />);
+  for (const name of ['Purchase', 'Edit', 'Restock', 'Delete']) {
+    expect(screen.queryByRole('button', { name })).not.toBeInTheDocument();
+  }
+  fireEvent.click(screen.getByRole('button', { name: 'Restore' }));
+  expect(action).toHaveBeenCalledWith('restore', archived);
+  rerender(<VehicleCard vehicle={archived} admin onAction={action} busy />);
+  expect(screen.getByRole('button', { name: 'Restore' })).toBeDisabled();
+  rerender(<VehicleCard vehicle={archived} admin={false} onAction={action} />);
+  expect(screen.queryByRole('button', { name: 'Restore' })).not.toBeInTheDocument();
+});
