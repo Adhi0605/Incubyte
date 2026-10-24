@@ -1,5 +1,6 @@
 import sqlite3
 from contextlib import contextmanager
+from decimal import Decimal
 
 
 class Database:
@@ -39,4 +40,4 @@ def public_user(row):
 
 def public_vehicle(row):
     return {**{key: row[key] for key in ('id', 'make', 'model', 'category', 'quantity')},
-            'price': format(row['price_cents'] / 100, '.2f')}
+            'price': format(Decimal(row['price_cents']) / 100, '.2f')}

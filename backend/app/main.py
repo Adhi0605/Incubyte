@@ -161,9 +161,14 @@ def create_app(database_path: str, jwt_secret: str):
     @app.post("/api/vehicles/{vehicle_id}/restock", dependencies=[Depends(admin_user)])
     def restock(vehicle_id: int, data: Restock):
         with database.connect() as db:
-            if not db.execute("UPDATE vehicles SET quantity = quantity + ? WHERE id = ?", (data.quantity, vehicle_id)).rowcount:
-                raise HTTPException(404, "Vehicle not found")
-            return find_vehicle(db, vehicle_id)
+            changed = db.execute(
+                "UPDATE vehicles SET quantity = quantity + ? WHERE id = ? AND quantity + ? <= 1000000",
+                (data.quantity, vehicle_id, data.quantity),
+            ).rowcount
+            item = find_vehicle(db, vehicle_id)
+            if not changed:
+                raise HTTPException(409, "Stock cannot exceed 1,000,000 units")
+            return item
 
     return app
 
@@ -175,4 +180,7 @@ def production_app():
     email, password = os.environ.get("ADMIN_EMAIL"), os.environ.get("ADMIN_PASSWORD")
     if email and password:
         app.state.bootstrap_admin(email, password)
+    with Database(path).connect() as db:
+        if not db.execute("SELECT 1 FROM users WHERE role = 'admin'").fetchone():
+            raise ValueError("Set ADMIN_EMAIL and ADMIN_PASSWORD to bootstrap the initial admin")
     return app

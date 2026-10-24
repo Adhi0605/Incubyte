@@ -35,6 +35,7 @@ def test_registration_login_and_duplicate(context):
     assert "password" not in response.json()["user"]
     assert client.post("/api/auth/register", json=data).status_code == 409
     assert client.post("/api/auth/login", json={**data, "password": "wrong"}).status_code == 401
+    assert client.post("/api/auth/login", json={"email": "missing@example.com", "password": "wrong"}).status_code == 401
     assert client.post("/api/auth/login", json=data).status_code == 200
 
 
@@ -160,8 +161,10 @@ def test_expired_and_unknown_user_sessions_are_rejected(context):
 def test_bootstrap_rejects_existing_regular_user_email(context):
     _, _, _, app = context
     import sqlite3
-    with sqlite3.connect(app.state.database_path) as db:
-        db.execute("DELETE FROM users WHERE role = 'admin'")
+    from contextlib import closing
+    with closing(sqlite3.connect(app.state.database_path)) as db:
+        with db:
+            db.execute("DELETE FROM users WHERE role = 'admin'")
     with pytest.raises(ValueError, match="already belongs"):
         app.state.bootstrap_admin("buyer@example.com", "BuyerPassword123!")
 
