@@ -177,11 +177,11 @@ performed. The CI workflow is committed but has not been run on GitHub.
 
 The Git history records actual red and green stages:
 
-- `a170080` → `a78a04f`: backend specification before implementation.
-- `438ff30` → `3b2c498`: frontend card specification before implementation.
-- `36d7fab` → `235333b`: failing bootstrap/stock-limit regressions, then fixes.
-- `c9373d8`: optional seed specification before its implementation.
-- `89085ac`: failing soft-delete/restore and migration specifications before implementation.
+- `2c509ca` → `6ed9283`: backend specification before implementation.
+- `47ba4c7` → `f9aa401`: frontend card specification before implementation.
+- `704e76b` → `5c6c349`: failing bootstrap/stock-limit regressions, then fixes.
+- `30cf58f`: optional seed specification before its implementation.
+- `7c5c450`: failing soft-delete/restore and migration specifications before implementation.
 
 Later integration tests validate existing behavior; they are not presented as
 having preceded that implementation. See [AGENTS.md](AGENTS.md) for the detailed

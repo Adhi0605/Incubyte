@@ -85,16 +85,16 @@ report that browser layout and end-to-end behavior were not verified.
 
 ## Progress
 
-- [x] Backend red specification committed (`a170080`).
-- [x] Backend green implementation committed (`a78a04f`); 19 tests passed.
-- [x] Frontend red specification committed (`438ff30`).
+- [x] Backend red specification committed (`2c509ca`).
+- [x] Backend green implementation committed (`6ed9283`); 19 tests passed.
+- [x] Frontend red specification committed (`47ba4c7`).
 - [x] Frontend implementation written and verified.
 - [x] Frontend tests (8) and production build pass.
 - [x] Review and regression fixes complete: bootstrap and stock-limit red/green
-      commits `36d7fab` / `235333b`. Extracted authentication and reusable UI
+      commits `704e76b` / `5c6c349`. Extracted authentication and reusable UI
       components and formatted the frontend for readability.
 - [x] Documentation, environment example, idempotent sample data, dependency
-      locks, and CI workflow implemented. Seed red/green: `c9373d8` / `051450b`.
+      locks, and CI workflow implemented. Seed red/green: `30cf58f` / `fec3fae`.
 - [x] Final verification: 25 backend tests, 97.64% statement coverage, 8 frontend
       tests, production build, dependency checks, and real HTTP smoke passed.
       Browser layout/end-to-end QA unavailable; GitHub CI has not run remotely.
