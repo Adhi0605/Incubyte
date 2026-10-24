@@ -1,0 +1,28 @@
+import { render, screen, fireEvent } from '@testing-library/react';
+import { vi, test, expect } from 'vitest';
+import { VehicleCard } from './VehicleCard';
+const vehicle = { id: 1, make: 'Toyota', model: 'Camry', category: 'Sedan', price: '32000.50', quantity: 0 };
+test('out-of-stock vehicles remain visible and cannot be purchased', () => {
+  render(<VehicleCard vehicle={vehicle} admin={false} onAction={vi.fn()} />);
+  expect(screen.getByText('Camry')).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: /out of stock/i })).toBeDisabled();
+  expect(screen.queryByRole('button', { name: /restock/i })).not.toBeInTheDocument();
+  expect(screen.queryByRole('button', { name: /edit/i })).not.toBeInTheDocument();
+});
+test('purchase sends the selected vehicle and pending purchase is disabled', () => {
+  const action = vi.fn();
+  const stocked = { ...vehicle, quantity: 3 };
+  const { rerender } = render(<VehicleCard vehicle={stocked} admin={false} onAction={action} />);
+  fireEvent.click(screen.getByRole('button', { name: /purchase/i }));
+  expect(action).toHaveBeenCalledWith('purchase', stocked);
+  rerender(<VehicleCard vehicle={stocked} admin={false} onAction={action} busy />);
+  expect(screen.getByRole('button', { name: /purchase/i })).toBeDisabled();
+});
+test('admins can edit, restock and delete', () => {
+  const action = vi.fn();
+  render(<VehicleCard vehicle={vehicle} admin onAction={action} />);
+  for (const name of ['Edit', 'Restock', 'Delete']) {
+    fireEvent.click(screen.getByRole('button', { name: new RegExp(name, 'i') }));
+    expect(action).toHaveBeenCalledWith(name.toLowerCase(), vehicle);
+  }
+});
