@@ -86,8 +86,8 @@ report that browser layout and end-to-end behavior were not verified.
 - [x] Backend red specification committed (`a170080`).
 - [x] Backend green implementation committed (`a78a04f`); 19 tests passed.
 - [x] Frontend red specification committed (`438ff30`).
-- [x] Frontend implementation written; pending verification and commit.
-- [ ] Frontend tests and production build pass.
+- [x] Frontend implementation written and verified.
+- [x] Frontend tests (3) and production build pass; backend coverage is 94%.
 - [ ] Review, regression fixes, and refactoring complete.
 - [ ] Documentation, environment example, sample data, dependency locks, CI.
 - [ ] Final integration verification and handoff.
