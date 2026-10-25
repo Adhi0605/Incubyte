@@ -2,14 +2,11 @@
 .github
 .agents
 skills-lock.json
-pyproject.toml
-uv.lock
 .vercel
 .venv
 **/.venv
 **/venv
 **/node_modules
-**/dist
 public
 **/__pycache__
 **/.pytest_cache
@@ -34,7 +31,3 @@ data
 docs
 backend/tests
 scripts/browser
-AGENTS.md
-Dockerfile
-compose.yaml
-render.yaml
