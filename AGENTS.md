@@ -124,3 +124,128 @@ Soft-delete verification: 31 backend tests, 97.81% statement coverage, 12 fronte
 tests, production build, and real HTTP smoke passed. The local API was restarted
 and the existing admin login plus active/archive endpoints were verified through
 the frontend proxy. Browser layout testing remains unavailable.
+
+## Portfolio expansion: automatic private workspaces (active plan)
+
+This section supersedes the original registration rule for this portfolio mode.
+The app will still look and behave like a normal dealership application. There
+will be no "Start my demo" gate, automatic resets, or shared editable inventory.
+
+### What will work and how
+
+1. **Automatic isolation.** Registration creates an owner-admin and a private
+   workspace in the same transaction, populated with Indian sample inventory and
+   synthetic history. Login returns that workspace's session. Every inventory,
+   archive, restore, purchase, user, and analytics query is restricted by the
+   workspace from the authenticated database user, never a client-supplied ID.
+   Existing accounts keep working; existing inventory is retained in the legacy
+   workspace. Subsequent independent registrations cannot promote/access users
+   in other workspaces. Workspace roles remain separate from global access.
+2. **Indian new/used inventory.** Create 200 deterministic synthetic listings,
+   with year, condition (`new`/`used`), trim, mileage in km, fuel, transmission,
+   colour, city, description, INR price, timestamps, stock number and optional
+   VIN. Each used listing represents one car (quantity 0 or 1). Add database
+   pagination, sorting, filters, a detail endpoint, and bulk CSV import. Prices,
+   inventory and histories are explicitly synthetic and are not market quotes.
+3. **Images and information.** Listings have gallery image objects (`url`,
+   `alt`, `credit`, `source_url`, `license`) plus an HTTPS manufacturer/model
+   information link. Use shared local licensed/attributed car photographs where
+   obtainable, labeled representative imagery. Never claim a photograph is of
+   the physical synthetic listing. Provide a fallback and lazy loading. Vehicle
+   details show gallery, full specifications, source credit and external link.
+4. **Transactional history and analytics.** Every purchase atomically decreases
+   stock by exactly one and inserts a durable purchase snapshot with the price
+   at purchase time. Inventory events record restocks, quantity adjustments,
+   archives and restores. Seed 12 months of labeled synthetic transactions per
+   workspace. Admin dashboard includes date-filtered recorded sales, units sold,
+   average sale price, inventory value, new/used and fuel/brand breakdowns,
+   monthly trends, low stock and aging stock. Historical records survive edits
+   and archiving. No payments or real revenue are implied.
+5. **Normal interface.** Keep login/registration; explain private persistent
+   data briefly on registration. Add Inventory / Analytics / Archived vehicles
+   navigation, INR/lakh/crore formatting, rich search with server pagination,
+   detail/gallery screen and expanded vehicle forms. A user immediately has
+   admin capabilities in their own automatically created workspace.
+6. **Hosting.** Provide a reproducible production container that builds React
+   and serves it alongside `/api` from FastAPI, a health endpoint, environment
+   configuration, and a Render blueprint. Keep SQLite supported for local use
+   and a persistent-disk single-instance demo; add PostgreSQL support for a
+   managed production database where practical. Include backups/migration and
+   secret instructions; never provision paid services or publish without the
+   actual host/account configuration. The deliverable is hosting-ready code.
+7. **Verification and delivery.** Write failing tests before changes, commit
+   meaningful red/green/refactor stages with AI attribution, verify isolation
+   for every endpoint with two users, test pagination and filters, transaction
+   atomicity, used-stock limits, image/link validation, legacy migration and
+   analytics. Run frontend tests/build and actual HTTP smoke. Update README and
+   plan with measured outcomes. Restart the local app and push the completed
+   work to the established remote. No browser verification claim without a run.
+
+### Parallel ownership and shared contracts
+
+The coordinator owns `backend/app/database.py`, `main.py`, `schemas.py`, workspace
+provisioning/auth, endpoint integration and cross-workspace regression tests.
+Agents edit only assigned paths and do not commit, push or edit this plan.
+
+- **Catalog agent:** `backend/app/catalog.py`, `backend/app/demo.py`,
+  `backend/tests/test_catalog.py`, `frontend/public/cars/`, `ASSET_CREDITS.md`.
+  Export `catalog_vehicles()` -> list of 200 dictionaries. Dictionaries use
+  vehicle input fields and `images` metadata. Export
+  `populate_workspace(db, workspace_id)` from demo.py, inserting vehicles,
+  purchases and events inside the caller's transaction, no own commits.
+- **Analytics agent:** `backend/app/analytics.py`,
+  `backend/tests/test_analytics.py`. Export `workspace_analytics(db,
+  workspace_id, start_date=None, end_date=None)`. SQL connection provides
+  `execute(sql, tuple_params)` and dictionary-like rows. Use tables below.
+- **Frontend agent:** all `frontend/src/` except existing CarArt and assets;
+  own frontend tests; coordinate against contracts below. No backend edits.
+- **Hosting agent:** `Dockerfile`, `.dockerignore`, `render.yaml`,
+  `compose.yaml`, `.github/workflows/ci.yml`, `docs/DEPLOYMENT.md` and
+  `scripts/backup.py`. Do not edit main.py; specify required static integration.
+
+Database contract: `workspaces(id,name,created_at)`,
+`users(...,workspace_id)`, `vehicles(...,workspace_id,condition,year,trim,
+ mileage_km,fuel_type,transmission,color,city,description,info_url,images_json,
+ stock_number,vin,created_at,updated_at)`. All money columns remain integer
+`price_cents` (INR paise). `purchases(id,workspace_id,vehicle_id,make,model,
+ condition,fuel_type,quantity,unit_price_cents,total_cents,purchased_at,is_demo)`;
+`inventory_events(id,workspace_id,vehicle_id,event_type,quantity_delta,
+ created_at,is_demo)`. SQL uses `?` parameters, common SQLite/Postgres syntax,
+`INSERT ... RETURNING id`; timestamps are UTC ISO text, booleans integer 0/1.
+
+API contract:
+
+- Auth sessions retain `{access_token,token_type,user}`; user includes
+  `workspace_id`. Registration produces `role: admin` for its own new workspace.
+- `GET /api/vehicles` and `/search`: return `{items,total,page,page_size,
+  summary:{listings,units,value}}`; pagination defaults page=1,page_size=12,
+  maximum 100. Filters: make,model,category,condition,fuel_type,transmission,
+  city,min_price,max_price,min_year,max_year. Sort: newest,price_asc,price_desc,
+  year_desc,mileage_asc. Summary covers all matches, excluding archived rows.
+- `GET /api/vehicles/{id}` returns expanded vehicle, with `images` parsed from
+  JSON, `currency: INR`, and optional timestamp `deleted_at`.
+- Existing mutation routes keep their methods. Archived endpoint remains an
+  admin-only array. Purchase/restock/restore return the expanded vehicle.
+- `GET /api/analytics?start_date=YYYY-MM-DD&end_date=YYYY-MM-DD`: admin-only
+  returns `summary` (recorded_sales,units_sold,average_sale_price,inventory_value,
+  inventory_units,active_listings), `monthly_sales` [{month,sales,units}],
+  `by_brand` [{name,sales,units}], `by_condition` [{name,sales,units}],
+  `by_fuel` [{name,units}], `low_stock` and `aging_stock` vehicle summaries,
+  and `demo_notice`. Money values are decimal strings in INR. Sales date bounds
+  are inclusive; inventory statistics describe current active inventory.
+- `POST /api/vehicles/import`: admin-only `{csv: string}`, validates all rows
+  before inserting, returns `{imported: number}`. Image gallery editing may
+  accept HTTPS URLs; locally seeded images use `/cars/...`.
+- `GET /api/health` returns `{status: ok}`. Production fallback serves React
+  routes, never masks missing `/api` endpoints with HTML.
+
+### Expansion progress
+
+- [x] Requirements, sequencing, ownership and contracts documented before work.
+- [ ] Failing isolation/rich-inventory/analytics tests recorded.
+- [ ] Workspace migration and automatic provisioning implemented.
+- [ ] Indian catalog, photo assets and synthetic history implemented.
+- [ ] Scoped inventory, transactional purchases and analytics integrated.
+- [ ] Frontend inventory/details/analytics and admin flows integrated.
+- [ ] Hosting artifacts and production serving verified.
+- [ ] Tests, smoke, docs, local restart and GitHub push complete.
