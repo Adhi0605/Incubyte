@@ -332,3 +332,10 @@ release verification passed at https://forecourt-inventory.vercel.app.
 The runtime uses hosted PostgreSQL; only generated verification workspaces were
 removed after public mutation tests. Prebuilt ignore-rule collisions were fixed
 in commit `9ca7aef` before the successful release.
+
+Final release confirmation: automatic GitHub production deployment was verified,
+including the rooted static-source exclusion regression (`c39f75f` / `de3e9bb`).
+Public Chrome checks passed original admin login, photos, analytics and 390px
+layout. The complete database/migration/hosting/artifact run passed 99 tests,
+95.88% statement coverage. All changes were committed with AI attribution and
+pushed. Public site: https://forecourt-inventory.vercel.app.

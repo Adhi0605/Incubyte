@@ -247,9 +247,8 @@ ID/user isolation, purchases, analytics, archive and restore through the proxy.
 It never uses `DATABASE_URL` inherited from your shell. Processes/data are cleaned
 up afterwards; it does not modify the running local app's database.
 
-Measured local verification for this expansion: **95 backend tests passed,
-including actual PostgreSQL migration and hosting checks, with 95.88% statement
-coverage; 29 frontend tests and
+Measured local verification for this expansion: **99 backend, migration, hosting and artifact tests passed,
+including actual PostgreSQL transfer checks, with 95.88% statement coverage; 29 frontend tests and
 the production build passed.** HTTP smoke passed. See the final implementation
 report and [deployment verification](docs/DEPLOYMENT.md#verification) for container
 and browser checks; a committed workflow is not itself evidence of remote CI.
@@ -281,7 +280,8 @@ Use [docs/VERCEL.md](docs/VERCEL.md) for the selected **Vercel Hobby + Neon Free
 deployment. The repository root uses the FastAPI preset and the checked-in build
 command; hosted startup rejects SQLite fallback. See
 [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) for container alternatives, backup/restore
-and migration details. The public production deployment is live at
+and migration details. Live Chrome also verified login, loaded car photos, analytics and the 390px
+mobile layout against the public site. The public production deployment is live at
 [forecourt-inventory.vercel.app](https://forecourt-inventory.vercel.app), on
 Vercel Hobby with the linked Neon Free database. The GitHub repository is
 connected to the Vercel project. No paid plans or custom-domain purchases were

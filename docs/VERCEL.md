@@ -166,3 +166,22 @@ statement coverage before the final artifact cases were added. Artifact checks
 are run separately against a real Vercel build; actual public HTTPS checks were
 also performed. Upstream TestClient `httpx` and npm `whatwg-encoding` deprecation
 warnings remain; no unrelated dependency upgrades were introduced.
+
+## Source deployment and final public checks
+
+GitHub pushes were confirmed to create new Ready production deployments. The
+source-based build initially exposed an overly broad `public` upload exclusion
+that also removed `frontend/public`. A failing source-file eligibility regression
+was committed (`c39f75f`), then the rule was anchored to `/public/` (`de3e9bb`).
+The resulting automatic production deployment restored photos and favicon over
+public HTTPS. This differs from the prebuilt-file tracing correction above:
+both source uploads and prebuilt uploads are now verified.
+
+After that GitHub deployment, real Chrome passed the existing admin login,
+inventory, loaded car photos, twelve-month analytics and mobile layout without
+horizontal overflow. The combined PostgreSQL, migration, hosting and actual
+artifact suite passed **99 tests with 95.88% statement coverage** using
+`VERIFY_VERCEL_BUILD=1 .venv/bin/python scripts/test_postgres.py`.
+Screenshots were retained locally under `/tmp`; no private session files or
+secrets were committed. The public alias remains
+https://forecourt-inventory.vercel.app.
