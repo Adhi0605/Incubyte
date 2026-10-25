@@ -27,15 +27,15 @@ The backend coordinator owns these required interfaces:
 - Registration creates a private, seeded workspace owned by its new admin.
   Initial administrator bootstrap is optional.
 
-| Environment variable | Purpose |
-| --- | --- |
-| `JWT_SECRET` | Required private random value, at least 32 characters. Keep stable across restarts; rotating it invalidates existing tokens. |
-| `DATABASE_URL` | PostgreSQL connection URL. Nonempty value takes precedence over `DATABASE_PATH`. Keep it private; use the host's internal URL on Render. |
-| `DATABASE_PATH` | SQLite fallback. Container default `/data/inventory.db`; local backend default `backend/inventory.db`. Its directory must exist and be writable. |
-| `FRONTEND_DIST` | Absolute built React directory; container default `/app/frontend/dist`. |
-| `PORT` | Listening port, default `8000`; the container honors a hosting platform's supplied value. |
+| Environment variable            | Purpose                                                                                                                                                                                              |
+| ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `JWT_SECRET`                    | Required private random value, at least 32 characters. Keep stable across restarts; rotating it invalidates existing tokens.                                                                         |
+| `DATABASE_URL`                  | PostgreSQL connection URL. Nonempty value takes precedence over `DATABASE_PATH`. Keep it private; use the host's internal URL on Render.                                                             |
+| `DATABASE_PATH`                 | SQLite fallback. Container default `/data/inventory.db`; local backend default `backend/inventory.db`. Its directory must exist and be writable.                                                     |
+| `FRONTEND_DIST`                 | Absolute built React directory; container default `/app/frontend/dist`.                                                                                                                              |
+| `PORT`                          | Listening port, default `8000`; the container honors a hosting platform's supplied value.                                                                                                            |
 | `ADMIN_EMAIL`, `ADMIN_PASSWORD` | Optional private first-admin bootstrap. Supply both or neither; supplying only one fails startup. No default credentials. Bootstrap is idempotent and does not replace an existing admin's password. |
-| `TEST_DATABASE_URL` | Tests only: opt into PostgreSQL integration checks against a disposable database. Never point this at production. |
+| `TEST_DATABASE_URL`             | Tests only: opt into PostgreSQL integration checks against a disposable database. Never point this at production.                                                                                    |
 
 Do not put secrets into the Dockerfile, frontend build variables, committed YAML,
 or command logs. The build context excludes environment files and local databases.
@@ -129,8 +129,10 @@ registration/login, workspace isolation, inventory and purchase history. Keep
 the previous image/revision and its matching backup for rollback; a code
 rollback alone does not undo database changes.
 
-There is no automatic SQLite-to-PostgreSQL data importer. A fresh PostgreSQL URL
-starts a separate database. To retain existing data, first take a SQLite backup,
+The verified transfer utility is now `scripts/migrate_sqlite_to_postgres.py`;
+see [MIGRATION.md](MIGRATION.md) for complete cutover and rollback steps. Startup
+does not transfer data automatically. A fresh PostgreSQL URL starts a separate
+database. To retain existing data, first take a SQLite backup,
 stop writes, and validate an explicit transfer in staging: preserve workspace
 and row IDs, password hashes, integer money, JSON and timestamps across
 workspaces, users, vehicles, purchases and inventory events; reset PostgreSQL

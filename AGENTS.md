@@ -305,7 +305,26 @@ password hashes, inventory (including archived rows), purchases and events.
    push to the established remote. Keep secrets, DB files and backups out of Git.
 
 Progress:
-- [ ] Migration specification and transfer/verification utility.
-- [ ] Persistent PostgreSQL, data transfer and live runtime cutover verified.
+
+- [x] Migration specification and transactional transfer/verification utility.
+- [x] Persistent local PostgreSQL and hosted Neon PostgreSQL cutovers verified:
+      all 3 workspaces, 3 users, 605 vehicles, 723 purchases and 1,323 events
+      retained with full row hashes and identical per-workspace analytics.
+      Existing admin login verified; active runtime now uses hosted pooled TLS.
 - [ ] Release build and hosting access/deployment completed or concrete missing access identified.
 - [ ] Accurate documentation, checks, commits and push.
+
+Hosting steering: use **Vercel Hobby (free only)** with external free PostgreSQL
+(Neon via Vercel Marketplace preferred), replacing Render as the deployment
+target. Vercel/Neon account connections are pending. The coordinator owns the
+actual data cutover and README. A delegated hosting worker owns only Vercel
+entry/config/build files, `docs/VERCEL.md` and Vercel configuration tests. No
+private-beta platform features or paid resources are required.
+
+Hosting account update: Vercel CLI is authorized; personal scope `adhi-eee9`
+was verified on Hobby. Project `forecourt-inventory` is linked to the existing
+GitHub repo. Neon `forecourt-db` was explicitly provisioned with `free_v3`,
+region iad1 and managed Auth disabled, then connected to Production only.
+`JWT_SECRET` is a sensitive Vercel production secret. No secrets or native
+connection credentials are committed. Production build/deployment verification
+is ongoing; no public release success is claimed yet.
