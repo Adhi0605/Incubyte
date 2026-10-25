@@ -277,3 +277,35 @@ Final measured verification: 71 backend tests including four actual PostgreSQL
 integration tests, 96.05% backend statement coverage, 29 frontend tests, browser
 QA and HTTP smoke. The production image was built and smoke-tested locally;
 remote hosting and remote CI are separate actions/results.
+
+## Actual PostgreSQL cutover and hosting release (active)
+
+The user now authorizes the actual data migration and hosting work. This replaces
+prior preparation-only scope. Preserve all existing accounts, workspace IDs,
+password hashes, inventory (including archived rows), purchases and events.
+
+1. Write failing migration tests. Implement a reusable SQLite-to-PostgreSQL
+   transfer that reads a consistent SQLite snapshot, imports only into an empty
+   target, preserves values/IDs, resets sequences, verifies complete row hashes
+   and per-workspace analytics, and rolls back on any mismatch. Never overwrite
+   a populated target or expose connection secrets in logs.
+2. Prepare a persistent PostgreSQL instance for this project with private local
+   credentials and storage outside Git. Freeze app writes, back up SQLite, run
+   and validate the transfer, update the private runtime DATABASE_URL, and restart
+   the app. Verify existing login/session, roles, photo delivery, stock and
+   historical analytics against the source. Keep the SQLite snapshot for rollback.
+3. Inspect host connection/account access. Build and test the concrete production
+   release and hosting configuration. Deploy to an authorized connected host if
+   possible; otherwise finish all independent migration/release work and identify
+   the exact missing hosting access/configuration. Never report a public URL
+   until the hosting service confirms a successful deployment.
+4. Update README/deployment guide with actual engine and migration results,
+   reproducible cutover/rollback steps, tests, and the exact hosting state. Run
+   backend/database and production HTTP checks, commit AI-attributed stages and
+   push to the established remote. Keep secrets, DB files and backups out of Git.
+
+Progress:
+- [ ] Migration specification and transfer/verification utility.
+- [ ] Persistent PostgreSQL, data transfer and live runtime cutover verified.
+- [ ] Release build and hosting access/deployment completed or concrete missing access identified.
+- [ ] Accurate documentation, checks, commits and push.
