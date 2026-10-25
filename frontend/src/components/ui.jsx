@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useId } from "react";
 import { CarFront, X } from "lucide-react";
 
 export function Brand() {
@@ -22,7 +22,19 @@ export function Field({ label, ...props }) {
   );
 }
 
-export function Modal({ title, children, onClose, busy }) {
+export function Select({ label, children, ...props }) {
+  const labelId = useId();
+  return (
+    <label className="field">
+      <span id={labelId}>{label}</span>
+      <select aria-labelledby={labelId} {...props}>
+        {children}
+      </select>
+    </label>
+  );
+}
+
+export function Modal({ title, children, onClose, busy, wide = false }) {
   const ref = useRef(null);
   useEffect(() => {
     const element = ref.current;
@@ -32,7 +44,7 @@ export function Modal({ title, children, onClose, busy }) {
   return (
     <dialog
       ref={ref}
-      className="modal"
+      className={"modal" + (wide ? " modal-wide" : "")}
       aria-labelledby="modal-title"
       onCancel={(e) => {
         e.preventDefault();

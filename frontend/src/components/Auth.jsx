@@ -10,6 +10,7 @@ export default function Auth({ onSession }) {
   const [error, setError] = useState("");
   async function submit(event) {
     event.preventDefault();
+    if (busy) return;
     setBusy(true);
     setError("");
     const data = Object.fromEntries(new FormData(event.currentTarget));
@@ -50,10 +51,10 @@ export default function Auth({ onSession }) {
       <section className="auth-form">
         <div className="auth-box">
           <span className="mini-label">WELCOME TO FORECOURT</span>
-          <h2>{register ? "Start your journey." : "Good to see you."}</h2>
+          <h2>{register ? "Create your account." : "Good to see you."}</h2>
           <p className="muted">
             {register
-              ? "Create your account to explore the inventory."
+              ? "Your private workspace is created automatically with 200 synthetic Indian listings and admin access. Your changes are saved and stay private."
               : "Sign in to explore what’s in the forecourt."}
           </p>
           <form onSubmit={submit}>
@@ -91,6 +92,7 @@ export default function Auth({ onSession }) {
           <p className="auth-toggle">
             {register ? "Already have an account?" : "New to Forecourt?"}{" "}
             <button
+              disabled={busy}
               onClick={() => {
                 setRegister(!register);
                 setError("");

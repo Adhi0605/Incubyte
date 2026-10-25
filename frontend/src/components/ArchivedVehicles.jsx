@@ -114,8 +114,8 @@ export default function ArchivedVehicles({ token, onRestored }) {
           <form onSubmit={restore}>
             <p className="muted">
               Restore {selected.make} {selected.model} to inventory with{" "}
-              {selected.quantity} units? It will be visible to all signed-in
-              users again.
+              {selected.quantity} units? It will be visible to members of your
+              private workspace again.
             </p>
             {restoreError && (
               <p role="alert" className="error">

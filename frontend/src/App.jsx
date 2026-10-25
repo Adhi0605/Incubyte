@@ -4,31 +4,33 @@ import {
   Archive,
   CarFront,
   Check,
-  ChevronDown,
+  BarChart3,
+  Upload,
   CircleHelp,
   LayoutGrid,
   LogOut,
   Package,
   Plus,
-  Search,
   ShieldCheck,
-  SlidersHorizontal,
   Users,
   X,
 } from "lucide-react";
 import { api, setUnauthorizedHandler } from "./api";
-import { VehicleCard, money } from "./VehicleCard";
+import { VehicleCard, money, compactMoney } from "./VehicleCard";
 import { CarArt } from "./CarArt";
 import Auth from "./components/Auth";
 import ArchivedVehicles from "./components/ArchivedVehicles";
-import { Brand, Field, Modal } from "./components/ui";
+import { Brand, Field, Modal, Select } from "./components/ui";
+import InventoryFilters, { blankFilters } from "./components/InventoryFilters";
+import VehicleDetails from "./components/VehicleDetails";
+import VehicleForm, { vehicleBody } from "./components/VehicleForm";
+import Analytics from "./components/Analytics";
+import CsvImport from "./components/CsvImport";
 
-const blankFilters = {
-  make: "",
-  model: "",
-  category: "",
-  min_price: "",
-  max_price: "",
+const emptyResult = {
+  total: 0,
+  page_size: 12,
+  summary: { listings: 0, units: 0, value: "0" },
 };
 
 export default function App() {
@@ -42,6 +44,14 @@ export default function App() {
   const [checking, setChecking] = useState(!!session);
   const [vehicles, setVehicles] = useState([]);
   const [users, setUsers] = useState([]);
+  const [page, setPage] = useState(1);
+  const [sort, setSort] = useState("newest");
+  const [result, setResult] = useState(emptyResult);
+  const [analyticsVersion, setAnalyticsVersion] = useState(0);
+  const [teamLoading, setTeamLoading] = useState(false);
+  const [teamError, setTeamError] = useState("");
+  const [detailsId, setDetailsId] = useState(null);
+  const [importing, setImporting] = useState(false);
   const [view, setView] = useState("inventory");
   const [filters, setFilters] = useState(blankFilters);
   const [applied, setApplied] = useState(blankFilters);
@@ -52,19 +62,43 @@ export default function App() {
   const [modal, setModal] = useState(null);
   const [modalError, setModalError] = useState("");
   const requestId = useRef(0);
+  const teamRequestId = useRef(0);
+  const currentToken = useRef(null);
   const token = session?.access_token;
   const admin = session?.user?.role === "admin";
+  currentToken.current = token;
   const saveSession = useCallback((value) => {
     if (value)
       sessionStorage.setItem("forecourt-session", JSON.stringify(value));
-    else sessionStorage.removeItem("forecourt-session");
+    else {
+      sessionStorage.removeItem("forecourt-session");
+      requestId.current++;
+      teamRequestId.current++;
+      setVehicles([]);
+      setUsers([]);
+      setResult(emptyResult);
+      setDetailsId(null);
+      setImporting(false);
+      setModal(null);
+      setNotice("");
+      setError("");
+      setBusy(false);
+    }
+    currentToken.current = value?.access_token;
     setSession(value);
   }, []);
   useEffect(() => {
-    setUnauthorizedHandler(() => {
+    setUnauthorizedHandler((expiredToken) => {
+      if (expiredToken !== currentToken.current) return;
+      requestId.current++;
+      teamRequestId.current++;
+      setDetailsId(null);
+      setImporting(false);
+      setModal(null);
       saveSession(null);
       setChecking(false);
     });
+    return () => setUnauthorizedHandler(() => {});
   }, [saveSession]);
   useEffect(() => {
     if (!token) {
@@ -74,7 +108,15 @@ export default function App() {
     let active = true;
     api("/auth/me", { token })
       .then((user) => {
-        if (active) setSession((previous) => ({ ...previous, user }));
+        if (active)
+          setSession((previous) => {
+            const updated = { ...previous, user };
+            sessionStorage.setItem(
+              "forecourt-session",
+              JSON.stringify(updated),
+            );
+            return updated;
+          });
       })
       .catch((err) => {
         if (active) {
@@ -90,37 +132,60 @@ export default function App() {
     };
   }, [token, saveSession]);
   const loadVehicles = useCallback(async () => {
+    if (!token || token !== currentToken.current) return;
     const id = ++requestId.current;
     setLoading(true);
     setError("");
     const query = new URLSearchParams(
-      Object.entries(applied).filter(([, value]) => value !== ""),
+      Object.entries({ ...applied, page, page_size: 12, sort }).filter(
+        ([, value]) => value !== "",
+      ),
     );
     try {
       const data = await api("/vehicles/search?" + query, { token });
-      if (id === requestId.current) setVehicles(data);
+      if (id === requestId.current && token === currentToken.current) {
+        const lastPage = Math.max(1, Math.ceil(data.total / data.page_size));
+        if (page > lastPage) {
+          setPage(lastPage);
+          return;
+        }
+        setVehicles(data.items);
+        setResult(data);
+      }
     } catch (err) {
       if (id === requestId.current) setError(err.message);
     } finally {
       if (id === requestId.current) setLoading(false);
     }
-  }, [applied, token]);
+  }, [applied, page, sort, token]);
   useEffect(() => {
     if (token && !checking) loadVehicles();
+    return () => {
+      requestId.current++;
+    };
   }, [token, checking, loadVehicles]);
   const loadUsers = useCallback(async () => {
-    setLoading(true);
-    setError("");
+    if (!token || token !== currentToken.current) return;
+    const id = ++teamRequestId.current;
+    setTeamLoading(true);
+    setTeamError("");
     try {
-      setUsers(await api("/users", { token }));
+      const data = await api("/users", { token });
+      if (id === teamRequestId.current && token === currentToken.current)
+        setUsers(data);
     } catch (err) {
-      setError(err.message);
+      if (id === teamRequestId.current && token === currentToken.current)
+        setTeamError(err.message);
     } finally {
-      setLoading(false);
+      if (id === teamRequestId.current && token === currentToken.current)
+        setTeamLoading(false);
     }
   }, [token]);
   useEffect(() => {
     if (view === "team" && admin) loadUsers();
+    return () => {
+      teamRequestId.current++;
+    };
   }, [view, admin, loadUsers]);
   useEffect(() => {
     if (!notice) return;
@@ -128,12 +193,17 @@ export default function App() {
     return () => clearTimeout(timer);
   }, [notice]);
   function open(action, vehicle) {
+    if (action === "details") {
+      setDetailsId(vehicle.id);
+      return;
+    }
+    setDetailsId(null);
     setModalError("");
     setModal({ action, vehicle });
   }
   async function submitAction(event) {
     event.preventDefault();
-    setBusy(true);
+    if (busy) return;
     setModalError("");
     const { action, vehicle } = modal;
     const data = Object.fromEntries(new FormData(event.currentTarget));
@@ -141,7 +211,12 @@ export default function App() {
     let method = "POST";
     let body;
     if (action === "add" || action === "edit") {
-      body = { ...data, quantity: Number(data.quantity) };
+      try {
+        body = vehicleBody(data);
+      } catch (err) {
+        setModalError(err.message);
+        return;
+      }
       if (action === "edit") {
         path += "/" + vehicle.id;
         method = "PUT";
@@ -151,11 +226,30 @@ export default function App() {
     } else {
       path += "/" + vehicle.id + (action === "delete" ? "" : "/" + action);
       method = action === "delete" ? "DELETE" : "POST";
-      if (action === "restock") body = { quantity: Number(data.quantity) };
+      if (action === "restock") {
+        const quantity = Number(data.quantity);
+        if (
+          !Number.isInteger(quantity) ||
+          quantity < 1 ||
+          quantity + vehicle.quantity >
+            (vehicle.condition === "used" ? 1 : 1000000)
+        ) {
+          setModalError(
+            vehicle.condition === "used"
+              ? "A used listing can contain only one car."
+              : "Enter a positive whole quantity within the stock limit.",
+          );
+          return;
+        }
+        body = { quantity };
+      }
     }
+    setBusy(true);
     try {
       await api(path, { token, method, ...(body ? { body } : {}) });
+      if (token !== currentToken.current) return;
       setModal(null);
+      setAnalyticsVersion((version) => version + 1);
       setNotice(
         {
           add: "Vehicle added to inventory.",
@@ -169,10 +263,11 @@ export default function App() {
       if (action === "promote") await loadUsers();
       else await loadVehicles();
     } catch (err) {
+      if (token !== currentToken.current) return;
       setModalError(err.message);
       if (action === "purchase") await loadVehicles();
     } finally {
-      setBusy(false);
+      if (token === currentToken.current) setBusy(false);
     }
   }
   if (checking)
@@ -187,18 +282,24 @@ export default function App() {
       <Auth
         onSession={(value) => {
           setChecking(true);
+          setResult(emptyResult);
+          setVehicles([]);
+          setUsers([]);
           saveSession(value);
           setView("inventory");
           setFilters(blankFilters);
           setApplied(blankFilters);
+          setPage(1);
+          setSort("newest");
+          setNotice("");
+          setError("");
+          setBusy(false);
         }}
       />
     );
-  const stock = vehicles.reduce((sum, v) => sum + v.quantity, 0);
-  const value = vehicles.reduce(
-    (sum, v) => sum + Number(v.price) * v.quantity,
-    0,
-  );
+  const stock = result.summary.units;
+  const value = result.summary.value;
+  const totalPages = Math.max(1, Math.ceil(result.total / result.page_size));
   const activeFilters = Object.values(applied).some(Boolean);
   return (
     <div className="app-shell">
@@ -207,14 +308,26 @@ export default function App() {
         <p className="nav-label">WORKSPACE</p>
         <nav>
           <button
+            aria-current={view === "inventory" ? "page" : undefined}
             className={view === "inventory" ? "active" : ""}
             onClick={() => setView("inventory")}
           >
             <LayoutGrid size={18} />
-            Inventory<span className="nav-count">{vehicles.length}</span>
+            Inventory<span className="nav-count">{result.total}</span>
           </button>
           {admin && (
             <button
+              aria-current={view === "analytics" ? "page" : undefined}
+              className={view === "analytics" ? "active" : ""}
+              onClick={() => setView("analytics")}
+            >
+              <BarChart3 size={18} />
+              Analytics
+            </button>
+          )}
+          {admin && (
+            <button
+              aria-current={view === "archive" ? "page" : undefined}
               className={view === "archive" ? "active" : ""}
               onClick={() => setView("archive")}
             >
@@ -224,6 +337,7 @@ export default function App() {
           )}
           {admin && (
             <button
+              aria-current={view === "team" ? "page" : undefined}
               className={view === "team" ? "active" : ""}
               onClick={() => setView("team")}
             >
@@ -253,10 +367,16 @@ export default function App() {
               aria-label="Sign out"
               onClick={() => {
                 requestId.current++;
+                teamRequestId.current++;
+                currentToken.current = null;
                 saveSession(null);
                 setVehicles([]);
                 setUsers([]);
                 setModal(null);
+                setDetailsId(null);
+                setImporting(false);
+                setNotice("");
+                setBusy(false);
               }}
             >
               <LogOut size={17} />
@@ -273,11 +393,13 @@ export default function App() {
               ? "Vehicle inventory"
               : view === "archive"
                 ? "Archived vehicles"
-                : "Team access"}
+                : view === "analytics"
+                  ? "Analytics"
+                  : "Team access"}
           </div>
           <span className="role-badge">
             <ShieldCheck size={14} />
-            {admin ? "Admin workspace" : "Member workspace"}
+            {admin ? "Private admin workspace" : "Private member workspace"}
           </span>
         </header>
         <main className="main-content">
@@ -296,10 +418,19 @@ export default function App() {
                   </p>
                 </div>
                 {admin && (
-                  <button className="primary" onClick={() => open("add")}>
-                    <Plus size={18} />
-                    Add vehicle
-                  </button>
+                  <div className="heading-actions">
+                    <button
+                      className="secondary"
+                      onClick={() => setImporting(true)}
+                    >
+                      <Upload size={16} />
+                      Import CSV
+                    </button>
+                    <button className="primary" onClick={() => open("add")}>
+                      <Plus size={18} />
+                      Add vehicle
+                    </button>
+                  </div>
                 )}
               </section>
               <section className="stats-grid" aria-label="Inventory statistics">
@@ -310,7 +441,7 @@ export default function App() {
                   <div>
                     <p>Vehicle listings{activeFilters ? " · filtered" : ""}</p>
                     <strong>
-                      {vehicles.length.toString().padStart(2, "0")}
+                      {result.summary.listings.toLocaleString("en-IN")}
                     </strong>
                   </div>
                   <span className="stat-note">In the collection</span>
@@ -321,7 +452,7 @@ export default function App() {
                   </span>
                   <div>
                     <p>Units in stock{activeFilters ? " · filtered" : ""}</p>
-                    <strong>{stock.toString().padStart(2, "0")}</strong>
+                    <strong>{Number(stock).toLocaleString("en-IN")}</strong>
                   </div>
                   <span className="stat-note">Ready for the road</span>
                 </div>
@@ -331,9 +462,11 @@ export default function App() {
                   </span>
                   <div>
                     <p>Inventory value{activeFilters ? " · filtered" : ""}</p>
-                    <strong className="value-number">{money(value)}</strong>
+                    <strong className="value-number" title={money(value)}>
+                      {compactMoney(value)}
+                    </strong>
                   </div>
-                  <span className="stat-note">USD · current stock</span>
+                  <span className="stat-note">INR · all matching stock</span>
                 </div>
               </section>
               <section className="collection-banner">
@@ -358,98 +491,47 @@ export default function App() {
               <section className="inventory-section">
                 <div className="section-heading">
                   <h2>
-                    Vehicle inventory <span>{vehicles.length}</span>
+                    Vehicle inventory <span>{result.total}</span>
                   </h2>
                   <span className="muted small">Browse. Discover. Drive.</span>
                 </div>
-                <form
-                  className="filter-panel"
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    setApplied({ ...filters });
+                <InventoryFilters
+                  filters={filters}
+                  setFilters={setFilters}
+                  applied={applied}
+                  onApply={(value) => {
+                    setPage(1);
+                    setApplied(value);
                   }}
-                >
-                  <div className="filter-title">
-                    <SlidersHorizontal size={16} />
-                    <span>Find your fit</span>
-                  </div>
-                  <div className="filter-fields">
-                    <Field
-                      label="Make"
-                      placeholder="e.g. Toyota"
-                      value={filters.make}
-                      onChange={(e) =>
-                        setFilters({ ...filters, make: e.target.value })
-                      }
-                    />
-                    <Field
-                      label="Model"
-                      placeholder="e.g. Camry"
-                      value={filters.model}
-                      onChange={(e) =>
-                        setFilters({ ...filters, model: e.target.value })
-                      }
-                    />
-                    <Field
-                      label="Category"
-                      placeholder="e.g. SUV"
-                      value={filters.category}
-                      onChange={(e) =>
-                        setFilters({ ...filters, category: e.target.value })
-                      }
-                    />
-                    <Field
-                      label="Min price ($)"
-                      type="number"
-                      min="0"
-                      max="1000000000"
-                      step="0.01"
-                      placeholder="Any"
-                      value={filters.min_price}
-                      onChange={(e) =>
-                        setFilters({ ...filters, min_price: e.target.value })
-                      }
-                    />
-                    <Field
-                      label="Max price ($)"
-                      type="number"
-                      min="0"
-                      max="1000000000"
-                      step="0.01"
-                      placeholder="Any"
-                      value={filters.max_price}
-                      onChange={(e) =>
-                        setFilters({ ...filters, max_price: e.target.value })
-                      }
-                    />
-                    <button className="primary search-button">
-                      <Search size={17} />
-                      Search
-                    </button>
-                  </div>
-                  {activeFilters && (
-                    <button
-                      type="button"
-                      className="clear-button"
-                      onClick={() => {
-                        setFilters(blankFilters);
-                        setApplied(blankFilters);
-                      }}
-                    >
-                      Clear filters <X size={13} />
-                    </button>
-                  )}
-                </form>
+                />
                 <div className="results-line">
-                  <span>
+                  <span aria-live="polite">
                     {loading
                       ? "Loading collection…"
-                      : `${vehicles.length} vehicle${vehicles.length === 1 ? "" : "s"} in your collection`}
+                      : result.total
+                        ? `${(page - 1) * result.page_size + 1}–${Math.min(page * result.page_size, result.total)} of ${result.total} vehicles`
+                        : "0 vehicles"}
                   </span>
-                  <span className="flex items-center gap-1">
-                    Newest first
-                    <ChevronDown size={13} />
-                  </span>
+                  <Select
+                    label="Sort inventory"
+                    value={sort}
+                    onChange={(e) => {
+                      setPage(1);
+                      setSort(e.target.value);
+                    }}
+                  >
+                    {[
+                      ["newest", "Newest first"],
+                      ["price_asc", "Price: low to high"],
+                      ["price_desc", "Price: high to low"],
+                      ["year_desc", "Year: newest first"],
+                      ["mileage_asc", "Mileage: low to high"],
+                    ].map(([value, text]) => (
+                      <option key={value} value={value}>
+                        {text}
+                      </option>
+                    ))}
+                  </Select>
                 </div>
                 {error && (
                   <div role="alert" className="error">
@@ -497,8 +579,42 @@ export default function App() {
                     )}
                   </div>
                 )}
+                {result.total > 0 && (
+                  <nav className="pagination" aria-label="Inventory pages">
+                    <button
+                      className="secondary"
+                      disabled={loading || page <= 1}
+                      onClick={() => setPage((previous) => previous - 1)}
+                      aria-label="Previous page"
+                    >
+                      Previous
+                    </button>
+                    <span aria-live="polite">
+                      Page {page} of {totalPages}
+                    </span>
+                    <button
+                      className="secondary"
+                      disabled={loading || page >= totalPages}
+                      onClick={() => setPage((previous) => previous + 1)}
+                      aria-label="Next page"
+                    >
+                      Next
+                    </button>
+                  </nav>
+                )}
+                <p className="catalog-notice">
+                  Synthetic inventory and INR asking prices for portfolio
+                  demonstration. Photos are representative; details include
+                  image credits.
+                </p>
               </section>
             </>
+          ) : view === "analytics" && admin ? (
+            <Analytics
+              token={token}
+              refreshKey={analyticsVersion}
+              onDetails={(v) => setDetailsId(v.id)}
+            />
           ) : view === "archive" && admin ? (
             <ArchivedVehicles token={token} onRestored={loadVehicles} />
           ) : (
@@ -510,18 +626,18 @@ export default function App() {
                     Team access<span>.</span>
                   </h1>
                   <p className="muted">
-                    Manage who can maintain inventory and invite other
-                    administrators.
+                    Manage access within this workspace. Independent
+                    registrations create separate private workspaces.
                   </p>
                 </div>
               </div>
-              {error && (
+              {teamError && (
                 <p className="error" role="alert">
-                  {error}
+                  {teamError}
                 </p>
               )}
               <div className="team-list">
-                {loading ? (
+                {teamLoading ? (
                   <p>Loading team…</p>
                 ) : (
                   users.map((user) => (
@@ -575,6 +691,31 @@ export default function App() {
           </button>
         </div>
       )}
+      {detailsId && (
+        <VehicleDetails
+          key={detailsId}
+          vehicleId={detailsId}
+          token={token}
+          admin={admin}
+          onClose={() => setDetailsId(null)}
+          onAction={open}
+        />
+      )}
+      {importing && (
+        <CsvImport
+          token={token}
+          onClose={() => setImporting(false)}
+          onImported={(count) => {
+            if (token !== currentToken.current) return;
+            setImporting(false);
+            setNotice(
+              `${count} vehicle${count === 1 ? "" : "s"} imported successfully.`,
+            );
+            setAnalyticsVersion((version) => version + 1);
+            loadVehicles();
+          }}
+        />
+      )}
       {modal && (
         <Modal
           title={
@@ -589,41 +730,11 @@ export default function App() {
           }
           onClose={() => setModal(null)}
           busy={busy}
+          wide={["add", "edit"].includes(modal.action)}
         >
           <form onSubmit={submitAction}>
             {["add", "edit"].includes(modal.action) ? (
-              <div className="modal-fields">
-                {["make", "model", "category"].map((key) => (
-                  <Field
-                    key={key}
-                    label={key[0].toUpperCase() + key.slice(1)}
-                    name={key}
-                    defaultValue={modal.vehicle?.[key] || ""}
-                    required
-                    maxLength={100}
-                  />
-                ))}
-                <Field
-                  label="Price (USD)"
-                  name="price"
-                  type="number"
-                  min="0"
-                  max="1000000000"
-                  step="0.01"
-                  defaultValue={modal.vehicle?.price || ""}
-                  required
-                />
-                <Field
-                  label="Quantity in stock"
-                  name="quantity"
-                  type="number"
-                  min="0"
-                  max="1000000"
-                  step="1"
-                  defaultValue={modal.vehicle?.quantity ?? 0}
-                  required
-                />
-              </div>
+              <VehicleForm vehicle={modal.vehicle} />
             ) : modal.action === "restock" ? (
               <>
                 <p className="muted">
@@ -635,7 +746,11 @@ export default function App() {
                   name="quantity"
                   type="number"
                   min="1"
-                  max="1000000"
+                  max={
+                    modal.vehicle.condition === "used"
+                      ? Math.max(0, 1 - modal.vehicle.quantity)
+                      : 1000000 - modal.vehicle.quantity
+                  }
                   step="1"
                   defaultValue="1"
                   required

@@ -14,7 +14,7 @@ export async function api(path, { token, ...options } = {}) {
   if (response.status === 204) return null;
   const data = await response.json();
   if (!response.ok) {
-    if (response.status === 401 && token) onUnauthorized();
+    if (response.status === 401 && token) onUnauthorized(token);
     const detail = Array.isArray(data.detail)
       ? data.detail.map((e) => `${e.loc.at(-1)}: ${e.msg}`).join("; ")
       : data.detail;

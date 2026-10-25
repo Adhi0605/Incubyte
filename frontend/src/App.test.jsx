@@ -130,7 +130,16 @@ beforeEach(() => {
             : buyer,
         ];
       else throw new Error("Unexpected request: " + path);
-      return { ok: true, status: 200, json: async () => data };
+      return {
+        ok: true,
+        status:
+          path === "/api/vehicles/import" ||
+          (path === "/api/vehicles" && options.method === "POST") ||
+          path === "/api/auth/register"
+            ? 201
+            : 200,
+        json: async () => data,
+      };
     }),
   );
 });
@@ -217,6 +226,10 @@ test("search forwards all supplied filters", async () => {
     ["Make", "Toyota"],
     ["Model", "Camry"],
     ["Category", "Sedan"],
+    ["Transmission", "Automatic"],
+    ["City", "Delhi"],
+    ["Min year", "2020"],
+    ["Max year", "2026"],
     ["Min price (₹)", "30000"],
     ["Max price (₹)", "40000"],
   ]) {
@@ -230,6 +243,10 @@ test("search forwards all supplied filters", async () => {
           "make=Toyota",
           "model=Camry",
           "category=Sedan",
+          "transmission=Automatic",
+          "city=Delhi",
+          "min_year=2020",
+          "max_year=2026",
           "min_price=30000",
           "max_price=40000",
         ].every((part) => r.path.includes(part)),
@@ -668,4 +685,41 @@ test("a purchase from analytics details refreshes analytics after the mutation",
       requests.filter((r) => r.path.startsWith("/api/analytics")),
     ).toHaveLength(2),
   );
+});
+
+test("analytics stock insights start compact and expand on request", async () => {
+  savedSession(admin);
+  const original = fetch.getMockImplementation();
+  fetch.mockImplementation(async (path, options) => {
+    const response = await original(path, options);
+    if (!path.startsWith("/api/analytics")) return response;
+    const data = await response.json();
+    data.low_stock = Array.from({ length: 15 }, (_, i) => ({
+      ...car,
+      id: i + 1,
+      model: `Stock ${i + 1}`,
+      quantity: 1,
+    }));
+    return { ...response, json: async () => data };
+  });
+  render(<App />);
+  fireEvent.click(await screen.findByRole("button", { name: "Analytics" }));
+  const heading = await screen.findByRole("heading", { name: "Low stock" });
+  const panel = heading.closest("section");
+  await within(panel).findByRole("button", { name: "Toyota Stock 1" });
+  expect(
+    within(panel).queryByRole("button", { name: "Toyota Stock 7" }),
+  ).not.toBeInTheDocument();
+  fireEvent.click(
+    within(panel).getByRole("button", { name: "Show all 15 vehicles" }),
+  );
+  expect(
+    within(panel).getByRole("button", { name: "Toyota Stock 15" }),
+  ).toBeInTheDocument();
+  fireEvent.click(
+    within(panel).getByRole("button", { name: "Show fewer vehicles" }),
+  );
+  expect(
+    within(panel).queryByRole("button", { name: "Toyota Stock 15" }),
+  ).not.toBeInTheDocument();
 });
