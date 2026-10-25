@@ -189,3 +189,14 @@ with TestClient(app.app) as client:
     result = subprocess.run([str(python), '-S', '-c', script], cwd=bundle,
                             env=environment, capture_output=True, text=True)
     assert result.returncode == 0, result.stderr
+
+
+def test_vercel_source_upload_preserves_tracked_photos_and_favicon():
+    # Vercel uses gitignore-style rules. Test which real source files survive
+    # upload, rather than checking a particular spelling of an ignore rule.
+    result = subprocess.run(
+        ['git', '-c', 'core.excludesFile=.vercelignore', 'check-ignore', '--no-index',
+         'frontend/public/cars/magnite.jpg', 'frontend/public/favicon.svg'],
+        cwd=ROOT, capture_output=True, text=True,
+    )
+    assert result.returncode == 1, f'Required frontend assets are excluded from upload: {result.stdout}'
