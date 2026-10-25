@@ -97,8 +97,8 @@ def create_app(database_path: str, jwt_secret: str):
         token = jwt.encode({'sub': str(user['id']), 'exp': datetime.now(timezone.utc) + timedelta(hours=8)}, jwt_secret, algorithm='HS256')
         return {'access_token': token, 'token_type': 'bearer', 'user': user}
 
-    def find_vehicle(db, vehicle_id, workspace_id, archived=False):
-        row = db.execute('SELECT * FROM vehicles WHERE id=? AND workspace_id=?' + ('' if archived else ' AND deleted_at IS NULL'), (vehicle_id, workspace_id)).fetchone()
+    def find_vehicle(db, vehicle_id, workspace_id, archived=False, lock=False):
+        row = db.execute('SELECT * FROM vehicles WHERE id=? AND workspace_id=?' + ('' if archived else ' AND deleted_at IS NULL') + (' FOR UPDATE' if lock and database.postgres else ''), (vehicle_id, workspace_id)).fetchone()
         if row is None:
             raise HTTPException(404, 'Vehicle not found')
         return public_vehicle(row)
@@ -251,7 +251,7 @@ def create_app(database_path: str, jwt_secret: str):
         with database.connect() as db:
             # Lock before reading previous quantity so adjustment history is accurate.
             db.execute('BEGIN IMMEDIATE')
-            previous = find_vehicle(db, vehicle_id, user['workspace_id'])
+            previous = find_vehicle(db, vehicle_id, user['workspace_id'], lock=True)
             values = {**vehicle_values(data), 'updated_at': utc_now()}
             assignments = ','.join(f'{key}=?' for key in values)
             db.execute(f'UPDATE vehicles SET {assignments} WHERE id=? AND workspace_id=? AND deleted_at IS NULL', (*values.values(), vehicle_id, user['workspace_id']))
