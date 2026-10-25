@@ -1,15 +1,41 @@
 # Incubyte
 
-# Forecourt — Car Dealership Inventory
+# Forecourt — Indian Car Dealership Portfolio
 
-A full-stack TDD kata with FastAPI, persistent SQLite, React, and Tailwind CSS.
-Browse and filter inventory, purchase one vehicle at a time, and manage the
-collection and team through an admin workspace.
+A full-stack dealership demo with **private persistent workspaces**, 200 Indian
+new/used listings per account, attributed car photographs, and recorded-sales
+analytics. Built with FastAPI, React, Tailwind, and SQLite or PostgreSQL.
+
+Register and use the application normally. Your account automatically owns an
+independent workspace: purchases, edits, archives, restores, imports, and charts
+never affect another account. There is no demo-start gate or scheduled reset.
+
+## What is included
+
+- **Indian catalog:** 100 new and 100 individual used listings across 25 model
+  families, with INR prices, year, trim, kilometres, fuel, transmission, colour,
+  city, stock number and descriptions. Prices/specifications are synthetic.
+- **Photographs:** 25 local representative photos from Wikimedia Commons,
+  retained attribution and license metadata, a detail gallery, and manufacturer
+  information links. See [ASSET_CREDITS.md](ASSET_CREDITS.md). A representative
+  model image is not evidence of the condition/trim of a synthetic listing.
+- **Search:** server pagination, sorting, make/model/category, new/used, fuel,
+  transmission, city, price and year filters. Summary cards cover every match,
+  independently of the current page. Admins can import validated CSV inventory.
+- **Inventory:** add/edit, purchase one unit, restock, soft-delete and restore.
+  Used listings hold at most one unit. Archived vehicles cannot be purchased,
+  edited or restocked and are excluded from inventory totals.
+- **Analytics:** twelve months of synthetic purchase history, date-filtered
+  recorded sales/units/average price, monthly chart, brand and condition sales,
+  fuel inventory, low stock and aging stock. Purchase snapshots survive later
+  price changes and archiving. No payments are collected or implied.
+- **Hosting:** a non-root production image serves React and `/api` on one
+  origin, health checks, PostgreSQL Render blueprint, persistent SQLite Compose
+  alternative, verified backup utility, CI and isolation tests.
 
 ## Run locally
 
-Requires Python 3.13 and Node.js 22.12 or newer (Node 22.22 was used locally).
-Run these commands from the repository root:
+Requires Python 3.13 and Node.js 22.12 or newer.
 
 ```sh
 python3 -m venv .venv
@@ -18,14 +44,17 @@ npm ci --prefix frontend
 cp backend/.env.example backend/.env
 ```
 
-Edit `backend/.env`: replace `JWT_SECRET` and `ADMIN_PASSWORD` with unique values
-and set `ADMIN_EMAIL` to your initial administrator's email. Generate a secret:
+Edit `backend/.env` and replace `JWT_SECRET` with a unique secret. Generate one:
 
 ```sh
 python3 -c 'import secrets; print(secrets.token_hex(32))'
 ```
 
-Start the API in one terminal:
+Bootstrap credentials are optional. Registration automatically creates an admin
+inside the new account's private workspace. To provision an initial owner, set
+both `ADMIN_EMAIL` and `ADMIN_PASSWORD`; never commit actual credentials.
+
+Start the API:
 
 ```sh
 cd backend
@@ -35,202 +64,217 @@ set +a
 ../.venv/bin/uvicorn app.main:production_app --factory --reload --host 127.0.0.1 --port 8000
 ```
 
-Start the frontend in another terminal, from the repository root:
+In another terminal, from the repository root:
 
 ```sh
 npm run dev --prefix frontend
 ```
 
-Open **http://127.0.0.1:5173**. Sign in with the administrator credentials you
-configured, or register a regular account. API documentation is at
-**http://127.0.0.1:8000/docs**. The Vite development server proxies `/api` to the
-backend, so browser requests use the same origin.
+Open **http://127.0.0.1:5173** and register or log in. API docs:
+**http://127.0.0.1:8000/docs**. Vite proxies `/api` to port 8000. For a custom
+API development address, set `API_TARGET` when starting Vite.
 
-SQLite is stored at `backend/inventory.db` by default. Override `DATABASE_PATH`
-with an absolute file path whose parent directory exists. Data survives restarts.
-No in-memory database is used by the app or integration tests.
+The default database is `backend/inventory.db`. `DATABASE_PATH` overrides the
+SQLite file; its parent directory must exist. `DATABASE_URL=postgresql://...`
+(or `postgres://...`) takes precedence and selects PostgreSQL. Data persists
+between visits and service restarts. Switching database engines starts from the
+selected database; it does not automatically transfer the old database.
 
-### Optional sample inventory
-
-After loading the environment variables as above, run from `backend`:
+### Serve the production build locally
 
 ```sh
-../.venv/bin/python -m app.seed
+npm run build --prefix frontend
+# Start the API as above; open http://127.0.0.1:8000 instead of the Vite URL.
 ```
 
-This adds six sample vehicles only when the collection is empty, including an
-out-of-stock vehicle. It preserves existing vehicles and creates no sample users.
+FastAPI serves `frontend/dist` by default. `FRONTEND_DIST` can select an absolute
+build directory. Missing API URLs return JSON errors rather than the SPA HTML.
 
-## Roles and inventory rules
+## Workspace ownership and migration
 
-| Action                                                | Member | Admin |
-| ----------------------------------------------------- | ------ | ----- |
-| List/search all vehicles, including sold-out listings | Yes    | Yes   |
-| Purchase exactly one unit per request                 | Yes    | Yes   |
-| Create, update, delete, and restock                   | No     | Yes   |
-| View registered users and promote them to admin       | No     | Yes   |
+Each normal registration creates a separate workspace and its owner-admin in
+one transaction, along with the sample inventory and historical records.
+No client can select a workspace ID at registration or in vehicle bodies.
+The backend reads the user and workspace from the database on every request;
+roles and workspace IDs supplied in a token payload are not used for access.
+Every inventory and analytics operation includes that workspace restriction.
 
-The first startup requires `ADMIN_EMAIL` and `ADMIN_PASSWORD`. Bootstrap is
-transactional and idempotent: once any admin exists, it never creates an
-additional bootstrap account. Existing regular accounts cannot be taken over
-through bootstrap. Subsequent administrators are promoted in **Team access**.
-Public registration cannot accept a role. Roles are checked in the database on
-each API request, so an existing token gains promoted permissions immediately.
-Reload the frontend after promotion to display its admin controls.
+New account owners can manage only their own vehicles. Scoped user-list and
+promotion endpoints remain available for regular members assigned to the same
+workspace; independently registered accounts are not members of one another's
+workspace and cannot be promoted or inspected by its owner. There is no global
+"all users" admin console or workspace-sharing/invitation flow in this demo.
 
-Prices are USD and are stored as integer cents, with at most two decimal places.
-Stock is an integer from 0 to 1,000,000; restocking cannot exceed that limit.
-Price limits are $0–$1,000,000,000. Text search is case-insensitive and literal
-substring matching; supplied filters are combined with AND. Price bounds are
-inclusive. Inventory statistics reflect the currently filtered collection.
+An existing SQLite database migrates additively on startup. The original owner
+retains the original inventory in the legacy workspace. Other legacy accounts
+receive separate owner workspaces. Existing email/password hashes, inventory,
+archive timestamps and IDs are retained. Unseeded workspaces receive the Indian
+catalog without overwriting custom listings or later owner edits; seeding is
+idempotent. Old sample amounts are preserved as numeric values; this is not a
+foreign-exchange conversion.
 
-Purchases use one atomic conditional database update to prevent negative stock,
-including concurrent requests for the last unit. Each request is an independent
-purchase; the UI disables pending submission and asks for confirmation. This is
-an inventory kata: it does not collect payments, reserve stock, or store orders.
+JWTs expire after eight hours and are stored in browser `sessionStorage`.
+Logout discards the browser token; there is no server-side token revocation.
+Passwords use Argon2. Login/registration share an in-process per-client rate
+limit; public hosting should also apply appropriate host-level traffic controls.
 
-Passwords use Argon2 hashes. JWTs expire after eight hours; sessions live in
-`sessionStorage` and are cleared on logout or a 401 response. Logout discards the
-browser token; server-side token revocation is outside this kata's scope. Deploy
-behind HTTPS and configure a same-origin `/api` reverse proxy if hosting the
-production frontend output. `npm run build --prefix frontend` produces
-`frontend/dist`; no deployment is included.
+## Inventory, money and historical data
 
-### Soft deletion and recovery
+Prices are INR, stored as integer paise and serialized as decimal strings.
+Price range: ₹0–₹1,000,000,000, with at most two decimal places. Stock is an
+integer from 0–1,000,000 for new listings and 0–1 for individual used listings.
+Each purchase is a separate inventory purchase of exactly one unit. The atomic
+stock update, purchase snapshot and inventory event commit together; a failed
+record insert rolls the stock change back. Pending UI actions are disabled.
 
-Deleting a vehicle archives its existing row with a UTC `deleted_at` timestamp.
-Archived vehicles are excluded from inventory, search, and inventory totals.
-Purchases, updates, and restocks return 404 while a vehicle is archived.
-Only admins can open **Archived vehicles**, review the saved stock and archive
-date, and confirm **Restore**. Restoring clears the timestamp and preserves the
-vehicle's original ID, price, details, and quantity, including zero stock.
+Deletion sets a UTC `deleted_at` timestamp. **Archived vehicles** is admin-only;
+Restore clears the timestamp while preserving identity, details and stock.
+Simultaneous restores succeed once; an active vehicle returns 409. Missing or
+foreign-workspace IDs return 404. There is no permanent-delete endpoint.
+Records permanently deleted before soft deletion cannot be recovered.
 
-Existing SQLite files are migrated automatically at startup without replacing
-rows. Archive and restore are atomic; simultaneous restore requests succeed
-once, with subsequent requests returning 409. Restoring a missing ID returns 404. Deleting an already archived ID returns 404. There is no permanent-delete
-endpoint. Vehicles permanently deleted before this feature cannot be recovered.
+Seeded history ends yesterday; purchases made today are live demonstration
+activity. All listings and historical activity are synthetic, not market quotes,
+real vehicle availability, inspection reports or payment receipts. Dashboard
+sales charts filter historical purchase snapshots; inventory cards, fuel units,
+low stock (≤2), and aging stock (90+ days with stock) describe current inventory.
+
+### CSV import
+
+Use the Inventory **Import CSV** action. Up to 500 rows are validated before
+anything is inserted. If any row fails, none of the rows are imported.
+
+```csv
+make,model,category,price,quantity,condition,year,mileage_km,fuel_type,transmission,city
+Tata,Tiago,Hatchback,650000,3,new,2026,0,Petrol,Manual,Pune
+Honda,City,Sedan,850000,1,used,2021,32000,Petrol,Automatic,Delhi
+```
+
+The gallery editor supports up to eight HTTPS image URLs or existing local
+`/cars/` assets with alt text and optional credit/source/license metadata. Binary
+uploads and external image-storage provisioning are not part of this version.
+No third-party API key is required to browse the bundled catalog.
 
 ## API
 
-All endpoints except registration and login require
+Except health, registration and login, endpoints require
 `Authorization: Bearer <access_token>`.
 
-| Method | Endpoint                      | Access / behavior                                     |
-| ------ | ----------------------------- | ----------------------------------------------------- |
-| POST   | `/api/auth/register`          | Public; `{email, password}`; returns token/user (201) |
-| POST   | `/api/auth/login`             | Public; `{email, password}`; returns token/user       |
-| GET    | `/api/auth/me`                | Current user and role                                 |
-| GET    | `/api/vehicles`               | Active vehicles, newest first                         |
-| GET    | `/api/vehicles/search`        | `make`, `model`, `category`, `min_price`, `max_price` |
-| POST   | `/api/vehicles`               | Admin; create (201)                                   |
-| PUT    | `/api/vehicles/{id}`          | Admin; replace all editable fields                    |
-| DELETE | `/api/vehicles/{id}`          | Admin; archive (204)                                  |
-| POST   | `/api/vehicles/{id}/purchase` | Purchase one; no request body                         |
-| POST   | `/api/vehicles/{id}/restock`  | Admin; `{quantity: positive_integer}`                 |
-| GET    | `/api/users`                  | Admin; list users without password hashes             |
-| POST   | `/api/users/{id}/promote`     | Admin; promote; no request body                       |
+| Method | Endpoint                                | Behavior                                            |
+| ------ | --------------------------------------- | --------------------------------------------------- |
+| GET    | `/api/health`                           | Database readiness                                  |
+| POST   | `/api/auth/register`                    | `{email,password}` → private owner session (201)    |
+| POST   | `/api/auth/login`                       | `{email,password}` → session                        |
+| GET    | `/api/auth/me`                          | Current user, role and workspace                    |
+| GET    | `/api/vehicles`, `/api/vehicles/search` | Paginated active inventory                          |
+| GET    | `/api/vehicles/{id}`                    | Active vehicle details                              |
+| POST   | `/api/vehicles`                         | Admin: create (201)                                 |
+| PUT    | `/api/vehicles/{id}`                    | Admin: replace editable fields                      |
+| DELETE | `/api/vehicles/{id}`                    | Admin: archive (204)                                |
+| GET    | `/api/vehicles/archived`                | Admin: own workspace's archive                      |
+| POST   | `/api/vehicles/{id}/restore`            | Admin: restore                                      |
+| POST   | `/api/vehicles/{id}/purchase`           | Buy one unit; no body                               |
+| POST   | `/api/vehicles/{id}/restock`            | Admin: `{quantity}`                                 |
+| POST   | `/api/vehicles/import`                  | Admin: `{csv: string}` (201)                        |
+| GET    | `/api/analytics`                        | Admin: dashboard; optional `start_date`, `end_date` |
+| GET    | `/api/users`                            | Admin: users in the same workspace                  |
+| POST   | `/api/users/{id}/promote`               | Admin: promote same-workspace member                |
 
-Admin-only recovery endpoints:
+Inventory responses contain `items`, `total`, `page`, `page_size`, and
+`summary: {listings,units,value}`. Page size defaults to 12 and is limited to 100.
+Sorts: `newest`, `price_asc`, `price_desc`, `year_desc`, `mileage_asc`. Search
+combines supplied filters with AND; text is case-insensitive literal substring
+matching; price and year boundaries are inclusive. See `/docs` for full schemas.
 
-- `GET /api/vehicles/archived` — archived vehicles, most recently archived first.
-- `POST /api/vehicles/{id}/restore` — restore a vehicle; no request body.
+Registration requires an email and a password of 10–128 characters. Responses
+never include passwords/hashes. Errors: 401 invalid session/login; 403 insufficient
+workspace role; 404 missing/foreign/archived active record; 409 duplicate account,
+stock conflict or already-active restore; 422 input validation; 429 auth rate limit.
 
-Vehicle create/update bodies contain `make`, `model`, `category`, `price`, and
-`quantity`. Responses add `id` and `deleted_at` (null for active vehicles), with
-`price` serialized as a decimal string.
-Registration requires a valid email and a password of 10–128 characters.
-Errors use 401 for invalid sessions/login, 403 for permission denial, 404 for
-missing records, 409 for duplicates or stock conflicts, and 422 for validation.
-Use the generated OpenAPI documentation for complete schemas and examples.
-
-## Tests and TDD history
+## Tests and verification
 
 ```sh
 cd backend
-../.venv/bin/pytest --cov=app --cov-report=term-missing --cov-fail-under=95
+../.venv/bin/pytest --cov=app --cov-report=term-missing
 cd ..
 npm test --prefix frontend
 npm run build --prefix frontend
-npm audit --prefix frontend
 python3 scripts/smoke.py
 ```
 
-Backend tests exercise the HTTP API with temporary file-backed SQLite databases:
-authentication, validation, permissions, CRUD, filters, promotion, persistence,
-bootstrap, limits, expired tokens, and six concurrent requests for the final
-unit. Frontend tests use Vitest, React Testing Library, and jsdom for card
-behavior and integrated login, search, purchase, restock, and promotion flows.
-UI integration tests mock HTTP responses; they do not substitute for a real
-browser end-to-end test. CI runs backend tests with a 95% statement coverage
-floor, frontend tests, and the production build.
+Backend integration tests use temporary file-backed SQLite databases. The
+PostgreSQL-specific cases skip when no test database is configured; CI enforces
+a 95% statement-coverage floor with both database engines exercised. To exercise
+real PostgreSQL too, set `TEST_DATABASE_URL` to a disposable database before
+running pytest. If local PostgreSQL tools are installed, the following command
+creates/removes its own temporary cluster and runs the whole coverage suite:
 
-The smoke script starts real API and Vite processes on temporary ports, uses a
-disposable SQLite database and generated credentials, exercises requests through
-the Vite proxy, and shuts down its own servers. It requires the dependencies
-installed above. For an API on a custom development port, set `API_TARGET` when
-starting Vite; its default remains `http://127.0.0.1:8000`.
-
-Local verification: **31 backend tests passed, 97.81% statement coverage; 12
-frontend tests passed; production build and HTTP smoke passed; npm audit found
-zero vulnerabilities.** No browser layout or browser end-to-end verification was
-performed. The CI workflow is committed but has not been run on GitHub.
-
-The Git history records actual red and green stages:
-
-- `2c509ca` → `6ed9283`: backend specification before implementation.
-- `47ba4c7` → `f9aa401`: frontend card specification before implementation.
-- `704e76b` → `5c6c349`: failing bootstrap/stock-limit regressions, then fixes.
-- `30cf58f`: optional seed specification before its implementation.
-- `7c5c450`: failing soft-delete/restore and migration specifications before implementation.
-
-Later integration tests validate existing behavior; they are not presented as
-having preceded that implementation. See [AGENTS.md](AGENTS.md) for the detailed
-implementation plan and tracked progress.
-
-## Project layout
-
-```text
-backend/app/          API factory, database, schemas, optional sample data
-backend/tests/        HTTP integration and sample-data tests
-frontend/src/         React app, API client, cards, reusable form/dialog components
-.github/workflows/    Backend and frontend CI jobs
-AGENTS.md             Agreed requirements, implementation plan and verification
+```sh
+.venv/bin/python scripts/test_postgres.py
 ```
+
+The HTTP smoke starts its own API/Vite processes, temporary SQLite database and
+random credentials. It checks two isolated registrations, 200 vehicles each,
+ID/user isolation, purchases, analytics, archive and restore through the proxy.
+It never uses `DATABASE_URL` inherited from your shell. Processes/data are cleaned
+up afterwards; it does not modify the running local app's database.
+
+Measured local verification for this expansion: **71 backend tests passed,
+including real PostgreSQL, with 96.05% statement coverage; 29 frontend tests and
+the production build passed.** HTTP smoke passed. See the final implementation
+report and [deployment verification](docs/DEPLOYMENT.md#verification) for container
+and browser checks; a committed workflow is not itself evidence of remote CI.
+
+The real Chrome harness passed 11 end-to-end checks, including separate browser
+contexts, archive/restore, purchase analytics and 390px layouts. It builds and
+serves its own temporary copy and retains screenshots/report under `/tmp`:
+
+```sh
+npm ci --prefix scripts/browser --ignore-scripts
+npm test --prefix scripts/browser
+```
+
+This optional harness requires `/usr/bin/google-chrome`, the backend `.venv`,
+and frontend dependencies. It never uses the developer's running application or
+database. The only incidental error in the initial run was a missing favicon;
+a local SVG favicon has since been added and verified over HTTP.
+
+The Git history retains actual red/green development stages. Original backend:
+`2c509ca` → `6ed9283`; frontend: `47ba4c7` → `f9aa401`. Portfolio workspace specifications: `f31a0a5` and
+`cd6377d` before the backend green implementation `4f616fb`; frontend `5f5995d`. The default analytics
+calendar-window regression is recorded as `100bd62` → `4cf7728`. Later integration
+checks validate already implemented behavior and are not claimed as tests-first.
+See [AGENTS.md](AGENTS.md) for the complete implementation plan and agent ownership.
+
+## Hosting
+
+Use [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) for Render/PostgreSQL and persistent
+SQLite container setup, environment variables, migrations, backup/restore,
+verification and known limits. The production image serves React and the API
+on one origin. No site or paid service has been provisioned by this work.
 
 ## My AI Usage
 
-### Tools used
+**Tool:** ChatGPT, operating as the Codex coding agent, plus explicitly requested
+Codex subagents. No other AI coding tool was used in this work. The Sites skill
+was consulted for UI workflow guidance; Sites hosting was not used.
 
-ChatGPT, operating as the Codex coding agent, assisted with this implementation.
-No other AI coding tool was used in this session. The Sites skill was consulted
-for frontend workflow guidance; no site was created or deployed through Sites.
-The vehicle illustrations are original code-based SVGs, not AI image-generator
-output.
+**Contributions:** the coordinator translated the requirements into `AGENTS.md`,
+wrote API tests, implemented authentication/workspace isolation and migrations,
+integrated and reviewed changes, ran cross-database and HTTP checks, and prepared
+the documentation. Subagents handled the Indian catalog/photo provenance,
+analytics and PostgreSQL tests, React interface/tests, and production container,
+CI and backup tooling. Agents also exercised real browser and container flows.
+The work includes substantial AI-written tests and implementation, rather than
+only boilerplate. Images were downloaded from attributed licensed Commons
+sources; they were not AI-generated. Original fallback illustrations are SVG code.
 
-### How AI contributed
-
-I used ChatGPT/Codex to translate the kata into an implementation plan, write
-backend tests before the API, implement JWT authentication and SQLite stock
-updates, and build the React/Tailwind interface. It also authored frontend tests,
-reviewed edge cases, reproduced and fixed bootstrap/restock defects, prepared
-sample data and CI, and wrote setup and API documentation. It subsequently
-implemented soft deletion, additive database migration, and admin-only archive
-and restore flows after writing failing API and UI tests. The agent ran the
-commands and checks documented in the Git history. AI assistance was substantial
-across the project, rather than limited to boilerplate.
-
-Every commit created during this work includes the ChatGPT co-author trailer
-and a description of its contribution. Earlier repository commits predate this
-implementation. No claim is made that the generated code was independently
-reviewed by a human or exercised manually in a browser.
-
-### Reflection
-
-AI accelerated the first implementation and made it practical to test permission
-and concurrency cases alongside the UI. Executing the tests was essential:
-review exposed two inconsistencies that the initial implementation missed, and
-their failing regression tests supplied concrete evidence for the fixes. The
-workflow still requires checking generated code, reviewing dependency changes,
-and distinguishing mocked component tests from real browser verification.
-The explicit plan and small, attributable commits make those decisions and
-limitations reviewable.
+**Transparency and reflection:** each AI-assisted commit records its contribution
+and includes the ChatGPT co-author trailer. The history records failing tests
+before their implementations, later regression fixes, and separate integration
+checks. Parallel work accelerated the feature slices, but shared API/schema
+contracts and executed tests were essential: real PostgreSQL caught a parameter
+escaping incompatibility that SQLite did not expose. UI component mocks, browser
+checks, HTTP smoke and container checks each verify different behavior. No claim
+is made that AI-written code received an independent human review or that remote
+hosting was deployed merely because local verification passed.

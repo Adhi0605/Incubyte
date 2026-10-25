@@ -195,7 +195,7 @@ Agents edit only assigned paths and do not commit, push or edit this plan.
   purchases and events inside the caller's transaction, no own commits.
 - **Analytics agent:** `backend/app/analytics.py`,
   `backend/tests/test_analytics.py`. Export `workspace_analytics(db,
-  workspace_id, start_date=None, end_date=None)`. SQL connection provides
+workspace_id, start_date=None, end_date=None)`. SQL connection provides
   `execute(sql, tuple_params)` and dictionary-like rows. Use tables below.
 - **Frontend agent:** all `frontend/src/` except existing CarArt and assets;
   own frontend tests; coordinate against contracts below. No backend edits.
@@ -218,7 +218,7 @@ API contract:
 - Auth sessions retain `{access_token,token_type,user}`; user includes
   `workspace_id`. Registration produces `role: admin` for its own new workspace.
 - `GET /api/vehicles` and `/search`: return `{items,total,page,page_size,
-  summary:{listings,units,value}}`; pagination defaults page=1,page_size=12,
+summary:{listings,units,value}}`; pagination defaults page=1,page_size=12,
   maximum 100. Filters: make,model,category,condition,fuel_type,transmission,
   city,min_price,max_price,min_year,max_year. Sort: newest,price_asc,price_desc,
   year_desc,mileage_asc. Summary covers all matches, excluding archived rows.
@@ -242,10 +242,38 @@ API contract:
 ### Expansion progress
 
 - [x] Requirements, sequencing, ownership and contracts documented before work.
-- [ ] Failing isolation/rich-inventory/analytics tests recorded.
-- [ ] Workspace migration and automatic provisioning implemented.
-- [ ] Indian catalog, photo assets and synthetic history implemented.
-- [ ] Scoped inventory, transactional purchases and analytics integrated.
-- [ ] Frontend inventory/details/analytics and admin flows integrated.
-- [ ] Hosting artifacts and production serving verified.
-- [ ] Tests, smoke, docs, local restart and GitHub push complete.
+- [x] Failing isolation/rich-inventory/analytics tests recorded (`f31a0a5`,
+      `cd6377d`); subagents supplied their red-run evidence.
+- [x] Workspace migration and automatic owner provisioning implemented, retaining
+      legacy rows and preventing cross-workspace reads/writes/promotions.
+- [x] Indian catalog: 200 listings, 25 attributed local photos, 241 synthetic
+      purchases over 12 months, no automatic resets.
+- [x] Scoped inventory, atomic purchase snapshots, CSV import and analytics
+      integrated; SQLite plus real PostgreSQL integration suite passes.
+- [x] Frontend inventory/details/gallery/forms/import and analytics integrated:
+      29 component/integration tests and production build pass.
+- [x] Hosting artifacts and production serving verified with Podman build,
+      HTTP, private registration, replacement persistence and live backup checks.
+- [x] Browser artifacts reviewed: 11 real Chrome checks, including 390px layouts,
+      isolated accounts, purchase analytics and archive/restore.
+- [x] Final local restart and existing-account/photo/API checks passed.
+- [x] Documentation and all changes prepared for the final GitHub push.
+
+### Coordination and verification record
+
+Four subagents implemented disjoint catalog/assets, analytics/tests, frontend,
+and hosting slices. The catalog agent then supplied a reusable real-browser
+harness. The coordinator owned schema/auth/scoping, reviewed/integrated all
+changes, ran actual PostgreSQL and HTTP smoke, and retained TDD commits.
+
+Live integration exposed a 13th empty chart month. A failing regression was
+committed (`100bd62`), followed by the calendar-window correction (`4cf7728`).
+Existing local SQLite data was backed up privately before migration; the old
+account's inventory and login were retained. No hosted service was provisioned.
+The single-origin production container is ready for deployment using the
+separate deployment guide; local verification does not imply remote deployment.
+
+Final measured verification: 71 backend tests including four actual PostgreSQL
+integration tests, 96.05% backend statement coverage, 29 frontend tests, browser
+QA and HTTP smoke. The production image was built and smoke-tested locally;
+remote hosting and remote CI are separate actions/results.
