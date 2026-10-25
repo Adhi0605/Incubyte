@@ -66,3 +66,34 @@ test("archived cards expose only an admin restore action", () => {
     screen.queryByRole("button", { name: "Restore" }),
   ).not.toBeInTheDocument();
 });
+
+test("cards show INR, condition and an API image that falls back accessibly", () => {
+  render(
+    <VehicleCard
+      vehicle={{
+        ...vehicle,
+        condition: "used",
+        images: [{ url: "/cars/test.jpg", alt: "Representative Toyota" }],
+      }}
+      admin
+      onAction={vi.fn()}
+    />,
+  );
+  expect(screen.getByText("Used")).toBeInTheDocument();
+  expect(screen.getByText(/₹32,000.50/)).toBeInTheDocument();
+  const img = screen.getByRole("img", { name: "Representative Toyota" });
+  expect(img).toHaveAttribute("loading", "lazy");
+  fireEvent.error(img);
+  expect(screen.getByText(/image unavailable/i)).toBeInTheDocument();
+});
+
+test("used vehicles already in stock cannot be restocked", () => {
+  render(
+    <VehicleCard
+      vehicle={{ ...vehicle, condition: "used", quantity: 1 }}
+      admin
+      onAction={vi.fn()}
+    />,
+  );
+  expect(screen.getByRole("button", { name: "Restock" })).toBeDisabled();
+});

@@ -117,3 +117,32 @@ def test_health_and_unknown_api_do_not_return_spa(private):
     client, _, _ = private
     assert client.get('/api/health').json() == {'status': 'ok'}
     assert client.get('/api/not-real').status_code == 404
+
+
+def test_failed_purchase_record_rolls_back_stock_and_events(private):
+    import sqlite3
+    from contextlib import closing
+    client, app, sessions = private
+    headers = header(sessions[0])
+    item = client.post('/api/vehicles', headers=headers, json={'make': 'Test', 'model': 'Atomic', 'category': 'Sedan', 'price': '10.25', 'quantity': 1}).json()
+    with closing(sqlite3.connect(app.state.database_path)) as db:
+        with db:
+            db.execute("CREATE TRIGGER fail_live_purchase BEFORE INSERT ON purchases WHEN NEW.is_demo=0 BEGIN SELECT RAISE(ABORT,'record failure'); END")
+    with pytest.raises(sqlite3.IntegrityError, match='record failure'):
+        client.post(f"/api/vehicles/{item['id']}/purchase", headers=headers)
+    assert client.get(f"/api/vehicles/{item['id']}", headers=headers).json()['quantity'] == 1
+    with Database(app.state.database_path).connect() as db:
+        assert db.execute('SELECT COUNT(*) FROM purchases WHERE vehicle_id=?', (item['id'],)).fetchone()[0] == 0
+        assert db.execute("SELECT COUNT(*) FROM inventory_events WHERE vehicle_id=? AND event_type='purchase'", (item['id'],)).fetchone()[0] == 0
+
+
+def test_client_cannot_choose_workspace_or_inject_gallery_links(private):
+    client, _, sessions = private
+    headers = header(sessions[0])
+    body = {'make': 'Test', 'model': 'Secure', 'category': 'Sedan', 'price': '10', 'quantity': 1, 'workspace_id': sessions[1]['user']['workspace_id']}
+    assert client.post('/api/vehicles', headers=headers, json=body).status_code == 422
+    del body['workspace_id']
+    for url in ['javascript:alert(1)', 'http://example.com/image.jpg', '/cars/../secret.env']:
+        assert client.post('/api/vehicles', headers=headers, json={**body, 'images': [{'url': url}]}).status_code == 422
+    own = client.get(f"/api/vehicles?workspace_id={sessions[1]['user']['workspace_id']}", headers=headers).json()
+    assert all(v['workspace_id'] == sessions[0]['user']['workspace_id'] for v in own['items'])
