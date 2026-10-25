@@ -304,8 +304,12 @@ def create_app(database_path: str, jwt_secret: str):
         from .analytics import workspace_analytics
         if start_date and end_date and start_date > end_date:
             raise HTTPException(422, 'Start date must not exceed end date')
-        start = start_date or (date.today() - timedelta(days=364))
         end = end_date or date.today()
+        month_index = end.year * 12 + end.month - 12
+        first_year, first_month = divmod(month_index, 12)
+        if first_year < 1:
+            raise HTTPException(422, 'Select dates between 1900 and 2100')
+        start = start_date or date(first_year, first_month + 1, 1)
         if start.year < 1900 or end.year > 2100:
             raise HTTPException(422, 'Select dates between 1900 and 2100')
         if start > end or (end - start).days > 3660:
