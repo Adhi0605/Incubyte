@@ -146,3 +146,16 @@ def test_client_cannot_choose_workspace_or_inject_gallery_links(private):
         assert client.post('/api/vehicles', headers=headers, json={**body, 'images': [{'url': url}]}).status_code == 422
     own = client.get(f"/api/vehicles?workspace_id={sessions[1]['user']['workspace_id']}", headers=headers).json()
     assert all(v['workspace_id'] == sessions[0]['user']['workspace_id'] for v in own['items'])
+
+
+def test_default_analytics_chart_has_twelve_calendar_months(private):
+    client, _, sessions = private
+    headers = header(sessions[0])
+    data = client.get('/api/analytics', headers=headers).json()
+    assert len(data['monthly_sales']) == 12
+    assert data['monthly_sales'][-1]['month'] == date.today().strftime('%Y-%m')
+    historical = client.get('/api/analytics?end_date=2025-06-30', headers=headers)
+    assert historical.status_code == 200
+    assert len(historical.json()['monthly_sales']) == 12
+    assert historical.json()['monthly_sales'][-1]['month'] == '2025-06'
+    assert client.get('/api/analytics?start_date=9999-12-30&end_date=9999-12-31', headers=headers).status_code == 422
