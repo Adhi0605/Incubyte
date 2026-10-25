@@ -1,10 +1,30 @@
 name: Verify dealership inventory
 
-on: [push, pull_request]
+"on": [push, pull_request]
+
+permissions:
+  contents: read
 
 jobs:
   backend:
     runs-on: ubuntu-latest
+    # Disposable runner-only database; no application/development credentials.
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: forecourt_test
+          POSTGRES_DB: forecourt_test
+          POSTGRES_HOST_AUTH_METHOD: trust
+        ports:
+          - "127.0.0.1:5432:5432"
+        options: >-
+          --health-cmd "pg_isready -U forecourt_test -d forecourt_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 12
+    env:
+      TEST_DATABASE_URL: postgresql://forecourt_test@127.0.0.1:5432/forecourt_test
     defaults:
       run:
         working-directory: backend
@@ -32,3 +52,129 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run build
+
+  container:
+    needs: [backend, frontend]
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        database: [sqlite, postgres]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build production image
+        run: docker build --tag forecourt:ci .
+      - name: Generate disposable test secrets
+        shell: bash
+        run: |
+          jwt_secret=$(openssl rand -hex 32)
+          postgres_password=$(openssl rand -hex 24)
+          echo "::add-mask::$jwt_secret"
+          echo "::add-mask::$postgres_password"
+          echo "JWT_SECRET=$jwt_secret" >> "$GITHUB_ENV"
+          echo "POSTGRES_PASSWORD=$postgres_password" >> "$GITHUB_ENV"
+      - name: Start database and application
+        env:
+          DATABASE_ENGINE: ${{ matrix.database }}
+        shell: bash
+        run: |
+          docker network create forecourt-ci
+          export DATABASE_URL=''
+          if [ "$DATABASE_ENGINE" = postgres ]; then
+            docker run --detach --name forecourt-db --network forecourt-ci \
+              --env POSTGRES_USER=forecourt --env POSTGRES_DB=forecourt \
+              --env POSTGRES_PASSWORD postgres:17
+            ready=false
+            for attempt in $(seq 1 60); do
+              if docker exec forecourt-db pg_isready -U forecourt -d forecourt; then
+                ready=true
+                break
+              fi
+              sleep 1
+            done
+            [ "$ready" = true ]
+            export DATABASE_URL="postgresql://forecourt:$POSTGRES_PASSWORD@forecourt-db:5432/forecourt"
+          fi
+          docker run --detach --name forecourt-app --network forecourt-ci \
+            --publish 127.0.0.1:8000:8000 --volume forecourt-data:/data \
+            --env JWT_SECRET --env DATABASE_URL forecourt:ci
+      - name: Verify HTTP, assets, private registration and restart persistence
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json
+          import re
+          import secrets
+          import subprocess
+          import time
+          import urllib.error
+          import urllib.request
+
+          base = "http://127.0.0.1:8000"
+
+          def request(path, body=None, token=None, expected=200):
+              headers = {"Content-Type": "application/json"}
+              if token:
+                  headers["Authorization"] = "Bearer " + token
+              req = urllib.request.Request(
+                  base + path, headers=headers,
+                  data=json.dumps(body).encode() if body is not None else None,
+              )
+              try:
+                  response = urllib.request.urlopen(req, timeout=30)
+              except urllib.error.HTTPError as error:
+                  response = error
+              with response:
+                  assert response.status == expected, (path, response.status)
+                  content_type = response.headers.get("Content-Type", "")
+                  raw = response.read().decode()
+                  return json.loads(raw) if "application/json" in content_type else raw
+
+          def wait_ready():
+              deadline = time.monotonic() + 90
+              while time.monotonic() < deadline:
+                  try:
+                      assert request("/api/health") == {"status": "ok"}
+                      return
+                  except (OSError, AssertionError):
+                      time.sleep(1)
+              raise AssertionError("Container never became ready")
+
+          wait_ready()
+          html = request("/")
+          assert '<div id="root">' in html
+          assert request("/inventory/123") == html
+          asset = re.search(r'src="(/assets/[^\"]+\.js)"', html)
+          assert asset and request(asset.group(1))
+          assert isinstance(request("/api/does-not-exist", expected=404), dict)
+          session = request("/api/auth/register", {
+              "email": "smoke@example.com", "password": secrets.token_urlsafe(24),
+          }, expected=201)
+          assert session["user"]["role"] == "admin"
+          token = session["access_token"]
+          listing = request("/api/vehicles", token=token)
+          assert listing["total"] > 0 and listing["items"]
+          other = request("/api/auth/register", {
+              "email": "other-smoke@example.com", "password": secrets.token_urlsafe(24),
+          }, expected=201)
+          assert other["user"]["workspace_id"] != session["user"]["workspace_id"]
+          request("/api/vehicles/" + str(listing["items"][0]["id"]),
+                  token=other["access_token"], expected=404)
+          subprocess.run(["docker", "restart", "forecourt-app"], check=True)
+          wait_ready()
+          assert request("/api/auth/me", token=token) == session["user"]
+          assert request("/api/vehicles", token=token)["total"] == listing["total"]
+          print("Container HTTP and persistence smoke passed")
+          PY
+      - name: Container logs
+        if: always()
+        run: |
+          docker logs forecourt-app 2>&1 || true
+          docker logs forecourt-db 2>&1 || true
+      - name: Remove disposable containers and volume
+        if: always()
+        run: |
+          docker rm --force forecourt-app forecourt-db || true
+          docker volume rm forecourt-data || true
+          docker network rm forecourt-ci || true

@@ -67,6 +67,8 @@ def main():
             "ADMIN_PASSWORD": secrets.token_urlsafe(24),
             "API_TARGET": api_base,
         }
+        # A developer's hosted DB URL must never redirect this disposable check.
+        env.pop('DATABASE_URL', None)
         with open(Path(directory) / "servers.log", "w+") as log:
             try:
                 python = str(ROOT / ".venv/bin/python")
@@ -86,31 +88,36 @@ def main():
                 session = request(web_base, "/api/auth/login", "POST", {"email": env["ADMIN_EMAIL"], "password": env["ADMIN_PASSWORD"]})
                 admin = session["access_token"]
                 assert request(web_base, "/api/auth/me", token=admin)["role"] == "admin"
-                assert len(request(web_base, "/api/vehicles", token=admin)) == 6
+                initial = request(web_base, "/api/vehicles", token=admin)
+                assert initial['total'] >= 200
                 buyer_session = request(web_base, "/api/auth/register", "POST", {"email": "buyer@example.com", "password": secrets.token_urlsafe(20)}, expected=201)
                 buyer = buyer_session["access_token"]
-                car = {"make": "Test", "model": "Smoke", "category": "Sedan", "price": "10.25", "quantity": 1}
-                request(web_base, "/api/vehicles", "POST", car, buyer, 403)
+                assert buyer_session['user']['role'] == 'admin'
+                assert buyer_session['user']['workspace_id'] != session['user']['workspace_id']
+                assert request(web_base, '/api/vehicles', token=buyer)['total'] == 200
+                car = {"make": "Test", "model": "Smoke", "category": "Sedan", "price": "1000000.25", "quantity": 1, "condition": "used", "mileage_km": 24000}
                 item = request(web_base, "/api/vehicles", "POST", car, admin, 201)
                 path = f"/api/vehicles/{item['id']}"
-                assert request(web_base, path + "/purchase", "POST", token=buyer)["quantity"] == 0
-                request(web_base, path + "/purchase", "POST", token=buyer, expected=409)
-                assert request(web_base, path + "/restock", "POST", {"quantity": 2}, admin)["quantity"] == 2
+                for method, suffix, body in [('GET', '', None), ('PUT', '', car), ('DELETE', '', None), ('POST', '/purchase', None), ('POST', '/restock', {'quantity': 1}), ('POST', '/restore', None)]:
+                    request(web_base, path + suffix, method, body, buyer, 404)
+                analytics_before = request(web_base, '/api/analytics', token=admin)
+                assert request(web_base, path + "/purchase", "POST", token=admin)["quantity"] == 0
+                request(web_base, path + "/purchase", "POST", token=admin, expected=409)
+                after = request(web_base, '/api/analytics', token=admin)
+                assert after['summary']['units_sold'] == analytics_before['summary']['units_sold'] + 1
+                assert request(web_base, path + "/restock", "POST", {"quantity": 1}, admin)["quantity"] == 1
                 request(web_base, path, "DELETE", token=admin, expected=204)
-                assert len(request(web_base, "/api/vehicles", token=buyer)) == 6
-                request(web_base, "/api/vehicles/archived", token=buyer, expected=403)
-                request(web_base, path + "/restore", "POST", token=buyer, expected=403)
-                request(web_base, path + "/purchase", "POST", token=buyer, expected=404)
-                request(web_base, path + "/restock", "POST", {"quantity": 1}, admin, 404)
-                request(web_base, path, "PUT", car, admin, 404)
+                assert request(web_base, '/api/vehicles/archived', token=buyer) == []
+                request(web_base, path + "/purchase", "POST", token=admin, expected=404)
                 archived = request(web_base, "/api/vehicles/archived", token=admin)
-                assert archived[0]['id'] == item['id'] and archived[0]['quantity'] == 2
+                assert archived[0]['id'] == item['id'] and archived[0]['quantity'] == 1
                 restored = request(web_base, path + "/restore", "POST", token=admin)
-                assert restored['id'] == item['id'] and restored['quantity'] == 2 and restored['deleted_at'] is None
-                request(web_base, f"/api/users/{buyer_session['user']['id']}/promote", "POST", token=admin)
-                request(web_base, path, "PUT", {**car, "model": "Promoted"}, buyer)
-                request(web_base, path, "DELETE", token=admin, expected=204)
-                print("HTTP smoke passed: SPA, proxy, login, roles, purchase, restock, archive, blocked mutations, restore, promotion, update.")
+                assert restored['id'] == item['id'] and restored['quantity'] == 1 and restored['deleted_at'] is None
+                own_ids = {v['id'] for v in request(web_base, '/api/vehicles', token=admin)['items']}
+                assert not own_ids.intersection(v['id'] for v in request(web_base, '/api/vehicles', token=buyer)['items'])
+                request(web_base, f"/api/users/{buyer_session['user']['id']}/promote", 'POST', token=admin, expected=404)
+                assert request(web_base, '/api/health') == {'status': 'ok'}
+                print("HTTP smoke passed: SPA proxy, 200 Indian cars per private workspace, login, scoped IDs/users, purchase analytics, archive and restore.")
             except Exception:
                 log.flush()
                 log.seek(0)

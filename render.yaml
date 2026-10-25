@@ -1,0 +1,34 @@
+# Review account configuration and selected plans before applying this blueprint.
+services:
+  - type: web
+    name: forecourt-inventory
+    runtime: docker
+    plan: starter
+    region: singapore
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/health
+    autoDeployTrigger: "off"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: forecourt-inventory-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: FRONTEND_DIST
+        value: /app/frontend/dist
+      # Optional first-admin bootstrap. Supply privately; never commit values.
+      # Leave both unset/empty to use normal private-workspace registration.
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+
+databases:
+  - name: forecourt-inventory-db
+    databaseName: forecourt_inventory
+    user: forecourt
+    plan: basic-256mb
+    region: singapore
+    ipAllowList: []

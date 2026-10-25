@@ -1,0 +1,16 @@
+{
+  "name": "forecourt-browser-qa",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node browser-smoke.mjs",
+    "smoke": "node browser-smoke.mjs"
+  },
+  "dependencies": {
+    "playwright": "1.64.1"
+  }
+}

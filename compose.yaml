@@ -1,0 +1,30 @@
+# Single-instance, persistent SQLite alternative to the Render/Postgres blueprint.
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "127.0.0.1:${APP_PORT:-8000}:8000"
+    environment:
+      PORT: "8000"
+      FRONTEND_DIST: /app/frontend/dist
+      DATABASE_URL: ""
+      DATABASE_PATH: /data/inventory.db
+      JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET to a private random value of at least 32 characters}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-}
+    volumes:
+      - inventory-data:/data
+    restart: unless-stopped
+    init: true
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+
+volumes:
+  inventory-data:
