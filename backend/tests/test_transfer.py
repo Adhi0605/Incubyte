@@ -2,7 +2,7 @@
 import os
 from contextlib import closing
 from pathlib import Path
-from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
+from urllib.parse import parse_qsl, quote, urlencode, urlsplit, urlunsplit
 from uuid import uuid4
 
 import pytest
@@ -48,7 +48,7 @@ def postgres_url():
     split = urlsplit(url)
     query = dict(parse_qsl(split.query))
     query['options'] = '-c search_path=' + schema
-    isolated = urlunsplit((split.scheme, split.netloc, split.path, urlencode(query), split.fragment))
+    isolated = urlunsplit((split.scheme, split.netloc, split.path, urlencode(query, quote_via=quote), split.fragment))
     try:
         yield isolated
     finally:
@@ -134,3 +134,13 @@ def test_insert_failure_rolls_back_entire_target(source, postgres_url):
         for table in ('users', 'vehicles', 'purchases', 'inventory_events'):
             assert db.execute(f'SELECT COUNT(*) AS n FROM {table}').fetchone()['n'] == 0
         assert db.execute('SELECT COUNT(*) AS n FROM workspaces').fetchone()['n'] == 1
+
+
+def test_connection_errors_do_not_expose_credentials(source, monkeypatch):
+    path, _ = source
+    def unavailable(_):
+        raise RuntimeError('connection failed: postgres://user:private-password@host/db')
+    monkeypatch.setattr('app.transfer.Database', unavailable)
+    with pytest.raises(MigrationError, match='initialize PostgreSQL') as error:
+        migrate_sqlite_to_postgres(path, 'postgresql://user:private-password@localhost/db')
+    assert 'private-password' not in str(error.value)
