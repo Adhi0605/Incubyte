@@ -1,4 +1,8 @@
 .git
+.vercel
+.agents
+public
+skills-lock.json
 .github
 **/.venv
 **/venv
