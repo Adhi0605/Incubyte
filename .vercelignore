@@ -7,7 +7,7 @@ skills-lock.json
 **/.venv
 **/venv
 **/node_modules
-public
+/public/
 **/__pycache__
 **/.pytest_cache
 **/.coverage*
