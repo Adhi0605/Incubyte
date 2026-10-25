@@ -5,3 +5,5 @@ pwdlib[argon2]>=0.2,<1
 pytest>=8,<10
 pytest-cov>=6,<8
 httpx>=0.28,<1
+
+psycopg[binary]>=3.2,<4

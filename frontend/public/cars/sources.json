@@ -1,0 +1,2391 @@
+{
+  "swift": {
+    "filename": "swift.jpg",
+    "credit": "Calreyn88 / Wikimedia Commons",
+    "source_url": "https://commons.wikimedia.org/wiki/File:2024_Suzuki_Swift.jpg",
+    "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)",
+    "title": "File:2024 Suzuki Swift.jpg",
+    "author": "Calreyn88",
+    "license_name": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/e/e7/2024_Suzuki_Swift.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e7/2024_Suzuki_Swift.jpg/960px-2024_Suzuki_Swift.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sha256": "000f74ddd218796d201d42c06b1c77ac6fed82b3252ba45066b2c216b7876219",
+    "retrieved_at": "2026-10-25",
+    "changes": "Wikimedia-generated thumbnail, maximum requested width 960px; no local edits.",
+    "wikimedia_metadata": {
+      "DateTime": {
+        "value": "2025-04-14 13:27:23",
+        "source": "mediawiki-metadata",
+        "hidden": ""
+      },
+      "ObjectName": {
+        "value": "2024 Suzuki Swift",
+        "source": "mediawiki-metadata"
+      },
+      "CommonsMetadataExtension": {
+        "value": 1.2,
+        "source": "extension",
+        "hidden": ""
+      },
+      "Categories": {
+        "value": "Self-published work|Uploaded with Mobile/Android|White Suzuki hatchbacks|Photographs taken on 2024-04-26|Files with coordinates missing SDC location of creation (52° N, 0° E)|Suzuki Swift (2024)",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "Assessments": {
+        "value": "",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "GPSLatitude": {
+        "value": "52.242735",
+        "source": "commons-desc-page"
+      },
+      "GPSLongitude": {
+        "value": "0.750737",
+        "source": "commons-desc-page"
+      },
+      "GPSMapDatum": {
+        "value": "WGS-84",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "ImageDescription": {
+        "value": "Suzuki Swift",
+        "source": "commons-desc-page"
+      },
+      "DateTimeOriginal": {
+        "value": "26 April 2024 (according to <span lang=\"en\" dir=\"ltr\"><a href=\"https://en.wikipedia.org/wiki/Exif\" class=\"extiw\" title=\"en:Exif\">Exif</a></span> data)",
+        "source": "commons-desc-page"
+      },
+      "Credit": {
+        "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+        "source": "commons-desc-page"
+      },
+      "Artist": {
+        "value": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:Calreyn88&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:Calreyn88 (page does not exist)\">Calreyn88</a>",
+        "source": "commons-desc-page"
+      },
+      "LicenseShortName": {
+        "value": "CC BY-SA 4.0",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "UsageTerms": {
+        "value": "Creative Commons Attribution-Share Alike 4.0",
+        "source": "commons-desc-page"
+      },
+      "AttributionRequired": {
+        "value": "true",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "LicenseUrl": {
+        "value": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "commons-desc-page"
+      },
+      "Copyrighted": {
+        "value": "True",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "Restrictions": {
+        "value": "",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "License": {
+        "value": "cc-by-sa-4.0",
+        "source": "commons-templates",
+        "hidden": ""
+      }
+    }
+  },
+  "baleno": {
+    "filename": "baleno.jpg",
+    "credit": "Milind Kwatra / Wikimedia Commons",
+    "source_url": "https://commons.wikimedia.org/wiki/File:2022_Maruti_Suzuki_Baleno_Alpha_(India)_front_view.jpg",
+    "license": "CC BY 3.0 (https://creativecommons.org/licenses/by/3.0)",
+    "title": "File:2022 Maruti Suzuki Baleno Alpha (India) front view.jpg",
+    "author": "Milind Kwatra",
+    "license_name": "CC BY 3.0",
+    "license_url": "https://creativecommons.org/licenses/by/3.0",
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/5/5b/2022_Maruti_Suzuki_Baleno_Alpha_%28India%29_front_view.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5b/2022_Maruti_Suzuki_Baleno_Alpha_%28India%29_front_view.jpg/960px-2022_Maruti_Suzuki_Baleno_Alpha_%28India%29_front_view.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sha256": "fd4f050f6f292303028f48fca2bb883cf0df2e3c7123be262e43b180eec00152",
+    "retrieved_at": "2026-10-25",
+    "changes": "Wikimedia-generated thumbnail, maximum requested width 960px; no local edits.",
+    "wikimedia_metadata": {
+      "DateTime": {
+        "value": "2022-02-24 14:50:46",
+        "source": "mediawiki-metadata",
+        "hidden": ""
+      },
+      "ObjectName": {
+        "value": "2022 Maruti Suzuki Baleno Alpha (India) front view",
+        "source": "mediawiki-metadata"
+      },
+      "CommonsMetadataExtension": {
+        "value": 1.2,
+        "source": "extension",
+        "hidden": ""
+      },
+      "Categories": {
+        "value": "Media from YouTube|Suzuki automobiles in India|Blue Suzuki hatchbacks|Suzuki Baleno (2022)",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "Assessments": {
+        "value": "",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "ImageDescription": {
+        "value": "2022 Maruti Suzuki Baleno Alpha (India) front view",
+        "source": "commons-desc-page"
+      },
+      "DateTimeOriginal": {
+        "value": "2022-02-25",
+        "source": "commons-desc-page"
+      },
+      "Credit": {
+        "value": "<bdi lang=\"en\" dir=\"ltr\"><a href=\"//commons.wikimedia.org/wiki/Commons:YouTube_files\" title=\"Commons:YouTube files\">YouTube</a>: <a rel=\"nofollow\" class=\"external text\" href=\"https://www.youtube.com/watch?v=CncvogzUKqI\"><bdi lang=\"\">https://www.youtube.com/watch?v=CncvogzUKqI</bdi></a> – View/save archived versions on <a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/*/https://www.youtube.com/watch?v=CncvogzUKqI\">archive.org</a></bdi>",
+        "source": "commons-desc-page"
+      },
+      "Artist": {
+        "value": "Milind Kwatra",
+        "source": "commons-desc-page"
+      },
+      "LicenseShortName": {
+        "value": "CC BY 3.0",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "UsageTerms": {
+        "value": "Creative Commons Attribution 3.0",
+        "source": "commons-desc-page"
+      },
+      "AttributionRequired": {
+        "value": "true",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "Attribution": {
+        "value": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.youtube.com/watch?v=CncvogzUKqI\">Milind Kwatra</a>",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "LicenseUrl": {
+        "value": "https://creativecommons.org/licenses/by/3.0",
+        "source": "commons-desc-page"
+      },
+      "Copyrighted": {
+        "value": "True",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "Restrictions": {
+        "value": "",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "License": {
+        "value": "cc-by-3.0",
+        "source": "commons-templates",
+        "hidden": ""
+      }
+    }
+  },
+  "brezza": {
+    "filename": "brezza.png",
+    "credit": "DriveSpark / Wikimedia Commons",
+    "source_url": "https://commons.wikimedia.org/wiki/File:2022_Maruti_Suzuki_Brezza_ZXi%2B_(India)_front_view_04.png",
+    "license": "CC BY 3.0 (https://creativecommons.org/licenses/by/3.0)",
+    "title": "File:2022 Maruti Suzuki Brezza ZXi+ (India) front view 04.png",
+    "author": "DriveSpark",
+    "license_name": "CC BY 3.0",
+    "license_url": "https://creativecommons.org/licenses/by/3.0",
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/d/df/2022_Maruti_Suzuki_Brezza_ZXi%2B_%28India%29_front_view_04.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/df/2022_Maruti_Suzuki_Brezza_ZXi%2B_%28India%29_front_view_04.png/960px-2022_Maruti_Suzuki_Brezza_ZXi%2B_%28India%29_front_view_04.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sha256": "1628774e09e5db54e1664fd4a0e4a51af1f0ee4f54fe97b646ed82ed40080df5",
+    "retrieved_at": "2026-10-25",
+    "changes": "Wikimedia-generated thumbnail, maximum requested width 960px; no local edits.",
+    "wikimedia_metadata": {
+      "DateTime": {
+        "value": "2022-07-07 17:01:40",
+        "source": "mediawiki-metadata",
+        "hidden": ""
+      },
+      "ObjectName": {
+        "value": "2022 Maruti Suzuki Brezza ZXi+ (India) front view 04",
+        "source": "mediawiki-metadata"
+      },
+      "CommonsMetadataExtension": {
+        "value": 1.2,
+        "source": "extension",
+        "hidden": ""
+      },
+      "Categories": {
+        "value": "Media from YouTube|Suzuki automobiles in India|Red Suzuki SUVs|2022 Suzuki automobiles|Suzuki Brezza (second generation)",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "Assessments": {
+        "value": "",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "ImageDescription": {
+        "value": "2022 Maruti Suzuki Brezza ZXi+ (India) front view",
+        "source": "commons-desc-page"
+      },
+      "DateTimeOriginal": {
+        "value": "2022-07-06",
+        "source": "commons-desc-page"
+      },
+      "Credit": {
+        "value": "<bdi lang=\"en\" dir=\"ltr\"><a href=\"//commons.wikimedia.org/wiki/Commons:YouTube_files\" title=\"Commons:YouTube files\">YouTube</a>: <a rel=\"nofollow\" class=\"external text\" href=\"https://www.youtube.com/watch?v=xCj6GdHnX6Y\"><bdi lang=\"\">https://www.youtube.com/watch?v=xCj6GdHnX6Y</bdi></a> – View/save archived versions on <a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/*/https://www.youtube.com/watch?v=xCj6GdHnX6Y\">archive.org</a></bdi>",
+        "source": "commons-desc-page"
+      },
+      "Artist": {
+        "value": "DriveSpark",
+        "source": "commons-desc-page"
+      },
+      "LicenseShortName": {
+        "value": "CC BY 3.0",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "UsageTerms": {
+        "value": "Creative Commons Attribution 3.0",
+        "source": "commons-desc-page"
+      },
+      "AttributionRequired": {
+        "value": "true",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "Attribution": {
+        "value": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.youtube.com/watch?v=xCj6GdHnX6Y\">DriveSpark Hindi</a>",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "LicenseUrl": {
+        "value": "https://creativecommons.org/licenses/by/3.0",
+        "source": "commons-desc-page"
+      },
+      "Copyrighted": {
+        "value": "True",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "Restrictions": {
+        "value": "",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "License": {
+        "value": "cc-by-3.0",
+        "source": "commons-templates",
+        "hidden": ""
+      }
+    }
+  },
+  "i20": {
+    "filename": "i20.jpg",
+    "credit": "© M 93 / Wikimedia Commons",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Hyundai_i20_(III,_Facelift)_%E2%80%93_f_11102025.jpg",
+    "license": "CC BY-SA 3.0 de (https://creativecommons.org/licenses/by-sa/3.0/de/deed.en)",
+    "title": "File:Hyundai i20 (III, Facelift) – f 11102025.jpg",
+    "author": "© M 93",
+    "license_name": "CC BY-SA 3.0 de",
+    "license_url": "https://creativecommons.org/licenses/by-sa/3.0/de/deed.en",
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Hyundai_i20_%28III%2C_Facelift%29_%E2%80%93_f_11102025.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ea/Hyundai_i20_%28III%2C_Facelift%29_%E2%80%93_f_11102025.jpg/960px-Hyundai_i20_%28III%2C_Facelift%29_%E2%80%93_f_11102025.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sha256": "e5d2ce992e784c4e10a6b22c50aaef4878ee173814e317b602ac37784cfccfd7",
+    "retrieved_at": "2026-10-25",
+    "changes": "Wikimedia-generated thumbnail, maximum requested width 960px; no local edits.",
+    "wikimedia_metadata": {
+      "DateTime": {
+        "value": "2025-10-12 09:18:52",
+        "source": "mediawiki-metadata",
+        "hidden": ""
+      },
+      "ObjectName": {
+        "value": "Hyundai i20 (III, Facelift) – f 11102025",
+        "source": "mediawiki-metadata"
+      },
+      "CommonsMetadataExtension": {
+        "value": 1.2,
+        "source": "extension",
+        "hidden": ""
+      },
+      "Categories": {
+        "value": "Self-published work|Information field template with formatting|Green Hyundai SUVs|Hyundai i20 (BC3)|Taken with Vivo X200 Pro",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "Assessments": {
+        "value": "",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "ImageDescription": {
+        "value": "Hyundai i20 (III, Facelift)",
+        "source": "commons-desc-page"
+      },
+      "DateTimeOriginal": {
+        "value": "2025-10-11",
+        "source": "commons-desc-page"
+      },
+      "Credit": {
+        "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+        "source": "commons-desc-page"
+      },
+      "Artist": {
+        "value": "<b>© <a href=\"//commons.wikimedia.org/wiki/User:M_93\" title=\"User:M 93\">M 93</a></b>",
+        "source": "commons-desc-page"
+      },
+      "Permission": {
+        "value": "<a href=\"https://de.wikipedia.org/wiki/Benutzer:M_93\" class=\"extiw\" title=\"de:Benutzer:M 93\">M 93</a>, the copyright holder of this work, hereby publishes it under the following license:",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "Attribution": {
+        "value": "<a href=\"https://de.wikipedia.org/wiki/Benutzer:M_93\" class=\"extiw\" title=\"de:Benutzer:M 93\">M 93</a>",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "LicenseShortName": {
+        "value": "CC BY-SA 3.0 de",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "UsageTerms": {
+        "value": "Creative Commons Attribution-Share Alike 3.0 de",
+        "source": "commons-desc-page"
+      },
+      "AttributionRequired": {
+        "value": "true",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "LicenseUrl": {
+        "value": "https://creativecommons.org/licenses/by-sa/3.0/de/deed.en",
+        "source": "commons-desc-page"
+      },
+      "Copyrighted": {
+        "value": "True",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "Restrictions": {
+        "value": "",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "License": {
+        "value": "cc-by-sa-3.0-de",
+        "source": "commons-templates",
+        "hidden": ""
+      }
+    }
+  },
+  "creta": {
+    "filename": "creta.jpg",
+    "credit": "Dairokkan9 / Wikimedia Commons",
+    "source_url": "https://commons.wikimedia.org/wiki/File:2021_Hyundai_Creta_SX(O)_CRDi_(India)_front_view.jpg",
+    "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)",
+    "title": "File:2021 Hyundai Creta SX(O) CRDi (India) front view.jpg",
+    "author": "Dairokkan9",
+    "license_name": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/7/7f/2021_Hyundai_Creta_SX%28O%29_CRDi_%28India%29_front_view.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7f/2021_Hyundai_Creta_SX%28O%29_CRDi_%28India%29_front_view.jpg/960px-2021_Hyundai_Creta_SX%28O%29_CRDi_%28India%29_front_view.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sha256": "c9e627f6cc499ebbc23ec6de05b6ad432f26ec120ed91c8561375a75c80e3265",
+    "retrieved_at": "2026-10-25",
+    "changes": "Wikimedia-generated thumbnail, maximum requested width 960px; no local edits.",
+    "wikimedia_metadata": {
+      "DateTime": {
+        "value": "2023-04-14 04:28:56",
+        "source": "mediawiki-metadata",
+        "hidden": ""
+      },
+      "ObjectName": {
+        "value": "2021 Hyundai Creta SX(O) CRDi (India) front view",
+        "source": "mediawiki-metadata"
+      },
+      "CommonsMetadataExtension": {
+        "value": 1.2,
+        "source": "extension",
+        "hidden": ""
+      },
+      "Categories": {
+        "value": "Self-published work|Gray Hyundai SUVs|Hyundai Creta (SU2)",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "Assessments": {
+        "value": "",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "ImageDescription": {
+        "value": "2021 Hyundai Creta SX(O) CRDi (India) front view",
+        "source": "commons-desc-page"
+      },
+      "DateTimeOriginal": {
+        "value": "2023-04-10 01:24:57",
+        "source": "commons-desc-page"
+      },
+      "Credit": {
+        "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+        "source": "commons-desc-page"
+      },
+      "Artist": {
+        "value": "<a href=\"//commons.wikimedia.org/wiki/User:Dairokkan9\" title=\"User:Dairokkan9\">Dairokkan9</a>",
+        "source": "commons-desc-page"
+      },
+      "LicenseShortName": {
+        "value": "CC BY-SA 4.0",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "UsageTerms": {
+        "value": "Creative Commons Attribution-Share Alike 4.0",
+        "source": "commons-desc-page"
+      },
+      "AttributionRequired": {
+        "value": "true",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "LicenseUrl": {
+        "value": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "commons-desc-page"
+      },
+      "Copyrighted": {
+        "value": "True",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "Restrictions": {
+        "value": "",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "License": {
+        "value": "cc-by-sa-4.0",
+        "source": "commons-templates",
+        "hidden": ""
+      }
+    }
+  },
+  "venue": {
+    "filename": "venue.jpg",
+    "credit": "SsmIntrigue / Wikimedia Commons",
+    "source_url": "https://commons.wikimedia.org/wiki/File:2020_Hyundai_Venue_Ultimate_2019-12-13_2.jpg",
+    "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)",
+    "title": "File:2020 Hyundai Venue Ultimate 2019-12-13 2.jpg",
+    "author": "SsmIntrigue",
+    "license_name": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/0/07/2020_Hyundai_Venue_Ultimate_2019-12-13_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/07/2020_Hyundai_Venue_Ultimate_2019-12-13_2.jpg/960px-2020_Hyundai_Venue_Ultimate_2019-12-13_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sha256": "b151810d23275dad6c56c7c0bdab6d6d82b57eb347638b52fd5a8d2c166f47a3",
+    "retrieved_at": "2026-10-25",
+    "changes": "Wikimedia-generated thumbnail, maximum requested width 960px; no local edits.",
+    "wikimedia_metadata": {
+      "DateTime": {
+        "value": "2019-12-16 00:06:06",
+        "source": "mediawiki-metadata",
+        "hidden": ""
+      },
+      "ObjectName": {
+        "value": "2020 Hyundai Venue Ultimate 2019-12-13 2",
+        "source": "mediawiki-metadata"
+      },
+      "CommonsMetadataExtension": {
+        "value": 1.2,
+        "source": "extension",
+        "hidden": ""
+      },
+      "Categories": {
+        "value": "Hyundai Venue|Self-published work|Hyundai automobiles in Canada|Automobiles in Sault Ste. Marie, Ontario",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "Assessments": {
+        "value": "",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "ImageDescription": {
+        "value": "2020 Hyundai Venue Ultimate photographed in Sault Ste. Marie, Ontario, Canada",
+        "source": "commons-desc-page"
+      },
+      "DateTimeOriginal": {
+        "value": "2019-12-13 15:15:49",
+        "source": "commons-desc-page"
+      },
+      "Credit": {
+        "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+        "source": "commons-desc-page"
+      },
+      "Artist": {
+        "value": "<a href=\"//commons.wikimedia.org/wiki/User:SsmIntrigue\" class=\"mw-redirect\" title=\"User:SsmIntrigue\">SsmIntrigue</a>",
+        "source": "commons-desc-page"
+      },
+      "LicenseShortName": {
+        "value": "CC BY-SA 4.0",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "UsageTerms": {
+        "value": "Creative Commons Attribution-Share Alike 4.0",
+        "source": "commons-desc-page"
+      },
+      "AttributionRequired": {
+        "value": "true",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "LicenseUrl": {
+        "value": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "commons-desc-page"
+      },
+      "Copyrighted": {
+        "value": "True",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "Restrictions": {
+        "value": "",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "License": {
+        "value": "cc-by-sa-4.0",
+        "source": "commons-templates",
+        "hidden": ""
+      }
+    }
+  },
+  "nexon-ev": {
+    "filename": "nexon-ev.jpg",
+    "credit": "Rajasekhar1961 / Wikimedia Commons",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Tata_Nexon_EV_in_Hyderabad_02.jpg",
+    "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)",
+    "title": "File:Tata Nexon EV in Hyderabad 02.jpg",
+    "author": "Rajasekhar1961",
+    "license_name": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/a/ad/Tata_Nexon_EV_in_Hyderabad_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ad/Tata_Nexon_EV_in_Hyderabad_02.jpg/960px-Tata_Nexon_EV_in_Hyderabad_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sha256": "cf0f4c5be2e893455c595f7c4a5a15ff03c7e13caaf77db84046f68fde0da250",
+    "retrieved_at": "2026-10-25",
+    "changes": "Wikimedia-generated thumbnail, maximum requested width 960px; no local edits.",
+    "wikimedia_metadata": {
+      "DateTime": {
+        "value": "2022-01-02 04:07:21",
+        "source": "mediawiki-metadata",
+        "hidden": ""
+      },
+      "ObjectName": {
+        "value": "Tata Nexon EV in Hyderabad 02",
+        "source": "mediawiki-metadata"
+      },
+      "CommonsMetadataExtension": {
+        "value": 1.2,
+        "source": "extension",
+        "hidden": ""
+      },
+      "Categories": {
+        "value": "Self-published work|Letters TS on vehicle registration plates|Tata Nexon EV|Electrically-powered automobiles in India",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "Assessments": {
+        "value": "",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "ImageDescription": {
+        "value": "Tata Nexon EV on road near Uppal Hyderabad in India taken by me.",
+        "source": "commons-desc-page"
+      },
+      "DateTimeOriginal": {
+        "value": "2021-12-20 14:51:59",
+        "source": "commons-desc-page"
+      },
+      "Credit": {
+        "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+        "source": "commons-desc-page"
+      },
+      "Artist": {
+        "value": "<a href=\"//commons.wikimedia.org/wiki/User:Rajasekhar1961\" title=\"User:Rajasekhar1961\">Rajasekhar1961</a>",
+        "source": "commons-desc-page"
+      },
+      "LicenseShortName": {
+        "value": "CC BY-SA 4.0",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "UsageTerms": {
+        "value": "Creative Commons Attribution-Share Alike 4.0",
+        "source": "commons-desc-page"
+      },
+      "AttributionRequired": {
+        "value": "true",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "LicenseUrl": {
+        "value": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "commons-desc-page"
+      },
+      "Copyrighted": {
+        "value": "True",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "Restrictions": {
+        "value": "",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "License": {
+        "value": "cc-by-sa-4.0",
+        "source": "commons-templates",
+        "hidden": ""
+      }
+    }
+  },
+  "tiago": {
+    "filename": "tiago.jpg",
+    "credit": "Dairokkan9 / Wikimedia Commons",
+    "source_url": "https://commons.wikimedia.org/wiki/File:2022_Tata_Tiago_XZA%2B_front_20230512.jpg",
+    "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)",
+    "title": "File:2022 Tata Tiago XZA+ front 20230512.jpg",
+    "author": "Dairokkan9",
+    "license_name": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/c/ca/2022_Tata_Tiago_XZA%2B_front_20230512.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ca/2022_Tata_Tiago_XZA%2B_front_20230512.jpg/960px-2022_Tata_Tiago_XZA%2B_front_20230512.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sha256": "2d396558c08e74e521f629f5c087d7eaa90a79fb26fff76b5c0ddcbf9431a3c8",
+    "retrieved_at": "2026-10-25",
+    "changes": "Wikimedia-generated thumbnail, maximum requested width 960px; no local edits.",
+    "wikimedia_metadata": {
+      "DateTime": {
+        "value": "2023-05-23 06:35:31",
+        "source": "mediawiki-metadata",
+        "hidden": ""
+      },
+      "ObjectName": {
+        "value": "2022 Tata Tiago XZA+ front 20230512",
+        "source": "mediawiki-metadata"
+      },
+      "CommonsMetadataExtension": {
+        "value": 1.2,
+        "source": "extension",
+        "hidden": ""
+      },
+      "Categories": {
+        "value": "Tata Tiago|Self-published work|Black hatchbacks",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "Assessments": {
+        "value": "",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "ImageDescription": {
+        "value": "2022 Tata Tiago facelift XZA+, front view, taken in Bengaluru",
+        "source": "commons-desc-page"
+      },
+      "DateTimeOriginal": {
+        "value": "2023-05-12 01:43:53",
+        "source": "commons-desc-page"
+      },
+      "Credit": {
+        "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+        "source": "commons-desc-page"
+      },
+      "Artist": {
+        "value": "<a href=\"//commons.wikimedia.org/wiki/User:Dairokkan9\" title=\"User:Dairokkan9\">Dairokkan9</a>",
+        "source": "commons-desc-page"
+      },
+      "LicenseShortName": {
+        "value": "CC BY-SA 4.0",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "UsageTerms": {
+        "value": "Creative Commons Attribution-Share Alike 4.0",
+        "source": "commons-desc-page"
+      },
+      "AttributionRequired": {
+        "value": "true",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "LicenseUrl": {
+        "value": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "commons-desc-page"
+      },
+      "Copyrighted": {
+        "value": "True",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "Restrictions": {
+        "value": "",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "License": {
+        "value": "cc-by-sa-4.0",
+        "source": "commons-templates",
+        "hidden": ""
+      }
+    }
+  },
+  "harrier": {
+    "filename": "harrier.jpg",
+    "credit": "Matti Blume / Wikimedia Commons",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Tata_Buzzard_Sport,_GIMS_2019,_Le_Grand-Saconnex_(GIMS0651).jpg",
+    "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)",
+    "title": "File:Tata Buzzard Sport, GIMS 2019, Le Grand-Saconnex (GIMS0651).jpg",
+    "author": "Matti Blume",
+    "license_name": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/c/c3/Tata_Buzzard_Sport%2C_GIMS_2019%2C_Le_Grand-Saconnex_%28GIMS0651%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c3/Tata_Buzzard_Sport%2C_GIMS_2019%2C_Le_Grand-Saconnex_%28GIMS0651%29.jpg/960px-Tata_Buzzard_Sport%2C_GIMS_2019%2C_Le_Grand-Saconnex_%28GIMS0651%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sha256": "57d98699fae9b4a0e88012fc2b26001026e5a5d985f1ccac4d58771fe3e8fd82",
+    "retrieved_at": "2026-10-25",
+    "changes": "Wikimedia-generated thumbnail, maximum requested width 960px; no local edits.",
+    "wikimedia_metadata": {
+      "DateTime": {
+        "value": "2019-03-07 19:56:24",
+        "source": "mediawiki-metadata",
+        "hidden": ""
+      },
+      "ObjectName": {
+        "value": "Tata Buzzard Sport, GIMS 2019, Le Grand-Saconnex (GIMS0651)",
+        "source": "mediawiki-metadata"
+      },
+      "CommonsMetadataExtension": {
+        "value": 1.2,
+        "source": "extension",
+        "hidden": ""
+      },
+      "Categories": {
+        "value": "Tata Buzzard Sport at GIMS 2019|Fotoprojekt Genfer Auto-Salon 2019 (supported by Wikimedia Deutschland)|Taken with Canon EOS 5D Mark IV and Canon EF 24-70mm F2.8L II USM|Uploaded with LrMediaWiki|User MB-one supported by Wikimedia Deutschland/Lightroom|Automobiles at GIMS 2019",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "Assessments": {
+        "value": "quality",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "GPSLatitude": {
+        "value": "46.236000",
+        "source": "commons-desc-page"
+      },
+      "GPSLongitude": {
+        "value": "6.110000",
+        "source": "commons-desc-page"
+      },
+      "GPSMapDatum": {
+        "value": "WGS-84",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "ImageDescription": {
+        "value": "Tata Buzzard Sport at Geneva International Motor Show 2019, Le Grand-Saconnex",
+        "source": "commons-desc-page"
+      },
+      "DateTimeOriginal": {
+        "value": "2019-03-04",
+        "source": "commons-desc-page"
+      },
+      "Credit": {
+        "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+        "source": "commons-desc-page"
+      },
+      "Artist": {
+        "value": "<a href=\"//commons.wikimedia.org/wiki/User:MB-one\" title=\"User:MB-one\">Matti Blume</a>",
+        "source": "commons-desc-page"
+      },
+      "LicenseShortName": {
+        "value": "CC BY-SA 4.0",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "UsageTerms": {
+        "value": "Creative Commons Attribution-Share Alike 4.0",
+        "source": "commons-desc-page"
+      },
+      "AttributionRequired": {
+        "value": "true",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "LicenseUrl": {
+        "value": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "commons-desc-page"
+      },
+      "Copyrighted": {
+        "value": "True",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "Restrictions": {
+        "value": "",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "License": {
+        "value": "cc-by-sa-4.0",
+        "source": "commons-templates",
+        "hidden": ""
+      }
+    }
+  },
+  "xuv700": {
+    "filename": "xuv700.jpg",
+    "credit": "Ank Kumar / Wikimedia Commons",
+    "source_url": "https://commons.wikimedia.org/wiki/File:A_black_Mahindra_XUV700_SUV_in_Ashiana_Brahmananda,_Jamshedpur,_India_(Ank_Kumar,_Infosys_Limited)_01.jpg",
+    "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)",
+    "title": "File:A black Mahindra XUV700 SUV in Ashiana Brahmananda, Jamshedpur, India (Ank Kumar, Infosys Limited) 01.jpg",
+    "author": "Ank Kumar",
+    "license_name": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/e/ec/A_black_Mahindra_XUV700_SUV_in_Ashiana_Brahmananda%2C_Jamshedpur%2C_India_%28Ank_Kumar%2C_Infosys_Limited%29_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/A_black_Mahindra_XUV700_SUV_in_Ashiana_Brahmananda%2C_Jamshedpur%2C_India_%28Ank_Kumar%2C_Infosys_Limited%29_01.jpg/960px-A_black_Mahindra_XUV700_SUV_in_Ashiana_Brahmananda%2C_Jamshedpur%2C_India_%28Ank_Kumar%2C_Infosys_Limited%29_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sha256": "61674322629cd49f2e4aabd4e149260155832a6c98058df2fc9533a0c5eefa54",
+    "retrieved_at": "2026-10-25",
+    "changes": "Wikimedia-generated thumbnail, maximum requested width 960px; no local edits.",
+    "wikimedia_metadata": {
+      "DateTime": {
+        "value": "2023-03-02 14:05:34",
+        "source": "mediawiki-metadata",
+        "hidden": ""
+      },
+      "ObjectName": {
+        "value": "A black Mahindra XUV700 SUV in Ashiana Brahmananda, Jamshedpur, India (Ank Kumar, Infosys Limited) 01",
+        "source": "mediawiki-metadata"
+      },
+      "CommonsMetadataExtension": {
+        "value": 1.2,
+        "source": "extension",
+        "hidden": ""
+      },
+      "Categories": {
+        "value": "Mahindra XUV700|Self-published work|Transport in Jamshedpur",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "Assessments": {
+        "value": "",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "ImageDescription": {
+        "value": "Mahindra XUV700 SUV in Ashiana Brahmananda , East Singhbhum, Jamshedpur, Jharkhand, India (Ank Kumar, Infosys Limited)\nIntroduced in 2021[codenamed project W601], XUV700 is the latest Sports utility vehicle by Mahindra &amp; Mahindra Limited in India.",
+        "source": "commons-desc-page"
+      },
+      "DateTimeOriginal": {
+        "value": "2023-03-02 18:05:27",
+        "source": "commons-desc-page"
+      },
+      "Credit": {
+        "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+        "source": "commons-desc-page"
+      },
+      "Artist": {
+        "value": "<a href=\"//commons.wikimedia.org/wiki/User:Ank_gsx\" title=\"User:Ank gsx\">Ank Kumar </a>",
+        "source": "commons-desc-page"
+      },
+      "LicenseShortName": {
+        "value": "CC BY-SA 4.0",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "UsageTerms": {
+        "value": "Creative Commons Attribution-Share Alike 4.0",
+        "source": "commons-desc-page"
+      },
+      "AttributionRequired": {
+        "value": "true",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "LicenseUrl": {
+        "value": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "commons-desc-page"
+      },
+      "Copyrighted": {
+        "value": "True",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "Restrictions": {
+        "value": "",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "License": {
+        "value": "cc-by-sa-4.0",
+        "source": "commons-templates",
+        "hidden": ""
+      }
+    }
+  },
+  "thar": {
+    "filename": "thar.jpg",
+    "credit": "Ank Kumar / Wikimedia Commons",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Mahindra_Thar_SUV_in_%22Red_Rage%22_color_at_Ashiana_Brahmanda,_East_Singbhum_India_(Ank_Kumar,_Infosys_limited)_02_(cropped).jpg",
+    "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)",
+    "title": "File:Mahindra Thar SUV in \"Red Rage\" color at Ashiana Brahmanda, East Singbhum India (Ank Kumar, Infosys limited) 02 (cropped).jpg",
+    "author": "Ank Kumar",
+    "license_name": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/5/51/Mahindra_Thar_SUV_in_%22Red_Rage%22_color_at_Ashiana_Brahmanda%2C_East_Singbhum_India_%28Ank_Kumar%2C_Infosys_limited%29_02_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/51/Mahindra_Thar_SUV_in_%22Red_Rage%22_color_at_Ashiana_Brahmanda%2C_East_Singbhum_India_%28Ank_Kumar%2C_Infosys_limited%29_02_%28cropped%29.jpg/960px-Mahindra_Thar_SUV_in_%22Red_Rage%22_color_at_Ashiana_Brahmanda%2C_East_Singbhum_India_%28Ank_Kumar%2C_Infosys_limited%29_02_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sha256": "05e074b2e9009447e0290b11790c5222a546dc0b1af1280f7d375a456e34e4ed",
+    "retrieved_at": "2026-10-25",
+    "changes": "Wikimedia-generated thumbnail, maximum requested width 960px; no local edits.",
+    "wikimedia_metadata": {
+      "DateTime": {
+        "value": "2026-03-07 00:37:26",
+        "source": "mediawiki-metadata",
+        "hidden": ""
+      },
+      "ObjectName": {
+        "value": "Mahindra Thar SUV in \"Red Rage\" color at Ashiana Brahmanda, East Singbhum India (Ank Kumar, Infosys limited) 02 (cropped)",
+        "source": "mediawiki-metadata"
+      },
+      "CommonsMetadataExtension": {
+        "value": 1.2,
+        "source": "extension",
+        "hidden": ""
+      },
+      "Categories": {
+        "value": "Self-published work|Extracted images|Files with coordinates missing SDC location of creation|Mahindra Thar (2nd generation)",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "Assessments": {
+        "value": "",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "GPSLatitude": {
+        "value": "22.847314",
+        "source": "commons-desc-page"
+      },
+      "GPSLongitude": {
+        "value": "86.194581",
+        "source": "commons-desc-page"
+      },
+      "GPSMapDatum": {
+        "value": "WGS-84",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "ImageDescription": {
+        "value": "Mahindra Thar SUV in \"Red Rage\" color, parked near Ashiana Brahmanda, East Singbhum, Jharkhand, India \n(Ank Kumar, Infosys limited)",
+        "source": "commons-desc-page"
+      },
+      "DateTimeOriginal": {
+        "value": "2023-02-13 15:34:22",
+        "source": "commons-desc-page"
+      },
+      "Credit": {
+        "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+        "source": "commons-desc-page"
+      },
+      "Artist": {
+        "value": "<a href=\"//commons.wikimedia.org/wiki/User:Ank_gsx\" title=\"User:Ank gsx\">Ank Kumar </a>",
+        "source": "commons-desc-page"
+      },
+      "LicenseShortName": {
+        "value": "CC BY-SA 4.0",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "UsageTerms": {
+        "value": "Creative Commons Attribution-Share Alike 4.0",
+        "source": "commons-desc-page"
+      },
+      "AttributionRequired": {
+        "value": "true",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "LicenseUrl": {
+        "value": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "commons-desc-page"
+      },
+      "Copyrighted": {
+        "value": "True",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "Restrictions": {
+        "value": "",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "License": {
+        "value": "cc-by-sa-4.0",
+        "source": "commons-templates",
+        "hidden": ""
+      }
+    }
+  },
+  "scorpio-n": {
+    "filename": "scorpio-n.jpg",
+    "credit": "LuvsMG481 / Wikimedia Commons",
+    "source_url": "https://commons.wikimedia.org/wiki/File:2024_Mahindra_Scorpio_Z8L_front.jpg",
+    "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)",
+    "title": "File:2024 Mahindra Scorpio Z8L front.jpg",
+    "author": "LuvsMG481",
+    "license_name": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/b/b4/2024_Mahindra_Scorpio_Z8L_front.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b4/2024_Mahindra_Scorpio_Z8L_front.jpg/960px-2024_Mahindra_Scorpio_Z8L_front.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sha256": "3609003cac438996d2fd54d056c9a1ae75540ca7ec30953cfe30ce674762d9d5",
+    "retrieved_at": "2026-10-25",
+    "changes": "Wikimedia-generated thumbnail, maximum requested width 960px; no local edits.",
+    "wikimedia_metadata": {
+      "DateTime": {
+        "value": "2026-03-01 10:52:09",
+        "source": "mediawiki-metadata",
+        "hidden": ""
+      },
+      "ObjectName": {
+        "value": "2024 Mahindra Scorpio Z8L front",
+        "source": "mediawiki-metadata"
+      },
+      "CommonsMetadataExtension": {
+        "value": 1.2,
+        "source": "extension",
+        "hidden": ""
+      },
+      "Categories": {
+        "value": "Self-published work|Green SUVs|Mahindra Scorpio (2nd generation)",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "Assessments": {
+        "value": "",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "ImageDescription": {
+        "value": "2024 Mahindra Scorpio Z8L in York, WA.",
+        "source": "commons-desc-page"
+      },
+      "DateTimeOriginal": {
+        "value": "2024-08-11 14:28:23",
+        "source": "commons-desc-page"
+      },
+      "Credit": {
+        "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+        "source": "commons-desc-page"
+      },
+      "Artist": {
+        "value": "<a href=\"//commons.wikimedia.org/wiki/User:LuvsMG481\" title=\"User:LuvsMG481\">LuvsMG481</a>",
+        "source": "commons-desc-page"
+      },
+      "LicenseShortName": {
+        "value": "CC BY-SA 4.0",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "UsageTerms": {
+        "value": "Creative Commons Attribution-Share Alike 4.0",
+        "source": "commons-desc-page"
+      },
+      "AttributionRequired": {
+        "value": "true",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "LicenseUrl": {
+        "value": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "commons-desc-page"
+      },
+      "Copyrighted": {
+        "value": "True",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "Restrictions": {
+        "value": "",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "License": {
+        "value": "cc-by-sa-4.0",
+        "source": "commons-templates",
+        "hidden": ""
+      }
+    }
+  },
+  "seltos": {
+    "filename": "seltos.jpg",
+    "credit": "Alexander-93 / Wikimedia Commons",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Kia_Seltos_IMG_9152.jpg",
+    "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)",
+    "title": "File:Kia Seltos IMG 9152.jpg",
+    "author": "Alexander-93",
+    "license_name": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/0/06/Kia_Seltos_IMG_9152.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/06/Kia_Seltos_IMG_9152.jpg/960px-Kia_Seltos_IMG_9152.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sha256": "3186d7572116c2b22362bebc2b283da1efb6882835c50ffc94cb47a56d457728",
+    "retrieved_at": "2026-10-25",
+    "changes": "Wikimedia-generated thumbnail, maximum requested width 960px; no local edits.",
+    "wikimedia_metadata": {
+      "DateTime": {
+        "value": "2024-06-08 16:49:48",
+        "source": "mediawiki-metadata",
+        "hidden": ""
+      },
+      "ObjectName": {
+        "value": "Kia Seltos IMG 9152",
+        "source": "mediawiki-metadata"
+      },
+      "CommonsMetadataExtension": {
+        "value": 1.2,
+        "source": "extension",
+        "hidden": ""
+      },
+      "Categories": {
+        "value": "Uploaded with VicuñaUploader|United States specification automobiles in Germany|Blue Kia SUVs|Kia Seltos (SP2)|User Alexander Migl - Stuttgart-Vaihingen in June 2024",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "Assessments": {
+        "value": "quality",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "ImageDescription": {
+        "value": "Kia Seltos in Stuttgart-Vaihingen",
+        "source": "commons-desc-page"
+      },
+      "DateTimeOriginal": {
+        "value": "2024-06-07",
+        "source": "commons-desc-page"
+      },
+      "Credit": {
+        "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+        "source": "commons-desc-page"
+      },
+      "Artist": {
+        "value": "<a href=\"//commons.wikimedia.org/wiki/User:Alexander-93\" title=\"User:Alexander-93\">Alexander-93</a>",
+        "source": "commons-desc-page"
+      },
+      "LicenseShortName": {
+        "value": "CC BY-SA 4.0",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "UsageTerms": {
+        "value": "Creative Commons Attribution-Share Alike 4.0",
+        "source": "commons-desc-page"
+      },
+      "AttributionRequired": {
+        "value": "true",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "LicenseUrl": {
+        "value": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "commons-desc-page"
+      },
+      "Copyrighted": {
+        "value": "True",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "Restrictions": {
+        "value": "",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "License": {
+        "value": "cc-by-sa-4.0",
+        "source": "commons-templates",
+        "hidden": ""
+      }
+    }
+  },
+  "sonet": {
+    "filename": "sonet.jpg",
+    "credit": "Zotyefan / Wikimedia Commons",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Kia_Sonet_IMG001.jpg",
+    "license": "CC0 (https://creativecommons.org/publicdomain/zero/1.0/deed.en)",
+    "title": "File:Kia Sonet IMG001.jpg",
+    "author": "Zotyefan",
+    "license_name": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/3/31/Kia_Sonet_IMG001.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/31/Kia_Sonet_IMG001.jpg/960px-Kia_Sonet_IMG001.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sha256": "f887b061bb8d0e624173a1a955a285e1d7c12aa86faef69e1ba604435687c8ae",
+    "retrieved_at": "2026-10-25",
+    "changes": "Wikimedia-generated thumbnail, maximum requested width 960px; no local edits.",
+    "wikimedia_metadata": {
+      "DateTime": {
+        "value": "2024-04-16 10:11:10",
+        "source": "mediawiki-metadata",
+        "hidden": ""
+      },
+      "ObjectName": {
+        "value": "Kia Sonet IMG001",
+        "source": "mediawiki-metadata"
+      },
+      "CommonsMetadataExtension": {
+        "value": 1.2,
+        "source": "extension",
+        "hidden": ""
+      },
+      "Categories": {
+        "value": "CC-Zero|Kia Sonet|Self-published work",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "Assessments": {
+        "value": "",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "ImageDescription": {
+        "value": "Kia Sonet",
+        "source": "commons-desc-page"
+      },
+      "DateTimeOriginal": {
+        "value": "2024-04-16 18:07:30",
+        "source": "commons-desc-page"
+      },
+      "Credit": {
+        "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+        "source": "commons-desc-page"
+      },
+      "Artist": {
+        "value": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:Zotyefan&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:Zotyefan (page does not exist)\">Zotyefan</a>",
+        "source": "commons-desc-page"
+      },
+      "LicenseShortName": {
+        "value": "CC0",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "UsageTerms": {
+        "value": "Creative Commons Zero, Public Domain Dedication",
+        "source": "commons-desc-page"
+      },
+      "AttributionRequired": {
+        "value": "false",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "LicenseUrl": {
+        "value": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "source": "commons-desc-page"
+      },
+      "Copyrighted": {
+        "value": "True",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "Restrictions": {
+        "value": "",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "License": {
+        "value": "cc0",
+        "source": "commons-templates",
+        "hidden": ""
+      }
+    }
+  },
+  "innova-hycross": {
+    "filename": "innova-hycross.jpg",
+    "credit": "Ethan Llamas / Wikimedia Commons",
+    "source_url": "https://commons.wikimedia.org/wiki/File:2023_Toyota_Zenix_2.0_v.jpg",
+    "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)",
+    "title": "File:2023 Toyota Zenix 2.0 v.jpg",
+    "author": "Ethan Llamas",
+    "license_name": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/7/7c/2023_Toyota_Zenix_2.0_v.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7c/2023_Toyota_Zenix_2.0_v.jpg/960px-2023_Toyota_Zenix_2.0_v.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sha256": "47c57108f2328132df4fe26fa7ccc973d5019131370ed72093b23b30486ea445",
+    "retrieved_at": "2026-10-25",
+    "changes": "Wikimedia-generated thumbnail, maximum requested width 960px; no local edits.",
+    "wikimedia_metadata": {
+      "DateTime": {
+        "value": "2023-08-07 22:07:54",
+        "source": "mediawiki-metadata",
+        "hidden": ""
+      },
+      "ObjectName": {
+        "value": "2023 Toyota Zenix 2.0 v",
+        "source": "mediawiki-metadata"
+      },
+      "CommonsMetadataExtension": {
+        "value": 1.2,
+        "source": "extension",
+        "hidden": ""
+      },
+      "Categories": {
+        "value": "Taken with iPhone 6S|Las Piñas|Self-published work|White Toyota station wagons|Toyota automobiles in the Philippines|Files with coordinates missing SDC location of creation|White automobiles in the Philippines|Toyota Innova (AG10)",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "Assessments": {
+        "value": "",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "GPSLatitude": {
+        "value": "14.420658",
+        "source": "commons-desc-page"
+      },
+      "GPSLongitude": {
+        "value": "121.009003",
+        "source": "commons-desc-page"
+      },
+      "GPSMapDatum": {
+        "value": "WGS-84",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "ImageDescription": {
+        "value": "2023 Toyota Zenix 2.0 G photographed in Las Piñas, Metro Manila, Philippines",
+        "source": "commons-desc-page"
+      },
+      "DateTimeOriginal": {
+        "value": "2023-08-07 16:52:02",
+        "source": "commons-desc-page"
+      },
+      "Credit": {
+        "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+        "source": "commons-desc-page"
+      },
+      "Artist": {
+        "value": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:Ethan_Llamas&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:Ethan Llamas (page does not exist)\">Ethan Llamas</a>",
+        "source": "commons-desc-page"
+      },
+      "LicenseShortName": {
+        "value": "CC BY-SA 4.0",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "UsageTerms": {
+        "value": "Creative Commons Attribution-Share Alike 4.0",
+        "source": "commons-desc-page"
+      },
+      "AttributionRequired": {
+        "value": "true",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "LicenseUrl": {
+        "value": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "commons-desc-page"
+      },
+      "Copyrighted": {
+        "value": "True",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "Restrictions": {
+        "value": "",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "License": {
+        "value": "cc-by-sa-4.0",
+        "source": "commons-templates",
+        "hidden": ""
+      }
+    }
+  },
+  "fortuner": {
+    "filename": "fortuner.jpg",
+    "credit": "Andra Febrian / Wikimedia Commons",
+    "source_url": "https://commons.wikimedia.org/wiki/File:2021_Toyota_Fortuner_SRZ_2.7_4x2_(Indonesia)_front_view_01.jpg",
+    "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)",
+    "title": "File:2021 Toyota Fortuner SRZ 2.7 4x2 (Indonesia) front view 01.jpg",
+    "author": "Andra Febrian",
+    "license_name": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/1/14/2021_Toyota_Fortuner_SRZ_2.7_4x2_%28Indonesia%29_front_view_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/14/2021_Toyota_Fortuner_SRZ_2.7_4x2_%28Indonesia%29_front_view_01.jpg/960px-2021_Toyota_Fortuner_SRZ_2.7_4x2_%28Indonesia%29_front_view_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sha256": "37e2e877c5e17d966b95da4c37d13e5c57f758dd51f41de36fcf6d4b570f9c4d",
+    "retrieved_at": "2026-10-25",
+    "changes": "Wikimedia-generated thumbnail, maximum requested width 960px; no local edits.",
+    "wikimedia_metadata": {
+      "DateTime": {
+        "value": "2021-03-18 05:07:34",
+        "source": "mediawiki-metadata",
+        "hidden": ""
+      },
+      "ObjectName": {
+        "value": "2021 Toyota Fortuner SRZ 2.7 4x2 (Indonesia) front view 01",
+        "source": "mediawiki-metadata"
+      },
+      "CommonsMetadataExtension": {
+        "value": 1.2,
+        "source": "extension",
+        "hidden": ""
+      },
+      "Categories": {
+        "value": "Self-published work|White Toyota SUVs|Files with coordinates missing SDC location of creation|Toyota automobiles in South Tangerang|Toyota Fortuner (AN150/AN160, 2020)",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "Assessments": {
+        "value": "",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "GPSLatitude": {
+        "value": "-6.276862",
+        "source": "commons-desc-page"
+      },
+      "GPSLongitude": {
+        "value": "106.723986",
+        "source": "commons-desc-page"
+      },
+      "GPSMapDatum": {
+        "value": "WGS-84",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "ImageDescription": {
+        "value": "2021 Toyota Fortuner SRZ 2.7 4x2 in South Tangerang, Indonesia",
+        "source": "commons-desc-page"
+      },
+      "DateTimeOriginal": {
+        "value": "2021-03-18 09:16:38",
+        "source": "commons-desc-page"
+      },
+      "Credit": {
+        "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+        "source": "commons-desc-page"
+      },
+      "Artist": {
+        "value": "<a href=\"//commons.wikimedia.org/wiki/User:Andra_Febrian\" title=\"User:Andra Febrian\">Andra Febrian</a>",
+        "source": "commons-desc-page"
+      },
+      "LicenseShortName": {
+        "value": "CC BY-SA 4.0",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "UsageTerms": {
+        "value": "Creative Commons Attribution-Share Alike 4.0",
+        "source": "commons-desc-page"
+      },
+      "AttributionRequired": {
+        "value": "true",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "LicenseUrl": {
+        "value": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "commons-desc-page"
+      },
+      "Copyrighted": {
+        "value": "True",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "Restrictions": {
+        "value": "",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "License": {
+        "value": "cc-by-sa-4.0",
+        "source": "commons-templates",
+        "hidden": ""
+      }
+    }
+  },
+  "city": {
+    "filename": "city.jpg",
+    "credit": "© M 93 / Wikimedia Commons",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Honda_City_1.5_i-VTEC_V_(VIII,_Facelift)_%E2%80%93_f_22032025.jpg",
+    "license": "CC BY-SA 3.0 de (https://creativecommons.org/licenses/by-sa/3.0/de/deed.en)",
+    "title": "File:Honda City 1.5 i-VTEC V (VIII, Facelift) – f 22032025.jpg",
+    "author": "© M 93",
+    "license_name": "CC BY-SA 3.0 de",
+    "license_url": "https://creativecommons.org/licenses/by-sa/3.0/de/deed.en",
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/e/e7/Honda_City_1.5_i-VTEC_V_%28VIII%2C_Facelift%29_%E2%80%93_f_22032025.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e7/Honda_City_1.5_i-VTEC_V_%28VIII%2C_Facelift%29_%E2%80%93_f_22032025.jpg/960px-Honda_City_1.5_i-VTEC_V_%28VIII%2C_Facelift%29_%E2%80%93_f_22032025.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sha256": "56f46a196eb34cd21ef2cb68ded2ebe3df80d3a4e374d00f757b66b875d56437",
+    "retrieved_at": "2026-10-25",
+    "changes": "Wikimedia-generated thumbnail, maximum requested width 960px; no local edits.",
+    "wikimedia_metadata": {
+      "DateTime": {
+        "value": "2025-04-04 22:13:02",
+        "source": "mediawiki-metadata",
+        "hidden": ""
+      },
+      "ObjectName": {
+        "value": "Honda City 1.5 i-VTEC V (VIII, Facelift) – f 22032025",
+        "source": "mediawiki-metadata"
+      },
+      "CommonsMetadataExtension": {
+        "value": 1.2,
+        "source": "extension",
+        "hidden": ""
+      },
+      "Categories": {
+        "value": "Taken with Canon EOS M100|Self-published work|Information field template with formatting|White Honda sedans|Honda City (7th generation) sedan",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "Assessments": {
+        "value": "",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "ImageDescription": {
+        "value": "Honda City 1.5 i-VTEC V (VIII, Facelift)",
+        "source": "commons-desc-page"
+      },
+      "DateTimeOriginal": {
+        "value": "2025-03-22",
+        "source": "commons-desc-page"
+      },
+      "Credit": {
+        "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+        "source": "commons-desc-page"
+      },
+      "Artist": {
+        "value": "<b>© <a rel=\"mw:WikiLink\" href=\"https://commons.wikimedia.org/wiki/User:M_93\" title=\"User:M 93\">M 93</a></b>",
+        "source": "commons-desc-page"
+      },
+      "Permission": {
+        "value": "<a rel=\"mw:WikiLink/Interwiki\" href=\"https://de.wikipedia.org/wiki/Benutzer:M%2093\" title=\"de:Benutzer:M 93\" class=\"extiw\">M 93</a>, the copyright holder of this work, hereby publishes it under the following license:",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "Attribution": {
+        "value": "<a rel=\"mw:WikiLink/Interwiki\" href=\"https://de.wikipedia.org/wiki/Benutzer:M%2093\" title=\"de:Benutzer:M 93\" class=\"extiw\">M 93</a>",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "LicenseShortName": {
+        "value": "CC BY-SA 3.0 de",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "UsageTerms": {
+        "value": "Creative Commons Attribution-Share Alike 3.0 de",
+        "source": "commons-desc-page"
+      },
+      "AttributionRequired": {
+        "value": "true",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "LicenseUrl": {
+        "value": "https://creativecommons.org/licenses/by-sa/3.0/de/deed.en",
+        "source": "commons-desc-page"
+      },
+      "Copyrighted": {
+        "value": "True",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "Restrictions": {
+        "value": "",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "License": {
+        "value": "cc-by-sa-3.0-de",
+        "source": "commons-templates",
+        "hidden": ""
+      }
+    }
+  },
+  "elevate": {
+    "filename": "elevate.jpg",
+    "credit": "Hulchul TV / Wikimedia Commons",
+    "source_url": "https://commons.wikimedia.org/wiki/File:2023_Honda_Elevate_VX_(India)_front_view.jpg",
+    "license": "CC BY 3.0 (https://creativecommons.org/licenses/by/3.0)",
+    "title": "File:2023 Honda Elevate VX (India) front view.jpg",
+    "author": "Hulchul TV",
+    "license_name": "CC BY 3.0",
+    "license_url": "https://creativecommons.org/licenses/by/3.0",
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/9/90/2023_Honda_Elevate_VX_%28India%29_front_view.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/2023_Honda_Elevate_VX_%28India%29_front_view.jpg/960px-2023_Honda_Elevate_VX_%28India%29_front_view.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sha256": "e376b849b43d18fb24d884ff483c05904cacc174cf4dfab798e79bbbefa83e12",
+    "retrieved_at": "2026-10-25",
+    "changes": "Wikimedia-generated thumbnail, maximum requested width 960px; no local edits.",
+    "wikimedia_metadata": {
+      "DateTime": {
+        "value": "2023-09-11 13:56:53",
+        "source": "mediawiki-metadata",
+        "hidden": ""
+      },
+      "ObjectName": {
+        "value": "2023 Honda Elevate VX (India) front view",
+        "source": "mediawiki-metadata"
+      },
+      "CommonsMetadataExtension": {
+        "value": 1.2,
+        "source": "extension",
+        "hidden": ""
+      },
+      "Categories": {
+        "value": "Media from YouTube|Honda Elevate|Brown Honda SUVs|2023 Honda automobiles|Still images of YouTube videos",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "Assessments": {
+        "value": "",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "ImageDescription": {
+        "value": "2023 Honda Elevate VX (India) front view",
+        "source": "commons-desc-page"
+      },
+      "DateTimeOriginal": {
+        "value": "2023-09-08",
+        "source": "commons-desc-page"
+      },
+      "Credit": {
+        "value": "<bdi lang=\"en\" dir=\"ltr\"><a href=\"//commons.wikimedia.org/wiki/Commons:YouTube_files\" title=\"Commons:YouTube files\">YouTube</a>: <a rel=\"nofollow\" class=\"external text\" href=\"https://www.youtube.com/watch?v=9TybvfZhEwc\"><bdi lang=\"\">https://www.youtube.com/watch?v=9TybvfZhEwc</bdi></a> – View/save archived versions on <a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/*/https://www.youtube.com/watch?v=9TybvfZhEwc\">archive.org</a></bdi>",
+        "source": "commons-desc-page"
+      },
+      "Artist": {
+        "value": "Hulchul TV",
+        "source": "commons-desc-page"
+      },
+      "LicenseShortName": {
+        "value": "CC BY 3.0",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "UsageTerms": {
+        "value": "Creative Commons Attribution 3.0",
+        "source": "commons-desc-page"
+      },
+      "AttributionRequired": {
+        "value": "true",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "Attribution": {
+        "value": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.youtube.com/watch?v=9TybvfZhEwc\">Hulchul TV</a>",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "LicenseUrl": {
+        "value": "https://creativecommons.org/licenses/by/3.0",
+        "source": "commons-desc-page"
+      },
+      "Copyrighted": {
+        "value": "True",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "Restrictions": {
+        "value": "",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "License": {
+        "value": "cc-by-3.0",
+        "source": "commons-templates",
+        "hidden": ""
+      }
+    }
+  },
+  "slavia": {
+    "filename": "slavia.jpg",
+    "credit": "Saiphani02 / Wikimedia Commons",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Skoda_Slavia_Side_view.jpg",
+    "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)",
+    "title": "File:Skoda Slavia Side view.jpg",
+    "author": "Saiphani02",
+    "license_name": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/a/a9/Skoda_Slavia_Side_view.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/Skoda_Slavia_Side_view.jpg/960px-Skoda_Slavia_Side_view.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sha256": "838ec4d4eb2ef2b09263c2defca1eaa29dfce2dc39de9962975f9e8adde90e47",
+    "retrieved_at": "2026-10-25",
+    "changes": "Wikimedia-generated thumbnail, maximum requested width 960px; no local edits.",
+    "wikimedia_metadata": {
+      "DateTime": {
+        "value": "2024-05-24 11:16:44",
+        "source": "mediawiki-metadata",
+        "hidden": ""
+      },
+      "ObjectName": {
+        "value": "Skoda Slavia Side view",
+        "source": "mediawiki-metadata"
+      },
+      "CommonsMetadataExtension": {
+        "value": 1.2,
+        "source": "extension",
+        "hidden": ""
+      },
+      "Categories": {
+        "value": "Škoda Slavia|Self-published work|Uploaded with Mobile/Android|Files with coordinates missing SDC location of creation|Photographs taken on 2022-12-17",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "Assessments": {
+        "value": "",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "GPSLatitude": {
+        "value": "17.739051",
+        "source": "commons-desc-page"
+      },
+      "GPSLongitude": {
+        "value": "83.260332",
+        "source": "commons-desc-page"
+      },
+      "GPSMapDatum": {
+        "value": "WGS-84",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "ImageDescription": {
+        "value": "Skoda Slavia Side view <span class=\"mw-valign-text-top noprint\" typeof=\"mw:File/Frameless\"><a href=\"//commons.wikimedia.org/wiki/File:Skoda_Slavia_Side_view.jpg#ooui-php-4\" title=\"Edit this at Structured Data on Commons\"><img alt=\"Edit this at Structured Data on Commons\" src=\"https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8a/OOjs_UI_icon_edit-ltr-progressive.svg/20px-OOjs_UI_icon_edit-ltr-progressive.svg.png?utm_source=commons.wikimedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\" decoding=\"async\" loading=\"lazy\" width=\"10\" height=\"10\" class=\"mw-file-element\" data-file-width=\"20\" data-file-height=\"20\"></a></span>",
+        "source": "commons-desc-page"
+      },
+      "DateTimeOriginal": {
+        "value": "17 December 2022 (according to <span lang=\"en\" dir=\"ltr\"><a href=\"https://en.wikipedia.org/wiki/Exif\" class=\"extiw\" title=\"en:Exif\">Exif</a></span> data)",
+        "source": "commons-desc-page"
+      },
+      "Credit": {
+        "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+        "source": "commons-desc-page"
+      },
+      "Artist": {
+        "value": "<a href=\"//commons.wikimedia.org/wiki/User:Saiphani02\" title=\"User:Saiphani02\">Saiphani02</a>",
+        "source": "commons-desc-page"
+      },
+      "LicenseShortName": {
+        "value": "CC BY-SA 4.0",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "UsageTerms": {
+        "value": "Creative Commons Attribution-Share Alike 4.0",
+        "source": "commons-desc-page"
+      },
+      "AttributionRequired": {
+        "value": "true",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "LicenseUrl": {
+        "value": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "commons-desc-page"
+      },
+      "Copyrighted": {
+        "value": "True",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "Restrictions": {
+        "value": "",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "License": {
+        "value": "cc-by-sa-4.0",
+        "source": "commons-templates",
+        "hidden": ""
+      }
+    }
+  },
+  "kushaq": {
+    "filename": "kushaq.jpg",
+    "credit": "Saiphani02 / Wikimedia Commons",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Skoda_Kushaq_Front.jpg",
+    "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)",
+    "title": "File:Skoda Kushaq Front.jpg",
+    "author": "Saiphani02",
+    "license_name": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/e/e7/Skoda_Kushaq_Front.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e7/Skoda_Kushaq_Front.jpg/960px-Skoda_Kushaq_Front.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sha256": "5fb30c4f5477ee8ec6c29f3f5167ffadda4734d693a3291d9c20926b8c1efbff",
+    "retrieved_at": "2026-10-25",
+    "changes": "Wikimedia-generated thumbnail, maximum requested width 960px; no local edits.",
+    "wikimedia_metadata": {
+      "DateTime": {
+        "value": "2024-05-24 11:16:11",
+        "source": "mediawiki-metadata",
+        "hidden": ""
+      },
+      "ObjectName": {
+        "value": "Skoda Kushaq Front",
+        "source": "mediawiki-metadata"
+      },
+      "CommonsMetadataExtension": {
+        "value": 1.2,
+        "source": "extension",
+        "hidden": ""
+      },
+      "Categories": {
+        "value": "Škoda Kushaq|Self-published work|Uploaded with Mobile/Android|Files with coordinates missing SDC location of creation|Photographs taken on 2022-12-17",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "Assessments": {
+        "value": "",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "GPSLatitude": {
+        "value": "17.738991",
+        "source": "commons-desc-page"
+      },
+      "GPSLongitude": {
+        "value": "83.260647",
+        "source": "commons-desc-page"
+      },
+      "GPSMapDatum": {
+        "value": "WGS-84",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "ImageDescription": {
+        "value": "Skoda Kushaq Front <span class=\"mw-valign-text-top noprint\" typeof=\"mw:File/Frameless\"><a href=\"//commons.wikimedia.org/wiki/File:Skoda_Kushaq_Front.jpg#ooui-php-4\" title=\"Edit this at Structured Data on Commons\"><img alt=\"Edit this at Structured Data on Commons\" src=\"https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8a/OOjs_UI_icon_edit-ltr-progressive.svg/20px-OOjs_UI_icon_edit-ltr-progressive.svg.png?utm_source=commons.wikimedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\" decoding=\"async\" loading=\"lazy\" width=\"10\" height=\"10\" class=\"mw-file-element\" data-file-width=\"20\" data-file-height=\"20\"></a></span>",
+        "source": "commons-desc-page"
+      },
+      "DateTimeOriginal": {
+        "value": "17 December 2022 (according to <span lang=\"en\" dir=\"ltr\"><a href=\"https://en.wikipedia.org/wiki/Exif\" class=\"extiw\" title=\"en:Exif\">Exif</a></span> data)",
+        "source": "commons-desc-page"
+      },
+      "Credit": {
+        "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+        "source": "commons-desc-page"
+      },
+      "Artist": {
+        "value": "<a href=\"//commons.wikimedia.org/wiki/User:Saiphani02\" title=\"User:Saiphani02\">Saiphani02</a>",
+        "source": "commons-desc-page"
+      },
+      "LicenseShortName": {
+        "value": "CC BY-SA 4.0",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "UsageTerms": {
+        "value": "Creative Commons Attribution-Share Alike 4.0",
+        "source": "commons-desc-page"
+      },
+      "AttributionRequired": {
+        "value": "true",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "LicenseUrl": {
+        "value": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "commons-desc-page"
+      },
+      "Copyrighted": {
+        "value": "True",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "Restrictions": {
+        "value": "",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "License": {
+        "value": "cc-by-sa-4.0",
+        "source": "commons-templates",
+        "hidden": ""
+      }
+    }
+  },
+  "virtus": {
+    "filename": "virtus.jpg",
+    "credit": "Dairokkan9 / Wikimedia Commons",
+    "source_url": "https://commons.wikimedia.org/wiki/File:2023_Volkswagen_Virtus_Topline_front_20230520.jpg",
+    "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)",
+    "title": "File:2023 Volkswagen Virtus Topline front 20230520.jpg",
+    "author": "Dairokkan9",
+    "license_name": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/e/ef/2023_Volkswagen_Virtus_Topline_front_20230520.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ef/2023_Volkswagen_Virtus_Topline_front_20230520.jpg/960px-2023_Volkswagen_Virtus_Topline_front_20230520.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sha256": "75507b5127180cf8d2c6cd502e86ffaeb6e67527ce337854e8baf3b6ecad0428",
+    "retrieved_at": "2026-10-25",
+    "changes": "Wikimedia-generated thumbnail, maximum requested width 960px; no local edits.",
+    "wikimedia_metadata": {
+      "DateTime": {
+        "value": "2023-05-21 01:08:58",
+        "source": "mediawiki-metadata",
+        "hidden": ""
+      },
+      "ObjectName": {
+        "value": "2023 Volkswagen Virtus Topline front 20230520",
+        "source": "mediawiki-metadata"
+      },
+      "CommonsMetadataExtension": {
+        "value": 1.2,
+        "source": "extension",
+        "hidden": ""
+      },
+      "Categories": {
+        "value": "Volkswagen Virtus|Self-published work|Images with extracted images|White Volkswagen sedans",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "Assessments": {
+        "value": "",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "ImageDescription": {
+        "value": "2023 Volkswagen Virtus Topline TSI front view (India)",
+        "source": "commons-desc-page"
+      },
+      "DateTimeOriginal": {
+        "value": "2023-05-20 11:42:34",
+        "source": "commons-desc-page"
+      },
+      "Credit": {
+        "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+        "source": "commons-desc-page"
+      },
+      "Artist": {
+        "value": "<a href=\"//commons.wikimedia.org/wiki/User:Dairokkan9\" title=\"User:Dairokkan9\">Dairokkan9</a>",
+        "source": "commons-desc-page"
+      },
+      "LicenseShortName": {
+        "value": "CC BY-SA 4.0",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "UsageTerms": {
+        "value": "Creative Commons Attribution-Share Alike 4.0",
+        "source": "commons-desc-page"
+      },
+      "AttributionRequired": {
+        "value": "true",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "LicenseUrl": {
+        "value": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "commons-desc-page"
+      },
+      "Copyrighted": {
+        "value": "True",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "Restrictions": {
+        "value": "",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "License": {
+        "value": "cc-by-sa-4.0",
+        "source": "commons-templates",
+        "hidden": ""
+      }
+    }
+  },
+  "taigun": {
+    "filename": "taigun.jpg",
+    "credit": "Dairokkan9 / Wikimedia Commons",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Volkswagen_Taigun_front_20230528.jpg",
+    "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)",
+    "title": "File:Volkswagen Taigun front 20230528.jpg",
+    "author": "Dairokkan9",
+    "license_name": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/a/a9/Volkswagen_Taigun_front_20230528.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/Volkswagen_Taigun_front_20230528.jpg/960px-Volkswagen_Taigun_front_20230528.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sha256": "cc3b7ef301bee3fe714385dc9b0901b8fd703893b9039e46083342a34263d61a",
+    "retrieved_at": "2026-10-25",
+    "changes": "Wikimedia-generated thumbnail, maximum requested width 960px; no local edits.",
+    "wikimedia_metadata": {
+      "DateTime": {
+        "value": "2023-05-28 02:51:28",
+        "source": "mediawiki-metadata",
+        "hidden": ""
+      },
+      "ObjectName": {
+        "value": "Volkswagen Taigun front 20230528",
+        "source": "mediawiki-metadata"
+      },
+      "CommonsMetadataExtension": {
+        "value": 1.2,
+        "source": "extension",
+        "hidden": ""
+      },
+      "Categories": {
+        "value": "Volkswagen Taigun|Self-published work|Grey Volkswagen SUVs|Taken with Realme GT 2",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "Assessments": {
+        "value": "",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "ImageDescription": {
+        "value": "2022 Volkswagen Taigun GT Plus DSG, front view, taken in Coimbatore",
+        "source": "commons-desc-page"
+      },
+      "DateTimeOriginal": {
+        "value": "2023-05-28 06:53:02",
+        "source": "commons-desc-page"
+      },
+      "Credit": {
+        "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+        "source": "commons-desc-page"
+      },
+      "Artist": {
+        "value": "<a href=\"//commons.wikimedia.org/wiki/User:Dairokkan9\" title=\"User:Dairokkan9\">Dairokkan9</a>",
+        "source": "commons-desc-page"
+      },
+      "LicenseShortName": {
+        "value": "CC BY-SA 4.0",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "UsageTerms": {
+        "value": "Creative Commons Attribution-Share Alike 4.0",
+        "source": "commons-desc-page"
+      },
+      "AttributionRequired": {
+        "value": "true",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "LicenseUrl": {
+        "value": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "commons-desc-page"
+      },
+      "Copyrighted": {
+        "value": "True",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "Restrictions": {
+        "value": "",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "License": {
+        "value": "cc-by-sa-4.0",
+        "source": "commons-templates",
+        "hidden": ""
+      }
+    }
+  },
+  "kiger": {
+    "filename": "kiger.jpg",
+    "credit": "Dairokkan9 / Wikimedia Commons",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Renault_Kiger_front_20230602.jpg",
+    "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)",
+    "title": "File:Renault Kiger front 20230602.jpg",
+    "author": "Dairokkan9",
+    "license_name": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Renault_Kiger_front_20230602.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Renault_Kiger_front_20230602.jpg/960px-Renault_Kiger_front_20230602.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sha256": "d4b9eeaab3761a4d673ad231312a41225bc8477b657f0a56d4d20c8d9780b348",
+    "retrieved_at": "2026-10-25",
+    "changes": "Wikimedia-generated thumbnail, maximum requested width 960px; no local edits.",
+    "wikimedia_metadata": {
+      "DateTime": {
+        "value": "2023-06-02 15:04:34",
+        "source": "mediawiki-metadata",
+        "hidden": ""
+      },
+      "ObjectName": {
+        "value": "Renault Kiger front 20230602",
+        "source": "mediawiki-metadata"
+      },
+      "CommonsMetadataExtension": {
+        "value": 1.2,
+        "source": "extension",
+        "hidden": ""
+      },
+      "Categories": {
+        "value": "Renault Kiger|Self-published work|Red Renault SUVs|Taken with Realme GT 2",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "Assessments": {
+        "value": "",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "ImageDescription": {
+        "value": "2022 Renault Kiger RxZ Petrol X-Tronic, front view, taken in Coimbatore",
+        "source": "commons-desc-page"
+      },
+      "DateTimeOriginal": {
+        "value": "2023-06-02 17:49:03",
+        "source": "commons-desc-page"
+      },
+      "Credit": {
+        "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+        "source": "commons-desc-page"
+      },
+      "Artist": {
+        "value": "<a href=\"//commons.wikimedia.org/wiki/User:Dairokkan9\" title=\"User:Dairokkan9\">Dairokkan9</a>",
+        "source": "commons-desc-page"
+      },
+      "LicenseShortName": {
+        "value": "CC BY-SA 4.0",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "UsageTerms": {
+        "value": "Creative Commons Attribution-Share Alike 4.0",
+        "source": "commons-desc-page"
+      },
+      "AttributionRequired": {
+        "value": "true",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "LicenseUrl": {
+        "value": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "commons-desc-page"
+      },
+      "Copyrighted": {
+        "value": "True",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "Restrictions": {
+        "value": "",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "License": {
+        "value": "cc-by-sa-4.0",
+        "source": "commons-templates",
+        "hidden": ""
+      }
+    }
+  },
+  "hector": {
+    "filename": "hector.jpg",
+    "credit": "Ank Kumar / Wikimedia Commons",
+    "source_url": "https://commons.wikimedia.org/wiki/File:MG(Morris_Garages)_Hector_SUV_in_Jamshedpur,_Jharkhand,_India_(Ank_Kumar,_Infosys_Limited))_02.jpg",
+    "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)",
+    "title": "File:MG(Morris Garages) Hector SUV in Jamshedpur, Jharkhand, India (Ank Kumar, Infosys Limited)) 02.jpg",
+    "author": "Ank Kumar",
+    "license_name": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/0/0d/MG%28Morris_Garages%29_Hector_SUV_in_Jamshedpur%2C_Jharkhand%2C_India_%28Ank_Kumar%2C_Infosys_Limited%29%29_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0d/MG%28Morris_Garages%29_Hector_SUV_in_Jamshedpur%2C_Jharkhand%2C_India_%28Ank_Kumar%2C_Infosys_Limited%29%29_02.jpg/960px-MG%28Morris_Garages%29_Hector_SUV_in_Jamshedpur%2C_Jharkhand%2C_India_%28Ank_Kumar%2C_Infosys_Limited%29%29_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sha256": "1e1edf0a0da4909a721c6b25c05deea749fc7704b6a354254749a4ecc18573ce",
+    "retrieved_at": "2026-10-25",
+    "changes": "Wikimedia-generated thumbnail, maximum requested width 960px; no local edits.",
+    "wikimedia_metadata": {
+      "DateTime": {
+        "value": "2023-02-28 06:30:10",
+        "source": "mediawiki-metadata",
+        "hidden": ""
+      },
+      "ObjectName": {
+        "value": "MG(Morris Garages) Hector SUV in Jamshedpur, Jharkhand, India (Ank Kumar, Infosys Limited)) 02",
+        "source": "mediawiki-metadata"
+      },
+      "CommonsMetadataExtension": {
+        "value": 1.2,
+        "source": "extension",
+        "hidden": ""
+      },
+      "Categories": {
+        "value": "Self-published work|Transport in Jamshedpur|MG Hector (first generation)",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "Assessments": {
+        "value": "",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "ImageDescription": {
+        "value": "MG(Morris Garages) Hector Sports Utility Vehicle. It’s the first model released by MG Motor India.\nPlace - Ashiana Brahmanda, Tamuliya, East Singhbhum, Jamshedpur, Jharkhand, India",
+        "source": "commons-desc-page"
+      },
+      "DateTimeOriginal": {
+        "value": "2023-02-28 08:42:39",
+        "source": "commons-desc-page"
+      },
+      "Credit": {
+        "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+        "source": "commons-desc-page"
+      },
+      "Artist": {
+        "value": "<a href=\"//commons.wikimedia.org/wiki/User:Ank_gsx\" title=\"User:Ank gsx\">Ank Kumar </a>",
+        "source": "commons-desc-page"
+      },
+      "LicenseShortName": {
+        "value": "CC BY-SA 4.0",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "UsageTerms": {
+        "value": "Creative Commons Attribution-Share Alike 4.0",
+        "source": "commons-desc-page"
+      },
+      "AttributionRequired": {
+        "value": "true",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "LicenseUrl": {
+        "value": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "commons-desc-page"
+      },
+      "Copyrighted": {
+        "value": "True",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "Restrictions": {
+        "value": "",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "License": {
+        "value": "cc-by-sa-4.0",
+        "source": "commons-templates",
+        "hidden": ""
+      }
+    }
+  },
+  "magnite": {
+    "filename": "magnite.jpg",
+    "credit": "Ganesh Mohan T / Wikimedia Commons",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Nissan_Magnite_01.jpg",
+    "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)",
+    "title": "File:Nissan Magnite 01.jpg",
+    "author": "Ganesh Mohan T",
+    "license_name": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/3/3f/Nissan_Magnite_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3f/Nissan_Magnite_01.jpg/960px-Nissan_Magnite_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sha256": "e908e5536b69ae3e94217864efcec515feb70ec7a800d58ca491835996ce8b55",
+    "retrieved_at": "2026-10-25",
+    "changes": "Wikimedia-generated thumbnail, maximum requested width 960px; no local edits.",
+    "wikimedia_metadata": {
+      "DateTime": {
+        "value": "2024-03-29 07:46:29",
+        "source": "mediawiki-metadata",
+        "hidden": ""
+      },
+      "ObjectName": {
+        "value": "Nissan Magnite 01",
+        "source": "mediawiki-metadata"
+      },
+      "CommonsMetadataExtension": {
+        "value": 1.2,
+        "source": "extension",
+        "hidden": ""
+      },
+      "Categories": {
+        "value": "Self-published work|Automobiles facing left|Nissan vehicles in India|Side views of Nissan automobiles|Uploaded with Mobile/Android|Red Nissan SUVs|Files with coordinates missing SDC location of creation|2024 Nissan automobiles|India photographs taken on 2024-03-27|Nissan Magnite (2020)",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "Assessments": {
+        "value": "",
+        "source": "commons-categories",
+        "hidden": ""
+      },
+      "GPSLatitude": {
+        "value": "10.027389",
+        "source": "commons-desc-page"
+      },
+      "GPSLongitude": {
+        "value": "76.307746",
+        "source": "commons-desc-page"
+      },
+      "GPSMapDatum": {
+        "value": "WGS-84",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "ImageDescription": {
+        "value": "Nissan Magnite from Kerala.",
+        "source": "commons-desc-page"
+      },
+      "DateTimeOriginal": {
+        "value": "27 March 2024 (according to <span lang=\"en\" dir=\"ltr\"><a href=\"https://en.wikipedia.org/wiki/Exif\" class=\"extiw\" title=\"en:Exif\">Exif</a></span> data)",
+        "source": "commons-desc-page"
+      },
+      "Credit": {
+        "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+        "source": "commons-desc-page"
+      },
+      "Artist": {
+        "value": "<a href=\"//commons.wikimedia.org/wiki/User:Ganesh_Mohan_T\" class=\"mw-redirect\" title=\"User:Ganesh Mohan T\">Ganesh Mohan T</a>",
+        "source": "commons-desc-page"
+      },
+      "LicenseShortName": {
+        "value": "CC BY-SA 4.0",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "UsageTerms": {
+        "value": "Creative Commons Attribution-Share Alike 4.0",
+        "source": "commons-desc-page"
+      },
+      "AttributionRequired": {
+        "value": "true",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "LicenseUrl": {
+        "value": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "commons-desc-page"
+      },
+      "Copyrighted": {
+        "value": "True",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "Restrictions": {
+        "value": "",
+        "source": "commons-desc-page",
+        "hidden": ""
+      },
+      "License": {
+        "value": "cc-by-sa-4.0",
+        "source": "commons-templates",
+        "hidden": ""
+      }
+    }
+  }
+}

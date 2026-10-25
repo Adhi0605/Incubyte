@@ -1,34 +1,23 @@
-"""Optional sample inventory; never replaces a nonempty collection."""
-
+"""Explicit Indian catalog provisioning; existing rows and edits are retained."""
 from .database import Database
+from .demo import populate_workspace
 
 
-SAMPLE_VEHICLES = [
-    ("Toyota", "Camry Hybrid", "Sedan", 3250050, 8),
-    ("Land Rover", "Defender 110", "SUV", 7290000, 3),
-    ("BMW", "330i", "Sedan", 4620000, 5),
-    ("Ford", "Bronco Sport", "SUV", 3499500, 4),
-    ("Porsche", "718 Cayman", "Coupe", 7290000, 0),
-    ("Volvo", "XC60", "SUV", 4890000, 6),
-]
-
-
-def seed_inventory(database_path):
+def seed_inventory(database_path, workspace_id=1):
     database = Database(database_path)
     with database.connect() as db:
-        db.execute("BEGIN IMMEDIATE")
-        if db.execute("SELECT 1 FROM vehicles LIMIT 1").fetchone():
+        db.execute('BEGIN IMMEDIATE')
+        workspace = db.execute('SELECT demo_seeded FROM workspaces WHERE id=?', (workspace_id,)).fetchone()
+        if workspace is None:
+            raise ValueError('Workspace not found')
+        if workspace['demo_seeded']:
             return 0
-        db.executemany(
-            "INSERT INTO vehicles(make, model, category, price_cents, quantity) VALUES (?, ?, ?, ?, ?)",
-            SAMPLE_VEHICLES,
-        )
-    return len(SAMPLE_VEHICLES)
+        count = populate_workspace(db, workspace_id)
+        db.execute('UPDATE workspaces SET demo_seeded=1 WHERE id=?', (workspace_id,))
+        return count
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     from .main import production_app
-
     app = production_app()
-    count = seed_inventory(app.state.database_path)
-    print(f"Added {count} sample vehicles. Existing inventory was preserved.")
+    print('Private workspaces provisioned. Existing inventory and edits were preserved.')
