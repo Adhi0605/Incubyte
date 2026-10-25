@@ -15,6 +15,23 @@ documents root `app.py`, custom build commands and CDN delivery from `public/**`
 The [configuration reference](https://vercel.com/docs/project-configuration/vercel-json)
 documents the `fastapi` framework preset. Guidance checked on 2026-10-25.
 
+## Current public release
+
+**https://forecourt-inventory.vercel.app** is the verified production URL.
+Project: `adhi-eee9/forecourt-inventory`; Vercel plan: **Hobby**. Database:
+`forecourt-db`, **Neon Free**, region iad1. Managed Neon Auth is disabled because
+the app retains its Argon2/JWT accounts. Production uses the pooled PostgreSQL
+TLS URL; administration and transfer used the direct connection. `JWT_SECRET`
+is a sensitive Vercel production secret.
+
+The real data was migrated and verified; see [MIGRATION.md](MIGRATION.md).
+Public HTTPS checks passed homepage, JS/CSS, favicon, photos, SPA deep links,
+health and JSON API errors. Existing admin login and inventory were verified.
+Two generated accounts then verified independent workspaces, purchase analytics,
+archive and restore. Only those two UUID-named test workspaces were cleaned up;
+original accounts and data were retained. Production alias requests were checked
+without Vercel authentication. No paid plan or custom domain was purchased.
+
 ## Free plans and account setup
 
 Use a personal **Vercel Hobby** project and **Neon Free** database only. Vercel
@@ -128,49 +145,24 @@ After deployment, verify HTTPS `/`, a hashed `/assets/` URL, a `/cars/` image,
 registration/login, workspace isolation, mutation persistence across cold
 starts, and transferred record counts against the actual Neon database.
 
-## Build evidence and deployment handoff
+## Verification evidence
 
-Local production Vite build succeeded and generated `public/` from `frontend/dist`:
-30 byte-identical files totaling 5,764,465 bytes. All three root HTML asset
-references loaded through the real FastAPI application, as did a generated
-car image and SPA deep link; health and missing API/asset checks passed.
-The hosting and existing production suite passed **23 tests**, including the
-actual artifact check enabled with `VERIFY_VERCEL_BUILD=1`, after the initial
-11 hosting tests failed before implementation.
-Hosting regression tests cover URL validation before factory invocation, both
-Postgres schemes, real FastAPI routes using a temporary test database, stale
-asset removal, private/reserved output rejection, and native config contracts.
-The regression tests use no hosted database credentials.
+The real `vercel build --prod` completed with CLI 65.2.0, Node 22.22 and pinned
+Python 3.12. Output includes 30 CDN files (5,764,465 bytes), a `/fastapi` function
+capped at 60 seconds in iad1, mapped SPA fallback, and no private dotenv/database
+paths. The function map was materialized separately and exercised on Python 3.12
+without relying on the source tree or CDN. Hosting/production checks passed
+24 tests with artifact verification enabled.
 
-The real production build succeeded with Vercel CLI **65.2.0**, Node **22.22.0**,
-Python **3.12**, scope `adhi-eee9`, and the prepared production environment.
-The output contains the native `/fastapi` function, a 60-second duration cap,
-30 CDN files, preserved request paths, and no local dotenv/database source files.
-A separate smoke check materialized the actual function file map in a temporary
-directory and ran it on Python **3.12.12** against the real Neon database:
-health, required authentication, SPA deep links, compiled assets, unknown API
-routes and missing assets passed. No API data mutations were exercised.
+The first prebuilt upload exposed collisions between upload exclusions and
+native traced runtime files. Those rules were fixed while retaining secret,
+database, key and backup exclusions. The next production deployment reached
+READY (`dpl_A6k6mk8M3h9EDU5E7NZiLuXYzZ5t`) and received the public alias.
+Vercel reports a 17.5 MB function in iad1. The public routing, login, photo,
+workspace isolation, purchase analytics and archive/restore checks then passed.
 
-The only remaining build warning was:
-`npm warn deprecated whatwg-encoding@3.1.1: Use @exodus/bytes instead for a more spec-conformant and faster implementation`.
-The test suite also reports the existing Starlette TestClient warning that
-`httpx` usage is deprecated in favor of `httpx2`. No dependency upgrade was
-introduced for either warning.
-
-The coordinator reports the local persistent PostgreSQL cutover is complete:
-3 workspaces, 3 users, 605 vehicles, 723 purchases, and 1,323 inventory events;
-all raw SHA comparisons and analytics for all 3 workspaces matched, and the
-existing admin login was verified. The coordinator also reports 94 tests passing
-with 95.86% coverage. The coordinator subsequently reports the **Neon Free**
-restore complete with the same counts, SHA comparisons and analytics matches.
-The runtime uses the pooled TLS URL in `iad1`. Local PostgreSQL also remains
-available privately on port 55432; its
-credentials remain outside Git and this guide. Transfer tooling is provided by
-`backend/app/transfer.py` and `scripts/migrate_sqlite_to_postgres.py`.
-
-The linked project is `adhi-eee9/forecourt-inventory` on personal Hobby, with
-Neon Free connected and production secrets configured by the coordinator.
-The coordinator owns project settings and public publishing. No deployment was
-performed by the hosting agent; deployed HTTPS/CDN behavior still needs the
-post-publication checks above. Do not configure the Vercel function to use the
-private local PostgreSQL address.
+The combined database, migration and hosting suite passed 95 tests with 95.88%
+statement coverage before the final artifact cases were added. Artifact checks
+are run separately against a real Vercel build; actual public HTTPS checks were
+also performed. Upstream TestClient `httpx` and npm `whatwg-encoding` deprecation
+warnings remain; no unrelated dependency upgrades were introduced.

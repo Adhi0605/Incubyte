@@ -311,12 +311,13 @@ Progress:
       all 3 workspaces, 3 users, 605 vehicles, 723 purchases and 1,323 events
       retained with full row hashes and identical per-workspace analytics.
       Existing admin login verified; active runtime now uses hosted pooled TLS.
-- [ ] Release build and hosting access/deployment completed or concrete missing access identified.
-- [ ] Accurate documentation, checks, commits and push.
+- [x] Native Vercel build and public deployment completed on Hobby, with Neon
+      Free in iad1; unauthenticated HTTPS and authenticated business flows passed.
+- [x] README, migration and Vercel guides updated; tested commits pushed to GitHub.
 
 Hosting steering: use **Vercel Hobby (free only)** with external free PostgreSQL
 (Neon via Vercel Marketplace preferred), replacing Render as the deployment
-target. Vercel/Neon account connections are pending. The coordinator owns the
+target. Vercel/Neon account connections are now authorized and configured. The coordinator owns the
 actual data cutover and README. A delegated hosting worker owns only Vercel
 entry/config/build files, `docs/VERCEL.md` and Vercel configuration tests. No
 private-beta platform features or paid resources are required.
@@ -326,5 +327,8 @@ was verified on Hobby. Project `forecourt-inventory` is linked to the existing
 GitHub repo. Neon `forecourt-db` was explicitly provisioned with `free_v3`,
 region iad1 and managed Auth disabled, then connected to Production only.
 `JWT_SECRET` is a sensitive Vercel production secret. No secrets or native
-connection credentials are committed. Production build/deployment verification
-is ongoing; no public release success is claimed yet.
+connection credentials are committed. Production build and public
+release verification passed at https://forecourt-inventory.vercel.app.
+The runtime uses hosted PostgreSQL; only generated verification workspaces were
+removed after public mutation tests. Prebuilt ignore-rule collisions were fixed
+in commit `9ca7aef` before the successful release.
